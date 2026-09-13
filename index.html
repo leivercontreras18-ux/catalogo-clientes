@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lewin Boutique - Catálogo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #faf7f5;
+      color: #2c2c2c;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 30px 20px;
+      background: white;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    h1 {
+      font-size: 2.2em;
+      font-weight: 300;
+      letter-spacing: 3px;
+      color: #1a1a1a;
+    }
+    .subtitulo {
+      color: #999;
+      margin-top: 8px;
+      font-size: 0.95em;
+      letter-spacing: 1px;
+    }
+    .buscador {
+      width: 100%;
+      max-width: 500px;
+      margin: 20px auto 0;
+      display: block;
+      padding: 14px 20px;
+      border: 1px solid #e5e5e5;
+      border-radius: 30px;
+      font-size: 1em;
+      outline: none;
+      transition: 0.3s;
+    }
+    .buscador:focus { border-color: #c9a87c; }
+    #productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .tarjeta {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .tarjeta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .tarjeta img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      background: #f0f0f0;
+    }
+    .info { padding: 16px; }
+    .info h3 {
+      font-size: 1.05em;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .detalles {
+      color: #888;
+      font-size: 0.85em;
+      margin-bottom: 10px;
+    }
+    .precio {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #c9a87c;
+      margin-bottom: 10px;
+    }
+    .estado {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: 500;
+    }
+    .disponible { background: #e8f5e9; color: #2e7d32; }
+    .agotado { background: #ffebee; color: #c62828; }
+    .fav { float: right; font-size: 1.1em; }
+    .cargando {
+      text-align: center;
+      padding: 60px;
+      color: #999;
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>LEWIN BOUTIQUE</h1>
+    <p class="subtitulo">Catálogo de productos</p>
+    <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar producto..." />
+  </header>
+
+  <div id="productos">
+    <p class="cargando">Cargando productos...</p>
+  </div>
+
+  <script type="module">
+    // ====== TUS DATOS DE SUPABASE ======
+    const SUPABASE_URL = 'https://qhihqujbzjcuxshndsez.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFoaWhxdWpiempjdXhzaG5kc2V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NzQzNTcsImV4cCI6MjEwMzM1MDM1N30.eyGr5EOeQQeYfftReayfRdMisR_cQIGPuLpiv7XFzhI';
+    // ===================================
+
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    let todosLosProductos = [];
+
+    async function cargarProductos() {
+      const contenedor = document.getElementById('productos');
+      try {
+        const { data, error } = await supabase
+          .from('inventario')
+          .select('producto, categoria, talla, color, cantidad, precio_venta, foto_url, favorito');
+
+        if (error) throw error;
+
+        todosLosProductos = data || [];
+        mostrarProductos(todosLosProductos);
+      } catch (err) {
+        contenedor.innerHTML = '<p class="cargando">Error al cargar productos.<br>Revisa la conexión a Supabase.</p>';
+        console.error(err);
+      }
+    }
+
+    function mostrarProductos(lista) {
+      const contenedor = document.getElementById('productos');
+
+      if (lista.length === 0) {
+        contenedor.innerHTML = '<p class="cargando">No hay productos disponibles.</p>';
+        return;
+      }
+
+      contenedor.innerHTML = lista.map(p => {
+        const disponible = p.cantidad > 0;
+        const foto = p.foto_url || 'https://via.placeholder.com/300x260?text=Sin+foto';
+        return `
+          <div class="tarjeta">
+            <img src="${foto}" alt="${p.producto}" onerror="this.src='https://via.placeholder.com/300x260?text=Sin+foto'" />
+            <div class="info">
+              ${p.favorito ? '<span class="fav">⭐</span>' : ''}
+              <h3>${p.producto || 'Sin nombre'}</h3>
+              <p class="detalles">
+                ${p.categoria || ''}${p.talla ? ' · Talla ' + p.talla : ''}${p.color ? ' · ' + p.color : ''}
+              </p>
+              <p class="precio">$${p.precio_venta || 0}</p>
+              <span class="estado ${disponible ? 'disponible' : 'agotado'}">
+                ${disponible ? 'Disponible' : 'Agotado'}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.getElementById('buscador').addEventListener('input', (e) => {
+      const texto = e.target.value.toLowerCase();
+      const filtrados = todosLosProductos.filter(p =>
+        (p.producto || '').toLowerCase().includes(texto) ||
+        (p.categoria || '').toLowerCase().includes(texto)
+      );
+      mostrarProductos(filtrados);
+    });
+
+    cargarProductos();
+  </script>
+</body>
+</html>
