@@ -63,11 +63,21 @@
       transform: translateY(-4px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     }
-    .tarjeta img {
+    .foto {
       width: 100%;
       height: 260px;
+      background: linear-gradient(135deg, #f5ede3 0%, #e8dcc9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c9a87c;
+      font-size: 3em;
+      overflow: hidden;
+    }
+    .foto img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      background: #f0f0f0;
     }
     .info { padding: 16px; }
     .info h3 {
@@ -116,10 +126,8 @@
   </div>
 
   <script type="module">
-    // ====== TUS DATOS DE SUPABASE ======
     const SUPABASE_URL = 'https://qhihqujbzjcuxshndsez.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFoaWhxdWpiempjdXhzaG5kc2V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NzQzNTcsImV4cCI6MjEwMzM1MDM1N30.eyGr5EOeQQeYfftReayfRdMisR_cQIGPuLpiv7XFzhI';
-    // ===================================
 
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
@@ -138,7 +146,7 @@
         todosLosProductos = data || [];
         mostrarProductos(todosLosProductos);
       } catch (err) {
-        contenedor.innerHTML = '<p class="cargando">Error al cargar productos.<br>Revisa la conexión a Supabase.</p>';
+        contenedor.innerHTML = '<p class="cargando">Error al cargar productos.</p>';
         console.error(err);
       }
     }
@@ -153,10 +161,16 @@
 
       contenedor.innerHTML = lista.map(p => {
         const disponible = p.cantidad > 0;
-        const foto = p.foto_url || 'https://via.placeholder.com/300x260?text=Sin+foto';
+        const tieneFoto = p.foto_url && p.foto_url.trim() !== '';
+
+        // Si tiene foto, la muestra. Si no, muestra un ícono de ropa.
+        const contenidoFoto = tieneFoto
+          ? `<img src="${p.foto_url}" alt="${p.producto}" onerror="this.parentElement.innerHTML='👗'" />`
+          : '👗';
+
         return `
           <div class="tarjeta">
-            <img src="${foto}" alt="${p.producto}" onerror="this.src='https://via.placeholder.com/300x260?text=Sin+foto'" />
+            <div class="foto">${contenidoFoto}</div>
             <div class="info">
               ${p.favorito ? '<span class="fav">⭐</span>' : ''}
               <h3>${p.producto || 'Sin nombre'}</h3>
