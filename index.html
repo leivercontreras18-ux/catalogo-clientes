@@ -562,10 +562,11 @@
     }
 
     function actualizarCarritoUI() {
-      const count = document.getElementById('cartCount');
-      const items = document.getElementById('cartItems');
-      const footer = document.getElementById('cartFooter');
-      const total = document.getElementById('cartTotal');
+        console.log('🟢 actualizarCarritoUI ejecutada. Carrito tiene:', carrito.length, 'items');
+       const count = document.getElementById('cartCount');
+       const items = document.getElementById('cartItems');
+       const footer = document.getElementById('cartFooter');
+       const total = document.getElementById('cartTotal');
 
       const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
       count.textContent = totalItems;
