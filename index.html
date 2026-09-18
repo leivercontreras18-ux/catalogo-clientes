@@ -328,6 +328,61 @@
   <!-- Los botones se generan automáticamente -->
   </div>
 </header>
+  
+  <!-- Botón flotante del carrito -->
+  <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
+    🛒 <span>Pedido</span> <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <!-- Overlay oscuro -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+  <!-- Panel lateral del carrito -->
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h2>🛒 Tu pedido</h2>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Tu pedido está vacío.<br>Agrega productos para empezar 👗</p>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="cart-send" onclick="enviarPedidoWhatsApp()">
+        📱 Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+  <!-- Botón flotante del carrito -->
+  <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
+    🛒 <span>Pedido</span> <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <!-- Overlay oscuro -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+  <!-- Panel lateral del carrito -->
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h2>🛒 Tu pedido</h2>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Tu pedido está vacío.<br>Agrega productos para empezar 👗</p>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="cart-send" onclick="enviarPedidoWhatsApp()">
+        📱 Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
 
   <div id="productos">
     <p class="cargando">Cargando productos...</p>
@@ -342,7 +397,9 @@
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     let todosLosProductos = [];
     let categoriaActual = 'Todas';
-
+    let carrito = JSON.parse(localStorage.getItem('carritoLewin') || '[]');
+    const WHATSAPP_NUM = '584241668588';
+    
     async function cargarProductos() {
       const contenedor = document.getElementById('productos');
       try {
@@ -426,6 +483,11 @@
               <span class="estado ${disponible ? 'disponible' : 'agotado'}">
                 ${disponible ? 'Disponible' : 'Agotado'}
               </span>
+              <button class="btn-agregar" 
+                      onclick="agregarAlCarrito('${p.id || p.producto}')"
+                      ${!disponible ? 'disabled' : ''}>
+                ${disponible ? '🛒 Agregar al pedido' : 'Agotado'}
+              </button>
             </div>
           </div>
         `;
@@ -440,8 +502,136 @@
       );
       mostrarProductos(filtrados);
     });
+        // ===== FUNCIONES DEL CARRITO =====
+    window.toggleCart = function toggleCart() {
+      const panel = document.getElementById('cartPanel');
+      const overlay = document.getElementById('cartOverlay');
+      panel.classList.toggle('open');
+      overlay.classList.toggle('open');
+    };
+
+    window.agregarAlCarrito = function agregarAlCarrito(id) {
+      const producto = todosLosProductos.find(p => (p.id || p.producto) === id);
+      if (!producto) return;
+      
+      const existe = carrito.find(item => (item.id || item.producto) === id);
+      
+      if (existe) {
+        existe.cantidad = (existe.cantidad || 1) + 1;
+      } else {
+        carrito.push({
+          id: producto.id || producto.producto,
+          producto: producto.producto,
+          categoria: producto.categoria,
+          talla: producto.talla,
+          color: producto.color,
+          precio_venta: parseFloat(producto.precio_venta) || 0,
+          foto_url: producto.foto_url,
+          cantidad: 1
+        });
+      }
+      
+      guardarCarrito();
+      actualizarCarritoUI();
+    };
+
+    window.cambiarCantidad = function cambiarCantidad(id, delta) {
+      const item = carrito.find(i => (i.id || i.producto) === id);
+      if (!item) return;
+      
+      item.cantidad += delta;
+      if (item.cantidad <= 0) {
+        carrito = carrito.filter(i => (i.id || i.producto) !== id);
+      }
+      
+      guardarCarrito();
+      actualizarCarritoUI();
+    };
+
+    window.quitarDelCarrito = function quitarDelCarrito(id) {
+      carrito = carrito.filter(i => (i.id || i.producto) !== id);
+      guardarCarrito();
+      actualizarCarritoUI();
+    };
+
+    function guardarCarrito() {
+      localStorage.setItem('carritoLewin', JSON.stringify(carrito));
+    }
+
+    function actualizarCarritoUI() {
+      const count = document.getElementById('cartCount');
+      const items = document.getElementById('cartItems');
+      const footer = document.getElementById('cartFooter');
+      const total = document.getElementById('cartTotal');
+
+      const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+      count.textContent = totalItems;
+
+      if (carrito.length === 0) {
+        items.innerHTML = '<p class="cart-empty">Tu pedido está vacío.<br>Agrega productos para empezar 👗</p>';
+        footer.style.display = 'none';
+        return;
+      }
+
+      footer.style.display = 'block';
+
+      items.innerHTML = carrito.map(item => {
+        const subtotal = item.cantidad * item.precio_venta;
+        const foto = item.foto_url 
+          ? `<img src="${item.foto_url}" />` 
+          : '👗';
+        
+        return `
+          <div class="cart-item">
+            <div class="cart-item-foto">${foto}</div>
+            <div class="cart-item-info">
+              <div class="cart-item-nombre">${item.producto}</div>
+              <div class="cart-item-detalles">
+                ${item.talla ? 'Talla ' + item.talla : ''}${item.color ? ' · ' + item.color : ''}
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
+                <button class="cart-btn-cantidad" onclick="cambiarCantidad('${item.id}', -1)">−</button>
+                <span style="font-weight: 600;">${item.cantidad}</span>
+                <button class="cart-btn-cantidad" onclick="cambiarCantidad('${item.id}', 1)">+</button>
+                <span class="cart-item-precio" style="margin-left: auto;">$${subtotal.toFixed(2)}</span>
+              </div>
+            </div>
+            <button class="cart-item-remove" onclick="quitarDelCarrito('${item.id}')">✕</button>
+          </div>
+        `;
+      }).join('');
+
+      const totalPrecio = carrito.reduce((sum, item) => sum + (item.cantidad * item.precio_venta), 0);
+      total.textContent = '$' + totalPrecio.toFixed(2);
+    }
+
+    window.enviarPedidoWhatsApp = function enviarPedidoWhatsApp() {
+      if (carrito.length === 0) return;
+
+      let mensaje = '🛍️ *NUEVO PEDIDO - LEWIN BOUTIQUE*\n\n';
+      
+      carrito.forEach(item => {
+        const subtotal = item.cantidad * item.precio_venta;
+        mensaje += `👕 *${item.producto}*\n`;
+        if (item.talla) mensaje += `📏 Talla: ${item.talla}\n`;
+        if (item.color) mensaje += `🎨 Color: ${item.color}\n`;
+        mensaje += `🔢 Cantidad: ${item.cantidad}\n`;
+        mensaje += `💰 Subtotal: $${subtotal.toFixed(2)}\n\n`;
+      });
+
+      const total = carrito.reduce((sum, item) => sum + (item.cantidad * item.precio_venta), 0);
+      mensaje += `────────────────\n`;
+      mensaje += `💰 *TOTAL: $${total.toFixed(2)}*\n\n`;
+      mensaje += `¡Gracias por tu pedido! 💜`;
+
+      const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    };
+
+    // ===== MODIFICAR mostrarProductos para agregar botón =====
 
     cargarProductos();
+    actualizarCarritoUI();
   </script>
 </body>
 </html>
