@@ -191,7 +191,7 @@
         console.error(err);
       }
     }
-    function crearBotonesFiltros() {
+      window.crearBotonesFiltros = function crearBotonesFiltros() {
       const contenedor = document.getElementById('filtros');
       const categorias = ['Todas'];
       
@@ -207,9 +207,9 @@
           ${cat}
         </button>
       `).join('');
-    }
+    };
 
-    function cambiarFiltro(cat) {
+      window.cambiarFiltro = function cambiarFiltro(cat) {
       categoriaActual = cat;
       crearBotonesFiltros();
       
