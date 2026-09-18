@@ -359,33 +359,6 @@
       </button>
     </div>
   </div>
-  <!-- Botón flotante del carrito -->
-  <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
-    🛒 <span>Pedido</span> <span class="cart-count" id="cartCount">0</span>
-  </button>
-
-  <!-- Overlay oscuro -->
-  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-
-  <!-- Panel lateral del carrito -->
-  <div class="cart-panel" id="cartPanel">
-    <div class="cart-header">
-      <h2>🛒 Tu pedido</h2>
-      <button class="cart-close" onclick="toggleCart()">✕</button>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <p class="cart-empty">Tu pedido está vacío.<br>Agrega productos para empezar 👗</p>
-    </div>
-    <div class="cart-footer" id="cartFooter" style="display: none;">
-      <div class="cart-total">
-        <span>Total:</span>
-        <span id="cartTotal">$0.00</span>
-      </div>
-      <button class="cart-send" onclick="enviarPedidoWhatsApp()">
-        📱 Enviar pedido por WhatsApp
-      </button>
-    </div>
-  </div>
 
   <div id="productos">
     <p class="cargando">Cargando productos...</p>
