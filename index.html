@@ -79,6 +79,34 @@
       border-color: #c9a87c;
       font-weight: 600;
     }
+    .ordenar-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+    .ordenar-container label {
+      color: #666;
+      font-size: 0.9em;
+    }
+    .ordenar-container select {
+      padding: 8px 16px;
+      border: 1px solid #e5e5e5;
+      border-radius: 20px;
+      background: white;
+      font-size: 0.9em;
+      font-family: inherit;
+      color: #666;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .ordenar-container select:hover,
+    .ordenar-container select:focus {
+      border-color: #c9a87c;
+    }
 
     #productos {
       display: grid;
@@ -330,6 +358,16 @@
   <div class="filtros" id="filtros">
   <!-- Los botones se generan automáticamente -->
   </div>
+  <div class="ordenar-container">
+      <label for="ordenar">Ordenar por:</label>
+      <select id="ordenar" onchange="cambiarOrden(this.value)">
+        <option value="default">Por defecto</option>
+        <option value="precio-asc">Precio: menor a mayor</option>
+        <option value="precio-desc">Precio: mayor a menor</option>
+        <option value="nombre-asc">Nombre: A-Z</option>
+        <option value="nombre-desc">Nombre: Z-A</option>
+      </select>
+    </div>
 </header>
   
   <!-- Botón flotante del carrito -->
@@ -373,6 +411,7 @@
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     let todosLosProductos = [];
     let categoriaActual = 'Todas';
+    let ordenActual = 'default';
     let carrito = JSON.parse(localStorage.getItem('carritoLewin') || '[]');
     const WHATSAPP_NUM = '584241668588';
     
@@ -411,6 +450,16 @@
       `).join('');
     };
 
+        window.cambiarOrden = function cambiarOrden(valor) {
+      ordenActual = valor;
+      const texto = document.getElementById('buscador').value.toLowerCase();
+      const filtrados = todosLosProductos.filter(p =>
+        (p.producto || '').toLowerCase().includes(texto) ||
+        (p.categoria || '').toLowerCase().includes(texto)
+      );
+      mostrarProductos(filtrados);
+    };
+
       window.cambiarFiltro = function cambiarFiltro(cat) {
       categoriaActual = cat;
       crearBotonesFiltros();
@@ -428,6 +477,17 @@
           // Filtrar por categoría seleccionada
           if (categoriaActual !== 'Todas') {
             lista = lista.filter(p => p.categoria === categoriaActual);
+          }
+      
+      // Aplicar orden
+          if (ordenActual === 'precio-asc') {
+            lista = [...lista].sort((a, b) => (parseFloat(a.precio_venta) || 0) - (parseFloat(b.precio_venta) || 0));
+          } else if (ordenActual === 'precio-desc') {
+            lista = [...lista].sort((a, b) => (parseFloat(b.precio_venta) || 0) - (parseFloat(a.precio_venta) || 0));
+          } else if (ordenActual === 'nombre-asc') {
+            lista = [...lista].sort((a, b) => (a.producto || '').localeCompare(b.producto || ''));
+          } else if (ordenActual === 'nombre-desc') {
+            lista = [...lista].sort((a, b) => (b.producto || '').localeCompare(a.producto || ''));
           }
       
           const contenedor = document.getElementById('productos');
