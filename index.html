@@ -51,6 +51,35 @@
       transition: 0.3s;
     }
     .buscador:focus { border-color: #c9a87c; }
+    .filtros {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .filtro-btn {
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 1px solid #e5e5e5;
+      background: white;
+      color: #666;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .filtro-btn:hover {
+      border-color: #c9a87c;
+      color: #c9a87c;
+    }
+    .filtro-btn.activo {
+      background: #c9a87c;
+      color: white;
+      border-color: #c9a87c;
+      font-weight: 600;
+    }
+
     #productos {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -121,11 +150,14 @@
   </style>
 </head>
 <body>
-  <header>
+<header>
   <img src="https://qhihqujbzjcuxshndsez.supabase.co/storage/v1/object/public/productos-fotos/1787708461873-removebg-preview.png" alt="Lewin Boutique" class="logo-header" />
   <h1>LEWIN BOUTIQUE</h1>
   <p class="subtitulo">Catálogo de productos</p>
   <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar producto..." />
+  <div class="filtros" id="filtros">
+  <!-- Los botones se generan automáticamente -->
+  </div>
 </header>
 
   <div id="productos">
@@ -140,6 +172,7 @@
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     let todosLosProductos = [];
+    let categoriaActual = 'Todas';
 
     async function cargarProductos() {
       const contenedor = document.getElementById('productos');
@@ -151,15 +184,51 @@
         if (error) throw error;
 
         todosLosProductos = data || [];
+        crearBotonesFiltros();
         mostrarProductos(todosLosProductos);
       } catch (err) {
         contenedor.innerHTML = '<p class="cargando">Error al cargar productos.</p>';
         console.error(err);
       }
     }
+    function crearBotonesFiltros() {
+      const contenedor = document.getElementById('filtros');
+      const categorias = ['Todas'];
+      
+      // Obtener categorías únicas de los productos
+      const catsUnicas = [...new Set(todosLosProductos.map(p => p.categoria).filter(c => c))];
+      catsUnicas.sort();
+      
+      categorias.push(...catsUnicas);
+      
+      contenedor.innerHTML = categorias.map(cat => `
+        <button class="filtro-btn ${cat === categoriaActual ? 'activo' : ''}" 
+                onclick="cambiarFiltro('${cat}')">
+          ${cat}
+        </button>
+      `).join('');
+    }
+
+    function cambiarFiltro(cat) {
+      categoriaActual = cat;
+      crearBotonesFiltros();
+      
+      // Reaplicar el buscador actual
+      const texto = document.getElementById('buscador').value.toLowerCase();
+      const filtrados = todosLosProductos.filter(p =>
+        (p.producto || '').toLowerCase().includes(texto) ||
+        (p.categoria || '').toLowerCase().includes(texto)
+      );
+      mostrarProductos(filtrados);
+    }
 
     function mostrarProductos(lista) {
-      const contenedor = document.getElementById('productos');
+          // Filtrar por categoría seleccionada
+          if (categoriaActual !== 'Todas') {
+            lista = lista.filter(p => p.categoria === categoriaActual);
+          }
+      
+          const contenedor = document.getElementById('productos');
 
       if (lista.length === 0) {
         contenedor.innerHTML = '<p class="cargando">No hay productos disponibles.</p>';
