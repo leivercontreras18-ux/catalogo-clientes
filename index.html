@@ -168,6 +168,7 @@
     }
     .disponible { background: #e8f5e9; color: #2e7d32; }
     .agotado { background: #ffebee; color: #c62828; }
+    .pocas { background: #fff3e0; color: #e65100; }
     .fav { float: right; font-size: 1.1em; }
         /* ===== CARRITO ===== */
     .cart-btn {
@@ -516,8 +517,10 @@
                 ${p.categoria || ''}${p.talla ? ' · Talla ' + p.talla : ''}${p.color ? ' · ' + p.color : ''}
               </p>
               <p class="precio">$${p.precio_venta || 0}</p>
-              <span class="estado ${disponible ? 'disponible' : 'agotado'}">
-                ${disponible ? 'Disponible' : 'Agotado'}
+              <span class="estado ${disponible ? (p.cantidad <= 4 ? 'pocas' : 'disponible') : 'agotado'}">
+                ${disponible 
+                  ? (p.cantidad <= 4 ? `🔥 ¡Quedan ${p.cantidad} unidades!` : '✅ Disponible')
+                  : '❌ Agotado'}
               </span>
               <button class="btn-agregar" 
                       onclick="agregarAlCarrito('${p.id || p.producto}')"
@@ -551,8 +554,13 @@
       if (!producto) return;
       
       const existe = carrito.find(item => (item.id || item.producto) === id);
+      const disponible = parseInt(producto.cantidad) || 0;
       
       if (existe) {
+        if (existe.cantidad >= disponible) {
+          alert(`⚠️ Solo hay ${disponible} unidades disponibles de "${producto.producto}"`);
+          return;
+        }
         existe.cantidad = (existe.cantidad || 1) + 1;
       } else {
         carrito.push({
@@ -574,6 +582,14 @@
     window.cambiarCantidad = function cambiarCantidad(id, delta) {
       const item = carrito.find(i => (i.id || i.producto) === id);
       if (!item) return;
+      
+      const producto = todosLosProductos.find(p => (p.id || p.producto) === id);
+      const disponible = producto ? (parseInt(producto.cantidad) || 0) : 0;
+      
+      if (delta > 0 && item.cantidad >= disponible) {
+        alert(`⚠️ Solo hay ${disponible} unidades disponibles de "${item.producto}"`);
+        return;
+      }
       
       item.cantidad += delta;
       if (item.cantidad <= 0) {
