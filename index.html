@@ -107,6 +107,28 @@
     .ordenar-container select:focus {
       border-color: #c9a87c;
     }
+    .seccion-titulo {
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: #c9a87c;
+      margin: 30px 0 20px 0;
+      padding: 10px 0;
+    }
+    #destacados-section {
+      max-width: 1200px;
+      margin: 0 auto 30px auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #fdf8f3 0%, #faf7f5 100%);
+      border-radius: 20px;
+      border: 1px solid #f0e6d8;
+    }
+    #destacados {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
 
     #productos {
       display: grid;
@@ -399,8 +421,16 @@
     </div>
   </div>
 
-  <div id="productos">
-    <p class="cargando">Cargando productos...</p>
+  <div id="destacados-section" style="display: none;">
+    <h2 class="seccion-titulo">⭐ DESTACADOS</h2>
+    <div id="destacados"></div>
+  </div>
+
+  <div id="todos-section">
+    <h2 class="seccion-titulo" id="titulo-todos">📦 TODOS LOS PRODUCTOS</h2>
+    <div id="productos">
+      <p class="cargando">Cargando productos...</p>
+    </div>
   </div>
 
   <script type="module">
@@ -427,6 +457,7 @@
 
         todosLosProductos = data || [];
         crearBotonesFiltros();
+        mostrarDestacados(todosLosProductos);
         mostrarProductos(todosLosProductos);
       } catch (err) {
         contenedor.innerHTML = '<p class="cargando">Error al cargar productos.</p>';
@@ -458,6 +489,7 @@
         (p.producto || '').toLowerCase().includes(texto) ||
         (p.categoria || '').toLowerCase().includes(texto)
       );
+      mostrarDestacados(filtrados);
       mostrarProductos(filtrados);
     };
 
@@ -471,16 +503,47 @@
         (p.producto || '').toLowerCase().includes(texto) ||
         (p.categoria || '').toLowerCase().includes(texto)
       );
+      mostrarDestacados(filtrados);
       mostrarProductos(filtrados);
     }
+        function generarTarjeta(p) {
+      const disponible = p.cantidad > 0;
+      const tieneFoto = p.foto_url && p.foto_url.trim() !== '';
+      const contenidoFoto = tieneFoto
+        ? `<img src="${p.foto_url}" alt="${p.producto}" onerror="this.parentElement.innerHTML='👗'" />`
+        : '👗';
 
-    function mostrarProductos(lista) {
-          // Filtrar por categoría seleccionada
+      return `
+        <div class="tarjeta">
+          <div class="foto">${contenidoFoto}</div>
+          <div class="info">
+            ${p.favorito ? '<span class="fav">⭐</span>' : ''}
+            <h3>${p.producto || 'Sin nombre'}</h3>
+            <p class="detalles">
+              ${p.categoria || ''}${p.talla ? ' · Talla ' + p.talla : ''}${p.color ? ' · ' + p.color : ''}
+            </p>
+            <p class="precio">$${p.precio_venta || 0}</p>
+            <span class="estado ${disponible ? (p.cantidad <= 4 ? 'pocas' : 'disponible') : 'agotado'}">
+              ${disponible 
+                ? (p.cantidad <= 4 ? `🔥 ¡Quedan ${p.cantidad} unidades!` : '✅ Disponible')
+                : '❌ Agotado'}
+            </span>
+            <button class="btn-agregar" 
+                    onclick="agregarAlCarrito('${p.id || p.producto}')"
+                    ${!disponible ? 'disabled' : ''}>
+              ${disponible ? '🛒 Agregar al pedido' : 'Agotado'}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+        function mostrarProductos(lista) {
           if (categoriaActual !== 'Todas') {
             lista = lista.filter(p => p.categoria === categoriaActual);
           }
-      
-      // Aplicar orden
+
+          // Aplicar orden
           if (ordenActual === 'precio-asc') {
             lista = [...lista].sort((a, b) => (parseFloat(a.precio_venta) || 0) - (parseFloat(b.precio_venta) || 0));
           } else if (ordenActual === 'precio-desc') {
@@ -490,49 +553,29 @@
           } else if (ordenActual === 'nombre-desc') {
             lista = [...lista].sort((a, b) => (b.producto || '').localeCompare(a.producto || ''));
           }
-      
-          const contenedor = document.getElementById('productos');
 
-      if (lista.length === 0) {
-        contenedor.innerHTML = '<p class="cargando">No hay productos disponibles.</p>';
+          const contenedor = document.getElementById('productos');
+          if (lista.length === 0) {
+            contenedor.innerHTML = '<p class="cargando">No hay productos disponibles.</p>';
+            return;
+          }
+          contenedor.innerHTML = lista.map(p => generarTarjeta(p)).join('');
+    }
+    function mostrarDestacados(lista) {
+      let filtrados = [...lista];
+      if (categoriaActual !== 'Todas') {
+        filtrados = filtrados.filter(p => p.categoria === categoriaActual);
+      }
+      const destacados = filtrados.filter(p => p.favorito === true);
+      
+      const section = document.getElementById('destacados-section');
+      if (destacados.length === 0) {
+        section.style.display = 'none';
         return;
       }
-
-      contenedor.innerHTML = lista.map(p => {
-        const disponible = p.cantidad > 0;
-        const tieneFoto = p.foto_url && p.foto_url.trim() !== '';
-
-        // Si tiene foto, la muestra. Si no, muestra un ícono de ropa.
-        const contenidoFoto = tieneFoto
-          ? `<img src="${p.foto_url}" alt="${p.producto}" onerror="this.parentElement.innerHTML='👗'" />`
-          : '👗';
-
-        return `
-          <div class="tarjeta">
-            <div class="foto">${contenidoFoto}</div>
-            <div class="info">
-              ${p.favorito ? '<span class="fav">⭐</span>' : ''}
-              <h3>${p.producto || 'Sin nombre'}</h3>
-              <p class="detalles">
-                ${p.categoria || ''}${p.talla ? ' · Talla ' + p.talla : ''}${p.color ? ' · ' + p.color : ''}
-              </p>
-              <p class="precio">$${p.precio_venta || 0}</p>
-              <span class="estado ${disponible ? (p.cantidad <= 4 ? 'pocas' : 'disponible') : 'agotado'}">
-                ${disponible 
-                  ? (p.cantidad <= 4 ? `🔥 ¡Quedan ${p.cantidad} unidades!` : '✅ Disponible')
-                  : '❌ Agotado'}
-              </span>
-              <button class="btn-agregar" 
-                      onclick="agregarAlCarrito('${p.id || p.producto}')"
-                      ${!disponible ? 'disabled' : ''}>
-                ${disponible ? '🛒 Agregar al pedido' : 'Agotado'}
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
+      section.style.display = 'block';
+      document.getElementById('destacados').innerHTML = destacados.map(p => generarTarjeta(p)).join('');
     }
-
     document.getElementById('buscador').addEventListener('input', (e) => {
       const texto = e.target.value.toLowerCase();
       const filtrados = todosLosProductos.filter(p =>
