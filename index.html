@@ -192,6 +192,18 @@
     .agotado { background: #ffebee; color: #c62828; }
     .pocas { background: #fff3e0; color: #e65100; }
     .fav { float: right; font-size: 1.1em; }
+    .badge-nuevo {
+      display: inline-block;
+      background: linear-gradient(135deg, #c9a87c 0%, #d4b88a 100%);
+      color: white;
+      font-size: 0.7em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 2px 6px rgba(201, 168, 124, 0.35);
+    }
         /* ===== CARRITO ===== */
     .cart-btn {
       position: fixed;
@@ -451,7 +463,7 @@
       try {
         const { data, error } = await supabase
           .from('inventario')
-          .select('producto, categoria, talla, color, cantidad, precio_venta, foto_url, favorito');
+          .select('producto, categoria, talla, color, cantidad, precio_venta, foto_url, favorito, created_at');
 
         if (error) throw error;
 
@@ -506,6 +518,13 @@
       mostrarDestacados(filtrados);
       mostrarProductos(filtrados);
     }
+    function esNuevo(producto) {
+      if (!producto.created_at) return false;
+      const fecha = new Date(producto.created_at);
+      const hoy = new Date();
+      const dias = (hoy - fecha) / (1000 * 60 * 60 * 24);
+      return dias < 15;
+    }
         function generarTarjeta(p) {
       const disponible = p.cantidad > 0;
       const tieneFoto = p.foto_url && p.foto_url.trim() !== '';
@@ -517,6 +536,7 @@
         <div class="tarjeta">
           <div class="foto">${contenidoFoto}</div>
           <div class="info">
+            ${esNuevo(p) ? '<span class="badge-nuevo">✨ NUEVO</span>' : ''}
             ${p.favorito ? '<span class="fav">⭐</span>' : ''}
             <h3>${p.producto || 'Sin nombre'}</h3>
             <p class="detalles">
