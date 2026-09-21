@@ -724,7 +724,7 @@
     <div class="modal-contenido">
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
       <div class="modal-grid">
-       <div class="modal-foto-wrapper" style="cursor: zoom-in;" onclick="abrirLightbox(event)">
+       <div class="modal-foto-wrapper" style="cursor: zoom-in;" onclick="abrirLightbox(this.querySelector('img').src)">
           <img id="modalFoto" src="" alt="" />
           <div id="modalFotoPlaceholder" class="modal-foto-placeholder">👗</div>
           <span id="modalBadgeNuevo" class="modal-badge-nuevo">✨ NUEVO</span>
@@ -1015,15 +1015,12 @@
       document.body.style.overflow = 'hidden';
     };
 
-    window.abrirLightbox = function abrirLightbox(e) {
-      if (!productoModalActual) return;
-      if (!productoModalActual.foto_url || productoModalActual.foto_url.trim() === '') return;
-      
-      e.stopPropagation();
+    window.abrirLightbox = function abrirLightbox(urlFoto) {
+      if (!urlFoto || urlFoto.trim() === '') return;
       
       const lightbox = document.getElementById('lightbox');
       const img = document.getElementById('lightboxImg');
-      img.src = productoModalActual.foto_url;
+      img.src = urlFoto;
       lightbox.classList.add('abierto');
     };
 
@@ -1209,20 +1206,7 @@
       const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
     };
-
-    // Delegación de eventos para el clic en la foto del modal
-    document.addEventListener('click', function(e) {
-        const wrapper = e.target.closest('.modal-foto-wrapper');
-        if (wrapper) {
-            e.stopPropagation();
-            if (!productoModalActual) return;
-            if (!productoModalActual.foto_url || productoModalActual.foto_url.trim() === '') return;
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightboxImg');
-            img.src = productoModalActual.foto_url;
-            lightbox.classList.add('abierto');
-        }
-    });
+    
   </script>
 </body>
 </html>
