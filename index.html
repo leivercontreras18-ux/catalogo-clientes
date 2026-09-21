@@ -724,7 +724,7 @@
     <div class="modal-contenido">
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
       <div class="modal-grid">
-       <div class="modal-foto-wrapper" style="cursor: zoom-in;" onclick="abrirLightbox()">
+       <div class="modal-foto-wrapper" style="cursor: zoom-in;" onclick="abrirLightbox(event)">
           <img id="modalFoto" src="" alt="" />
           <div id="modalFotoPlaceholder" class="modal-foto-placeholder">👗</div>
           <span id="modalBadgeNuevo" class="modal-badge-nuevo">✨ NUEVO</span>
@@ -1015,11 +1015,11 @@
       document.body.style.overflow = 'hidden';
     };
 
-    window.abrirLightbox = function abrirLightbox() {
+    window.abrirLightbox = function abrirLightbox(e) {
       if (!productoModalActual) return;
       if (!productoModalActual.foto_url || productoModalActual.foto_url.trim() === '') return;
       
-      event.stopPropagation();
+      e.stopPropagation();
       
       const lightbox = document.getElementById('lightbox');
       const img = document.getElementById('lightboxImg');
