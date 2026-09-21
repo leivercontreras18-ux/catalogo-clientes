@@ -1214,6 +1214,23 @@
 
     cargarProductos();
     actualizarCarritoUI();
+    
+    // Listener para el clic en la foto del modal (abre lightbox)
+    setTimeout(function() {
+        const fotoWrapper = document.querySelector('.modal-foto-wrapper');
+        if (fotoWrapper) {
+            fotoWrapper.style.cursor = 'zoom-in';
+            fotoWrapper.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!productoModalActual) return;
+                if (!productoModalActual.foto_url || productoModalActual.foto_url.trim() === '') return;
+                const lightbox = document.getElementById('lightbox');
+                const img = document.getElementById('lightboxImg');
+                img.src = productoModalActual.foto_url;
+                lightbox.classList.add('abierto');
+            });
+        }
+    }, 500);
   </script>
 </body>
 </html>
