@@ -1210,27 +1210,19 @@
       window.open(url, '_blank');
     };
 
-    // ===== MODIFICAR mostrarProductos para agregar botón =====
-
-    cargarProductos();
-    actualizarCarritoUI();
-    
-    // Listener para el clic en la foto del modal (abre lightbox)
-    setTimeout(function() {
-        const fotoWrapper = document.querySelector('.modal-foto-wrapper');
-        if (fotoWrapper) {
-            fotoWrapper.style.cursor = 'zoom-in';
-            fotoWrapper.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (!productoModalActual) return;
-                if (!productoModalActual.foto_url || productoModalActual.foto_url.trim() === '') return;
-                const lightbox = document.getElementById('lightbox');
-                const img = document.getElementById('lightboxImg');
-                img.src = productoModalActual.foto_url;
-                lightbox.classList.add('abierto');
-            });
+    // Delegación de eventos para el clic en la foto del modal
+    document.addEventListener('click', function(e) {
+        const wrapper = e.target.closest('.modal-foto-wrapper');
+        if (wrapper) {
+            e.stopPropagation();
+            if (!productoModalActual) return;
+            if (!productoModalActual.foto_url || productoModalActual.foto_url.trim() === '') return;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = productoModalActual.foto_url;
+            lightbox.classList.add('abierto');
         }
-    }, 500);
+    });
   </script>
 </body>
 </html>
