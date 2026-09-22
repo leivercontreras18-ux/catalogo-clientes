@@ -807,6 +807,7 @@
     const WHATSAPP_NUM = '584241668588';
     
     async function cargarProductos() {
+      console.log('🚀 cargarProductos INICIÓ');
       const contenedor = document.getElementById('productos');
       try {
         const { data, error } = await supabase
@@ -1206,7 +1207,13 @@
       const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
     };
+
     
+    console.log('✅ Módulo llegó al final');
+    cargarProductos();
+    actualizarCarritoUI();
+    console.log('🏁 Módulo ejecutado COMPLETO');
+
   </script>
 </body>
 </html>
