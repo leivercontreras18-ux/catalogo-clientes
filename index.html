@@ -1030,18 +1030,26 @@
         placeholderEl.style.display = 'flex';
       }
       
+      // Badge NUEVO (con protección)
       const badgeNuevo = document.getElementById('modalBadgeNuevo');
-      if (typeof esNuevo === 'function' && esNuevo(producto)) {
-        badgeNuevo.style.display = 'block';
-      } else {
-        badgeNuevo.style.display = 'none';
+      if (badgeNuevo) {
+        if (typeof esNuevo === 'function' && esNuevo(producto)) {
+          badgeNuevo.style.display = 'block';
+        } else {
+          badgeNuevo.style.display = 'none';
+        }
       }
-      // Badge OFERTA en el modal
+
+      // Badge OFERTA (con protección)
       const badgeOferta = document.getElementById('modalBadgeOferta');
-      if (producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta) {
-        badgeOferta.style.display = 'block';
-      } else {
-        badgeOferta.style.display = 'none';
+      if (badgeOferta) {
+        if (producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta) {
+          badgeOferta.style.setProperty('display', 'block', 'important');
+          if (badgeNuevo) badgeNuevo.classList.add('tiene-oferta');
+        } else {
+          badgeOferta.style.setProperty('display', 'none', 'important');
+          if (badgeNuevo) badgeNuevo.classList.remove('tiene-oferta');
+        }
       }
       
       document.getElementById('modalCategoria').textContent = producto.categoria || '';
