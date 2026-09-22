@@ -206,6 +206,19 @@
       margin-right: 6px;
       box-shadow: 0 2px 6px rgba(219, 39, 119, 0.35);
     }
+    .badge-oferta {
+      display: inline-block;
+      background: linear-gradient(135deg, #db2777 0%, #ec4899 100%);
+      color: white;
+      font-size: 0.7em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      margin-right: 6px;
+      box-shadow: 0 2px 6px rgba(219, 39, 119, 0.35);
+    }
     .badge-nuevo {
       display: inline-block;
       background: linear-gradient(135deg, #c9a87c 0%, #d4b88a 100%);
@@ -1023,7 +1036,27 @@
           document.querySelector('.modal-foto-wrapper').appendChild(badgeOf);
         }
       } else {
+        const enOfertaModal = producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta;
+      
+      if (enOfertaModal) {
+        document.getElementById('modalPrecio').innerHTML = '<span style="text-decoration: line-through; color: #999; font-size: 0.6em; font-weight: 400; margin-right: 10px;">$' + parseFloat(producto.precio_venta).toFixed(2) + '</span>$' + parseFloat(producto.precio_oferta).toFixed(2);
+        if (!document.getElementById('modalBadgeOferta')) {
+          const badgeOf = document.createElement('span');
+          badgeOf.id = 'modalBadgeOferta';
+          badgeOf.className = 'modal-badge-nuevo';
+          badgeOf.style.background = 'linear-gradient(135deg, #db2777 0%, #ec4899 100%)';
+          badgeOf.style.top = 'auto';
+          badgeOf.style.left = 'auto';
+          badgeOf.style.right = '15px';
+          badgeOf.style.bottom = '15px';
+          badgeOf.textContent = '🎁 OFERTA';
+          document.querySelector('.modal-foto-wrapper').appendChild(badgeOf);
+        }
+      } else {
         document.getElementById('modalPrecio').textContent = '$' + (parseFloat(producto.precio_venta) || 0).toFixed(2);
+        const badgeViejo = document.getElementById('modalBadgeOferta');
+        if (badgeViejo) badgeViejo.remove();
+      }
         const badgeViejo = document.getElementById('modalBadgeOferta');
         if (badgeViejo) badgeViejo.remove();
       }
