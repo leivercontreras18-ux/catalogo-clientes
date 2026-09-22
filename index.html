@@ -370,6 +370,25 @@
       font-size: 6em;
       color: #c9a87c;
     }
+     .modal-badge-oferta {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: linear-gradient(135deg, #db2777 0%, #ec4899 100%);
+      color: white;
+      font-size: 0.75em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 5px 12px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(219, 39, 119, 0.5);
+      z-index: 5;
+    }
+    .modal-badge-nuevo + .modal-badge-oferta,
+    .modal-badge-oferta + .modal-badge-nuevo {
+      left: auto;
+      right: 15px;
+    }
     .modal-badge-nuevo {
       position: absolute;
       top: 15px;
@@ -753,6 +772,7 @@
        <div class="modal-foto-wrapper" onclick="abrirLightbox(this.querySelector('img').src)" style="cursor: zoom-in;">
           <img id="modalFoto" src="" alt="" style="cursor: zoom-in;" />
           <div id="modalFotoPlaceholder" class="modal-foto-placeholder">👗</div>
+          <span id="modalBadgeOferta" class="modal-badge-oferta" style="display:none;">🎁 OFERTA</span>
           <span id="modalBadgeNuevo" class="modal-badge-nuevo">✨ NUEVO</span>
         </div>
         <div class="modal-info">
@@ -1015,6 +1035,13 @@
         badgeNuevo.style.display = 'block';
       } else {
         badgeNuevo.style.display = 'none';
+      }
+      // Badge OFERTA en el modal
+      const badgeOferta = document.getElementById('modalBadgeOferta');
+      if (producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta) {
+        badgeOferta.style.display = 'block';
+      } else {
+        badgeOferta.style.display = 'none';
       }
       
       document.getElementById('modalCategoria').textContent = producto.categoria || '';
