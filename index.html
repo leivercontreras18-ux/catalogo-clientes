@@ -862,7 +862,7 @@
       try {
         const { data, error } = await supabase
           .from('inventario')
-          .select('producto, categoria, talla, color, cantidad, precio_venta, precio_oferta, en_oferta, foto_url, favorito, created_at');
+          .select('id, producto, categoria, talla, color, cantidad, precio_venta, precio_final, precio_oferta, en_oferta, foto_url, favorito, created_at');
 
         if (error) throw error;
 
