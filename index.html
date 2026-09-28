@@ -12,6 +12,7 @@
       background: #faf7f5;
       color: #2c2c2c;
       padding: 20px;
+      scroll-behavior: smooth;
     }
     
     /* ===== HEADER ELEGANTE ===== */
@@ -88,6 +89,108 @@
     }
     .icon-search:hover, .icon-cart:hover {
       transform: scale(1.15);
+    }
+    
+    /* ===== HERO / PORTADA ===== */
+    .hero-section {
+      padding: 70px 40px 60px;
+      text-align: center;
+      background: #faf7f5;
+      margin: -20px -20px 0 -20px;
+    }
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: #b8976a;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 52px;
+      font-weight: 500;
+      color: #2c2c2c;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero-subtitle {
+      font-size: 15px;
+      color: #888;
+      letter-spacing: 2px;
+    }
+    
+    /* ===== SOBRE NOSOTROS ===== */
+    .about-section {
+      padding: 70px 40px;
+      background: #ffffff;
+      margin: 0 -20px;
+    }
+    .about-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-photo {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #f5ede3 0%, #e8dcc9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-placeholder {
+      font-size: 120px;
+      color: #c9a87c;
+    }
+    .about-content h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 34px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #2c2c2c;
+    }
+    .about-content p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 16px;
+    }
+    .about-features {
+      display: flex;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .about-feature {
+      text-align: center;
+      flex: 1;
+    }
+    .about-icon {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+    .about-text {
+      font-size: 11px;
+      color: #888;
+      line-height: 1.4;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Responsive: en móvil, una sola columna */
+    @media (max-width: 700px) {
+      .about-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .hero-title {
+        font-size: 32px;
+      }
+      .about-content h2 {
+        font-size: 26px;
+      }
     }
     
     /* Sección de búsqueda y filtros */
@@ -916,6 +1019,41 @@
   </div>
 </header>
 
+<!-- ===== HERO / PORTADA ===== -->
+<section class="hero-section" id="inicio">
+  <p class="hero-tag">BOUTIQUE VENEZOLANA</p>
+  <h1 class="hero-title">Nacimos para vestir<br>a tu familia</h1>
+  <p class="hero-subtitle">Damas · Caballeros · Niños · Niñas</p>
+</section>
+
+<!-- ===== SOBRE NOSOTROS ===== -->
+<section class="about-section" id="sobre">
+  <div class="about-container">
+    <div class="about-photo">
+      <div class="about-placeholder">👨‍👩‍👧‍👦</div>
+    </div>
+    <div class="about-content">
+      <h2>💜 Sobre Nosotros</h2>
+      <p>Lewin Boutique nació en Venezuela con la misión de vestir a toda la familia con moda elegante y accesible.</p>
+      <p>Desde prendas para damas y caballeros, hasta ropa para niños y niñas, cada pieza es seleccionada con amor para que te sientas única y especial.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="about-icon">🚚</div>
+          <div class="about-text">Envíos<br>a todo el país</div>
+        </div>
+        <div class="about-feature">
+          <div class="about-icon">💬</div>
+          <div class="about-text">Atención por<br>WhatsApp</div>
+        </div>
+        <div class="about-feature">
+          <div class="about-icon">✨</div>
+          <div class="about-text">Calidad<br>garantizada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
 <!-- ===== BUSCADOR Y FILTROS (debajo del header) ===== -->
 <section class="search-section" id="catalogo">
   <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar producto..." />
@@ -1010,11 +1148,12 @@
     </div>
   </div>
 
-  <div id="destacados-section" style="display: none;">
+  <div id="destacados-section" style="display: none;" data-section="ofertas">
     <h2 class="seccion-titulo">⭐ DESTACADOS</h2>
     <div id="destacados"></div>
   </div>
-
+  
+  <div id="ofertas"></div>
   <div id="todos-section">
     <h2 class="seccion-titulo" id="titulo-todos">📦 TODOS LOS PRODUCTOS</h2>
     <div id="productos">
@@ -1023,7 +1162,7 @@
   </div>
   
   <!-- ===== FOOTER ===== -->
-  <footer>
+  <footer id="contacto">
     <div class="footer-content">
       <div class="footer-col">
         <div class="footer-logo-circle">L</div>
