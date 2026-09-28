@@ -13,13 +13,89 @@
       color: #2c2c2c;
       padding: 20px;
     }
-    header {
+    
+    /* ===== HEADER ELEGANTE ===== */
+    .main-header {
+      background: #faf7f5;
+      border-bottom: 1px solid #e8dfd2;
+      padding: 20px 40px;
+      margin: -20px -20px 30px -20px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1300px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .logo-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #c9a87c;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 700;
+      font-size: 22px;
+    }
+    .logo-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #2c2c2c;
+    }
+    .header-nav {
+      display: flex;
+      gap: 32px;
+      flex: 1;
+      justify-content: center;
+    }
+    .header-nav a {
+      text-decoration: none;
+      color: #2c2c2c;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+    .header-nav a:hover {
+      color: #c9a87c;
+    }
+    .header-icons {
+      display: flex;
+      gap: 18px;
+      font-size: 18px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .icon-search, .icon-cart {
+      transition: transform 0.2s;
+    }
+    .icon-search:hover, .icon-cart:hover {
+      transform: scale(1.15);
+    }
+    
+    /* Sección de búsqueda y filtros */
+    .search-section {
       text-align: center;
-      padding: 30px 20px;
-      background: white;
-      border-radius: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      padding: 20px;
+      max-width: 1300px;
+      margin: 0 auto 30px;
     }
     .logo-header {
       display: block;
@@ -818,25 +894,43 @@
   </style>
 </head>
 <body>
-<header>
-  <img src="https://qhihqujbzjcuxshndsez.supabase.co/storage/v1/object/public/productos-fotos/1787708461873-removebg-preview.png" alt="Lewin Boutique" class="logo-header" />
-  <h1>LEWIN BOUTIQUE</h1>
-  <p class="subtitulo">Catálogo de productos</p>
-  <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar producto..." />
-  <div class="filtros" id="filtros">
-  <!-- Los botones se generan automáticamente -->
-  </div>
-  <div class="ordenar-container">
-      <label for="ordenar">Ordenar por:</label>
-      <select id="ordenar" onchange="cambiarOrden(this.value)">
-        <option value="default">Por defecto</option>
-        <option value="precio-asc">Precio: menor a mayor</option>
-        <option value="precio-desc">Precio: mayor a menor</option>
-        <option value="nombre-asc">Nombre: A-Z</option>
-        <option value="nombre-desc">Nombre: Z-A</option>
-      </select>
+  
+<!-- ===== HEADER ELEGANTE ===== -->
+<header class="main-header">
+  <div class="header-top">
+    <div class="header-logo">
+      <div class="logo-circle">L</div>
+      <span class="logo-name">LEWIN BOUTIQUE</span>
     </div>
+    <nav class="header-nav">
+      <a href="#inicio">INICIO</a>
+      <a href="#catalogo">CATÁLOGO</a>
+      <a href="#ofertas">OFERTAS</a>
+      <a href="#sobre">SOBRE NOSOTROS</a>
+      <a href="#contacto">CONTACTO</a>
+    </nav>
+    <div class="header-icons">
+      <span class="icon-search" onclick="document.getElementById('buscador').focus()">🔍</span>
+      <span class="icon-cart" onclick="toggleCart()">🛒</span>
+    </div>
+  </div>
 </header>
+
+<!-- ===== BUSCADOR Y FILTROS (debajo del header) ===== -->
+<section class="search-section" id="catalogo">
+  <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar producto..." />
+  <div class="filtros" id="filtros"></div>
+  <div class="ordenar-container">
+    <label for="ordenar">Ordenar por:</label>
+    <select id="ordenar" onchange="cambiarOrden(this.value)">
+      <option value="default">Por defecto</option>
+      <option value="precio-asc">Precio: menor a mayor</option>
+      <option value="precio-desc">Precio: mayor a menor</option>
+      <option value="nombre-asc">Nombre: A-Z</option>
+      <option value="nombre-desc">Nombre: Z-A</option>
+    </select>
+  </div>
+</section>
   
   <!-- Botón flotante del carrito -->
   <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
