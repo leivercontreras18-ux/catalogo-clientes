@@ -138,13 +138,13 @@
       overflow: hidden;
       aspect-ratio: 4/5;
       background: linear-gradient(135deg, #f5ede3 0%, #e8dcc9 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      box-shadow: 0 15px 40px rgba(201, 168, 124, 0.2);
     }
-    .about-placeholder {
-      font-size: 120px;
-      color: #c9a87c;
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .about-content h2 {
       font-family: Georgia, 'Times New Roman', serif;
@@ -158,6 +158,11 @@
       line-height: 1.8;
       color: #666;
       margin-bottom: 16px;
+    }
+    .about-content p em {
+      color: #b8976a;
+      font-style: italic;
+      font-size: 15px;
     }
     .about-features {
       display: flex;
@@ -1030,12 +1035,13 @@
 <section class="about-section" id="sobre">
   <div class="about-container">
     <div class="about-photo">
-      <div class="about-placeholder">👨‍👩‍👧‍👦</div>
+      <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80" alt="Familia Lewin Boutique" />
     </div>
     <div class="about-content">
       <h2>💜 Sobre Nosotros</h2>
-      <p>Lewin Boutique nació en Venezuela con la misión de vestir a toda la familia con moda elegante y accesible.</p>
-      <p>Desde prendas para damas y caballeros, hasta ropa para niños y niñas, cada pieza es seleccionada con amor para que te sientas única y especial.</p>
+      <p><strong>Vestimos a tu familia con amor, desde Venezuela para el mundo.</strong></p>
+      <p>En Lewin Boutique creemos que la moda no es solo ropa: es confianza, es estilo, es sentirte bien contigo mismo. Por eso elegimos cada pieza con dedicación, para damas, caballeros, niños y niñas.</p>
+      <p><em>Más que una boutique, somos parte de tu historia.</em></p>
       <div class="about-features">
         <div class="about-feature">
           <div class="about-icon">🚚</div>
