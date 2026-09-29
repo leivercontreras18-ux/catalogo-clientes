@@ -12,198 +12,14 @@
       background: #faf7f5;
       color: #2c2c2c;
       padding: 20px;
-      scroll-behavior: smooth;
     }
-    
-    /* ===== HEADER ELEGANTE ===== */
-    .main-header {
-      background: #faf7f5;
-      border-bottom: 1px solid #e8dfd2;
-      padding: 20px 40px;
-      margin: -20px -20px 30px -20px;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1300px;
-      margin: 0 auto;
-      gap: 30px;
-    }
-    .header-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-    .logo-circle {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #c9a87c;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-weight: 700;
-      font-size: 22px;
-    }
-    .logo-name {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: #2c2c2c;
-    }
-    .header-nav {
-      display: flex;
-      gap: 32px;
-      flex: 1;
-      justify-content: center;
-    }
-    .header-nav a {
-      text-decoration: none;
-      color: #2c2c2c;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      transition: color 0.3s;
-      white-space: nowrap;
-    }
-    .header-nav a:hover {
-      color: #c9a87c;
-    }
-    .header-icons {
-      display: flex;
-      gap: 18px;
-      font-size: 18px;
-      flex-shrink: 0;
-      cursor: pointer;
-    }
-    .icon-search, .icon-cart {
-      transition: transform 0.2s;
-    }
-    .icon-search:hover, .icon-cart:hover {
-      transform: scale(1.15);
-    }
-    
-    /* ===== HERO / PORTADA ===== */
-    .hero-section {
-      padding: 70px 40px 60px;
+    header {
       text-align: center;
-      background: #faf7f5;
-      margin: -20px -20px 0 -20px;
-    }
-    .hero-tag {
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: #b8976a;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .hero-title {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 52px;
-      font-weight: 500;
-      color: #2c2c2c;
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .hero-subtitle {
-      font-size: 15px;
-      color: #888;
-      letter-spacing: 2px;
-    }
-    
-    /* ===== SOBRE NOSOTROS ===== */
-    .about-section {
-      padding: 70px 40px;
-      background: #ffffff;
-      margin: 0 -20px;
-    }
-    .about-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    .about-photo {
+      padding: 30px 20px;
+      background: white;
       border-radius: 20px;
-      overflow: hidden;
-      aspect-ratio: 4/5;
-      background: linear-gradient(135deg, #f5ede3 0%, #e8dcc9 100%);
-      box-shadow: 0 15px 40px rgba(201, 168, 124, 0.2);
-    }
-    .about-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .about-content h2 {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 34px;
-      font-weight: 600;
-      margin-bottom: 24px;
-      color: #2c2c2c;
-    }
-    .about-content p {
-      font-size: 15px;
-      line-height: 1.8;
-      color: #666;
-      margin-bottom: 16px;
-    }
-    .about-content p em {
-      color: #b8976a;
-      font-style: italic;
-      font-size: 15px;
-    }
-    .about-features {
-      display: flex;
-      gap: 24px;
-      margin-top: 32px;
-    }
-    .about-feature {
-      text-align: center;
-      flex: 1;
-    }
-    .about-icon {
-      font-size: 26px;
-      margin-bottom: 8px;
-    }
-    .about-text {
-      font-size: 11px;
-      color: #888;
-      line-height: 1.4;
-      letter-spacing: 0.5px;
-    }
-    
-    /* Responsive: en móvil, una sola columna */
-    @media (max-width: 700px) {
-      .about-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .hero-title {
-        font-size: 32px;
-      }
-      .about-content h2 {
-        font-size: 26px;
-      }
-    }
-    
-    /* Sección de búsqueda y filtros */
-    .search-section {
-      text-align: center;
-      padding: 20px;
-      max-width: 1300px;
-      margin: 0 auto 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
     .logo-header {
       display: block;
@@ -314,7 +130,7 @@
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 20px;
     }
-
+ 
     #productos {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -415,7 +231,7 @@
       margin-bottom: 8px;
       box-shadow: 0 2px 6px rgba(201, 168, 124, 0.35);
     }
-
+ 
     /* ===== LIGHTBOX (foto en grande) ===== */
     .lightbox {
       display: none;
@@ -460,7 +276,7 @@
     .lightbox-cerrar:hover {
       background: rgba(255, 255, 255, 0.3);
     }
-
+ 
     /* ===== MODAL DE PRODUCTO ===== */
     .modal-producto {
       display: none;
@@ -915,181 +731,43 @@
       color: #999;
       grid-column: 1 / -1;
     }
-    
-    /* ===== FOOTER ===== */
-    footer {
-      background: #2c2c2c;
-      color: #faf7f5;
-      padding: 60px 40px 20px;
-      margin-top: 60px;
-      border-radius: 20px 20px 0 0;
-    }
-    .footer-content {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 40px;
-      text-align: center;
-    }
-    .footer-col h4 {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      margin-bottom: 20px;
-      color: #c9a87c;
-    }
-    .footer-col p {
-      font-size: 13px;
-      margin-bottom: 10px;
-      color: #cccccc;
-      line-height: 1.6;
-    }
-    .footer-col p a {
-      color: #cccccc;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .footer-col p a:hover {
-      color: #c9a87c;
-    }
-    .footer-logo-circle {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #c9a87c;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-weight: 700;
-      font-size: 22px;
-      margin: 0 auto 15px;
-    }
-    .footer-logo-name {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
-    .footer-slogan {
-      font-size: 12px;
-      color: #999;
-      font-style: italic;
-      letter-spacing: 0.5px;
-    }
-    .footer-bottom {
-      text-align: center;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #444;
-      font-size: 11px;
-      color: #888;
-    }
-    
-    /* Footer responsive para celular */
-    @media (max-width: 700px) {
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-    }
-    
   </style>
 </head>
 <body>
-  
-<!-- ===== HEADER ELEGANTE ===== -->
-<header class="main-header">
-  <div class="header-top">
-    <div class="header-logo">
-      <div class="logo-circle">L</div>
-      <span class="logo-name">LEWIN BOUTIQUE</span>
-    </div>
-    <nav class="header-nav">
-      <a href="#inicio">INICIO</a>
-      <a href="#catalogo">CATÁLOGO</a>
-      <a href="#ofertas">OFERTAS</a>
-      <a href="#sobre">SOBRE NOSOTROS</a>
-      <a href="#contacto">CONTACTO</a>
-    </nav>
-    <div class="header-icons">
-      <span class="icon-search" onclick="document.getElementById('buscador').focus()">🔍</span>
-      <span class="icon-cart" onclick="toggleCart()">🛒</span>
-    </div>
-  </div>
-</header>
-
-<!-- ===== HERO / PORTADA ===== -->
-<section class="hero-section" id="inicio">
-  <p class="hero-tag">BOUTIQUE VENEZOLANA</p>
-  <h1 class="hero-title">Nacimos para vestir<br>a tu familia</h1>
-  <p class="hero-subtitle">Damas · Caballeros · Niños · Niñas</p>
-</section>
-
-<!-- ===== SOBRE NOSOTROS ===== -->
-<section class="about-section" id="sobre">
-  <div class="about-container">
-    <div class="about-photo">
-      <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80" alt="Familia Lewin Boutique" />
-    </div>
-    <div class="about-content">
-      <h2>💜 Sobre Nosotros</h2>
-      <p><strong>Vestimos a tu familia con amor, desde Venezuela para el mundo.</strong></p>
-      <p>En Lewin Boutique creemos que la moda no es solo ropa: es confianza, es estilo, es sentirte bien contigo mismo. Por eso elegimos cada pieza con dedicación, para damas, caballeros, niños y niñas.</p>
-      <p><em>Más que una boutique, somos parte de tu historia.</em></p>
-      <div class="about-features">
-        <div class="about-feature">
-          <div class="about-icon">🚚</div>
-          <div class="about-text">Envíos<br>a todo el país</div>
-        </div>
-        <div class="about-feature">
-          <div class="about-icon">💬</div>
-          <div class="about-text">Atención por<br>WhatsApp</div>
-        </div>
-        <div class="about-feature">
-          <div class="about-icon">✨</div>
-          <div class="about-text">Calidad<br>garantizada</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-  
-<!-- ===== BUSCADOR Y FILTROS (debajo del header) ===== -->
-<section class="search-section" id="catalogo">
+<header>
+  <img src="https://qhihqujbzjcuxshndsez.supabase.co/storage/v1/object/public/productos-fotos/1787708461873-removebg-preview.png" alt="Lewin Boutique" class="logo-header" />
+  <h1>LEWIN BOUTIQUE</h1>
+  <p class="subtitulo">Catálogo de productos</p>
   <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar producto..." />
-  <div class="filtros" id="filtros"></div>
-  <div class="ordenar-container">
-    <label for="ordenar">Ordenar por:</label>
-    <select id="ordenar" onchange="cambiarOrden(this.value)">
-      <option value="default">Por defecto</option>
-      <option value="precio-asc">Precio: menor a mayor</option>
-      <option value="precio-desc">Precio: mayor a menor</option>
-      <option value="nombre-asc">Nombre: A-Z</option>
-      <option value="nombre-desc">Nombre: Z-A</option>
-    </select>
+  <div class="filtros" id="filtros">
+  <!-- Los botones se generan automáticamente -->
   </div>
-</section>
+  <div class="ordenar-container">
+      <label for="ordenar">Ordenar por:</label>
+      <select id="ordenar" onchange="cambiarOrden(this.value)">
+        <option value="default">Por defecto</option>
+        <option value="precio-asc">Precio: menor a mayor</option>
+        <option value="precio-desc">Precio: mayor a menor</option>
+        <option value="nombre-asc">Nombre: A-Z</option>
+        <option value="nombre-desc">Nombre: Z-A</option>
+      </select>
+    </div>
+</header>
   
   <!-- Botón flotante del carrito -->
   <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
     🛒 <span>Pedido</span> <span class="cart-count" id="cartCount">0</span>
   </button>
-
+ 
   <!-- Overlay oscuro -->
   <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-
+ 
   <!-- ===== LIGHTBOX (foto en grande) ===== -->
   <div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
     <button class="lightbox-cerrar" onclick="cerrarLightbox()">✕</button>
     <img id="lightboxImg" src="" alt="" />
   </div>
-
+ 
   <!-- ===== MODAL DE PRODUCTO ===== -->
   <div class="modal-producto" id="modalProducto">
     <div class="modal-overlay" onclick="cerrarModal()"></div>
@@ -1153,52 +831,25 @@
       </button>
     </div>
   </div>
-
-  <div id="destacados-section" style="display: none;" data-section="ofertas">
+ 
+  <div id="destacados-section" style="display: none;">
     <h2 class="seccion-titulo">⭐ DESTACADOS</h2>
     <div id="destacados"></div>
   </div>
-  
-  <div id="ofertas"></div>
+ 
   <div id="todos-section">
     <h2 class="seccion-titulo" id="titulo-todos">📦 TODOS LOS PRODUCTOS</h2>
     <div id="productos">
       <p class="cargando">Cargando productos...</p>
     </div>
   </div>
-  
-  <!-- ===== FOOTER ===== -->
-  <footer id="contacto">
-    <div class="footer-content">
-      <div class="footer-col">
-        <div class="footer-logo-circle">L</div>
-        <div class="footer-logo-name">LEWIN BOUTIQUE</div>
-        <div class="footer-slogan">Moda que enamora</div>
-      </div>
-      <div class="footer-col">
-        <h4>CONTACTO</h4>
-        <p>📱 WhatsApp: +58 424-166-8588</p>
-        <p>📷 Instagram: @lewinboutique</p>
-      </div>
-      <div class="footer-col">
-        <h4>MENÚ</h4>
-        <p><a href="#inicio">Inicio</a></p>
-        <p><a href="#catalogo">Catálogo</a></p>
-        <p><a href="#ofertas">Ofertas</a></p>
-        <p><a href="#contacto">Contacto</a></p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 Lewin Boutique. Todos los derechos reservados.</p>
-    </div>
-  </footer>
-  
+ 
   <script type="module">
     const SUPABASE_URL = 'https://qhihqujbzjcuxshndsez.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFoaWhxdWpiempjdXhzaG5kc2V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NzQzNTcsImV4cCI6MjEwMzM1MDM1N30.eyGr5EOeQQeYfftReayfRdMisR_cQIGPuLpiv7XFzhI';
-
+ 
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
+ 
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     let todosLosProductos = [];
     let categoriaActual = 'Todas';
@@ -1213,9 +864,9 @@
         const { data, error } = await supabase
           .from('inventario')
           .select('id, producto, categoria, talla, color, cantidad, precio_venta, precio_final, precio_oferta, en_oferta, foto_url, favorito, created_at');
-
+ 
         if (error) throw error;
-
+ 
         todosLosProductos = data || [];
         crearBotonesFiltros();
         mostrarDestacados(todosLosProductos);
@@ -1242,7 +893,7 @@
         </button>
       `).join('');
     };
-
+ 
         window.cambiarOrden = function cambiarOrden(valor) {
       ordenActual = valor;
       const texto = document.getElementById('buscador').value.toLowerCase();
@@ -1253,7 +904,7 @@
       mostrarDestacados(filtrados);
       mostrarProductos(filtrados);
     };
-
+ 
       window.cambiarFiltro = function cambiarFiltro(cat) {
       categoriaActual = cat;
       crearBotonesFiltros();
@@ -1280,7 +931,7 @@
       const contenidoFoto = tieneFoto
         ? `<img src="${p.foto_url}" alt="${p.producto}" onerror="this.parentElement.innerHTML='👗'" />`
         : '👗';
-
+ 
       const enOferta = p.en_oferta === true && p.precio_oferta > 0 && p.precio_oferta < p.precio_venta;
       
       return `
@@ -1312,12 +963,12 @@
         </div>
       `;
     }
-
+ 
         function mostrarProductos(lista) {
           if (categoriaActual !== 'Todas') {
             lista = lista.filter(p => p.categoria === categoriaActual);
           }
-
+ 
           // Aplicar orden
           if (ordenActual === 'precio-asc') {
             lista = [...lista].sort((a, b) => (parseFloat(a.precio_venta) || 0) - (parseFloat(b.precio_venta) || 0));
@@ -1328,7 +979,7 @@
           } else if (ordenActual === 'nombre-desc') {
             lista = [...lista].sort((a, b) => (b.producto || '').localeCompare(a.producto || ''));
           }
-
+ 
           const contenedor = document.getElementById('productos');
           if (lista.length === 0) {
             contenedor.innerHTML = '<p class="cargando">No hay productos disponibles.</p>';
@@ -1359,11 +1010,11 @@
       );
       mostrarProductos(filtrados);
     });
-
+ 
         
     // ===== FUNCIONES DEL MODAL DE PRODUCTO =====
     let productoModalActual = null;
-
+ 
     window.abrirModal = function abrirModal(id) {
       const producto = todosLosProductos.find(p => (p.id || p.producto) === id);
       if (!producto) return;
@@ -1393,7 +1044,7 @@
           badgeNuevo.style.display = 'none';
         }
       }
-
+ 
       // Badge OFERTA (con classList)
       const badgeOferta = document.getElementById('modalBadgeOferta');
       if (badgeOferta) {
@@ -1442,7 +1093,7 @@
       document.getElementById('modalProducto').classList.add('abierto');
       document.body.style.overflow = 'hidden';
     };
-
+ 
     window.abrirLightbox = function abrirLightbox(urlFoto) {
       if (!urlFoto || urlFoto.trim() === '') return;
       
@@ -1451,19 +1102,19 @@
       img.src = urlFoto;
       lightbox.classList.add('abierto');
     };
-
+ 
     window.cerrarLightbox = function cerrarLightbox() {
       const lightbox = document.getElementById('lightbox');
       lightbox.classList.remove('abierto');
     };
-
-
+ 
+ 
     window.cerrarModal = function cerrarModal() {
       document.getElementById('modalProducto').classList.remove('abierto');
       document.body.style.overflow = '';
       productoModalActual = null;
     };
-
+ 
     window.agregarDesdeModal = function agregarDesdeModal() {
       if (!productoModalActual) return;
       const id = productoModalActual.id || productoModalActual.producto;
@@ -1471,7 +1122,7 @@
       cerrarModal();
       setTimeout(() => toggleCart(), 300);
     };
-
+ 
     window.pedirPorWhatsApp = function pedirPorWhatsApp() {
       if (!productoModalActual) return;
       const p = productoModalActual;
@@ -1485,7 +1136,7 @@
       const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
     };
-
+ 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         const modal = document.getElementById('modalProducto');
@@ -1494,7 +1145,7 @@
         }
       }
     });
-
+ 
         // ===== FUNCIONES DEL CARRITO =====
     window.toggleCart = function toggleCart() {
       const panel = document.getElementById('cartPanel');
@@ -1502,7 +1153,7 @@
       panel.classList.toggle('open');
       overlay.classList.toggle('open');
     };
-
+ 
     window.agregarAlCarrito = function agregarAlCarrito(id) {
       const producto = todosLosProductos.find(p => (p.id || p.producto) === id);
       if (!producto) return;
@@ -1536,7 +1187,7 @@
       guardarCarrito();
       actualizarCarritoUI();
     };
-
+ 
     window.cambiarCantidad = function cambiarCantidad(id, delta) {
       const item = carrito.find(i => (i.id || i.producto) === id);
       if (!item) return;
@@ -1557,35 +1208,35 @@
       guardarCarrito();
       actualizarCarritoUI();
     };
-
+ 
     window.quitarDelCarrito = function quitarDelCarrito(id) {
       carrito = carrito.filter(i => (i.id || i.producto) !== id);
       guardarCarrito();
       actualizarCarritoUI();
     };
-
+ 
     function guardarCarrito() {
       localStorage.setItem('carritoLewin', JSON.stringify(carrito));
     }
-
+ 
     function actualizarCarritoUI() {
         console.log('🟢 actualizarCarritoUI ejecutada. Carrito tiene:', carrito.length, 'items');
        const count = document.getElementById('cartCount');
        const items = document.getElementById('cartItems');
        const footer = document.getElementById('cartFooter');
        const total = document.getElementById('cartTotal');
-
+ 
       const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
       count.textContent = totalItems;
-
+ 
       if (carrito.length === 0) {
         items.innerHTML = '<p class="cart-empty">Tu pedido está vacío.<br>Agrega productos para empezar 👗</p>';
         footer.style.display = 'none';
         return;
       }
-
+ 
       footer.style.display = 'block';
-
+ 
       items.innerHTML = carrito.map(item => {
         const subtotal = item.cantidad * item.precio_venta;
         const foto = item.foto_url 
@@ -1611,14 +1262,14 @@
           </div>
         `;
       }).join('');
-
+ 
       const totalPrecio = carrito.reduce((sum, item) => sum + (item.cantidad * item.precio_venta), 0);
       total.textContent = '$' + totalPrecio.toFixed(2);
     }
-
+ 
     window.enviarPedidoWhatsApp = function enviarPedidoWhatsApp() {
       if (carrito.length === 0) return;
-
+ 
       let mensaje = '🛍️ *NUEVO PEDIDO - LEWIN BOUTIQUE*\n\n';
       
       carrito.forEach(item => {
@@ -1629,23 +1280,22 @@
         mensaje += `🔢 Cantidad: ${item.cantidad}\n`;
         mensaje += `💰 Subtotal: $${subtotal.toFixed(2)}\n\n`;
       });
-
+ 
       const total = carrito.reduce((sum, item) => sum + (item.cantidad * item.precio_venta), 0);
       mensaje += `────────────────\n`;
       mensaje += `💰 *TOTAL: $${total.toFixed(2)}*\n\n`;
       mensaje += `¡Gracias por tu pedido! 💜`;
-
+ 
       const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
     };
-
+ 
     
     console.log('✅ Módulo llegó al final');
     cargarProductos();
     actualizarCarritoUI();
     console.log('🏁 Módulo ejecutado COMPLETO');
-
+ 
   </script>
 </body>
 </html>
-
