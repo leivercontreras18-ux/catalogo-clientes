@@ -13,14 +13,138 @@
       color: #2c2c2c;
       padding: 20px;
     }
-    header {
-      text-align: center;
-      padding: 30px 20px;
-      background: white;
-      border-radius: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    
+    /* ===== HEADER ELEGANTE ===== */
+    .main-header {
+      background: #faf7f5;
+      margin: -20px -20px 0 -20px;
+      border-bottom: 1px solid #e8dfd2;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
+    .header-top {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 20px 40px 15px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .header-left {
+      text-align: left;
+    }
+    .envios-tag {
+      font-size: 12px;
+      color: #999;
+      letter-spacing: 0.5px;
+    }
+    .header-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .logo-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #c9a87c;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 700;
+      font-size: 26px;
+    }
+    .logo-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 24px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: #2c2c2c;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 18px;
+    }
+    .icon-header {
+      font-size: 22px;
+      cursor: pointer;
+      color: #2c2c2c;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .icon-header:hover {
+      color: #c9a87c;
+      transform: scale(1.1);
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 15px 40px;
+      border-top: 1px solid #f0ebe3;
+      background: #ffffff;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: #2c2c2c;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      color: #c9a87c;
+    }
+    .nav-dot {
+      color: #d4c8b5;
+      font-size: 14px;
+    }
+    
+    /* ===== SECCIÓN DE BÚSQUEDA Y FILTROS ===== */
+    .search-section {
+      text-align: center;
+      padding: 30px 20px 20px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    
+    /* Responsive: en celular */
+    @media (max-width: 900px) {
+      .header-top {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px 20px;
+        text-align: center;
+      }
+      .header-left, .header-right {
+        justify-content: center;
+        text-align: center;
+      }
+      .logo-name {
+        font-size: 18px;
+        letter-spacing: 2px;
+      }
+      .header-nav {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px 15px;
+      }
+      .nav-link {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+      }
+      .nav-dot {
+        display: none;
+      }
+    }
+    
     .logo-header {
       display: block;
       margin: 0 auto 20px auto;
@@ -734,14 +858,45 @@
   </style>
 </head>
 <body>
-<header>
-  <img src="https://qhihqujbzjcuxshndsez.supabase.co/storage/v1/object/public/productos-fotos/1787708461873-removebg-preview.png" alt="Lewin Boutique" class="logo-header" />
-  <h1>LEWIN BOUTIQUE</h1>
-  <p class="subtitulo">Catálogo de productos</p>
-  <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar producto..." />
-  <div class="filtros" id="filtros">
-  <!-- Los botones se generan automáticamente -->
+  
+<!-- ===== HEADER ELEGANTE ===== -->
+<header class="main-header">
+  <!-- NIVEL 1: Envíos + Logo + Íconos -->
+  <div class="header-top">
+    <div class="header-left">
+      <span class="envios-tag">🇻🇪 Envíos a Venezuela</span>
+    </div>
+    <div class="header-center">
+      <div class="logo-circle">L</div>
+      <span class="logo-name">LEWIN BOUTIQUE</span>
+    </div>
+    <div class="header-right">
+      <span class="icon-header" onclick="document.getElementById('buscador').focus()">🔍</span>
+      <span class="icon-header" onclick="toggleWishlist()">♡</span>
+      <span class="icon-header" onclick="toggleCart()">🛍</span>
+    </div>
   </div>
+
+  <!-- NIVEL 2: Menú de navegación -->
+  <nav class="header-nav">
+    <a href="#" class="nav-link">INICIO</a>
+    <span class="nav-dot">·</span>
+    <a href="#" class="nav-link">CATÁLOGO</a>
+    <span class="nav-dot">·</span>
+    <a href="#" class="nav-link">COMBOS</a>
+    <span class="nav-dot">·</span>
+    <a href="#" class="nav-link">NOVEDADES</a>
+    <span class="nav-dot">·</span>
+    <a href="#" class="nav-link">NOSOTROS</a>
+    <span class="nav-dot">·</span>
+    <a href="#" class="nav-link">CONTACTO</a>
+  </nav>
+</header>
+
+<!-- ===== BUSCADOR Y FILTROS (debajo del header) ===== -->
+<section class="search-section">
+  <input type="text" class="buscador" id="buscador" placeholder="Buscar producto..." />
+  <div class="filtros" id="filtros"></div>
   <div class="ordenar-container">
       <label for="ordenar">Ordenar por:</label>
       <select id="ordenar" onchange="cambiarOrden(this.value)">
@@ -752,7 +907,7 @@
         <option value="nombre-desc">Nombre: Z-A</option>
       </select>
     </div>
-</header>
+</section>
   
   <!-- Botón flotante del carrito -->
   <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
