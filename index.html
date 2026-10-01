@@ -136,12 +136,181 @@
       font-size: 14px;
     }
     
-    /* ===== SECCIÓN DE BÚSQUEDA Y FILTROS ===== */
+    /* ===== SECCIÓN DE BÚSQUEDA Y CATEGORÍAS ===== */
     .search-section {
-      text-align: center;
-      padding: 30px 20px 20px;
+      padding: 40px 40px 30px;
       max-width: 1300px;
       margin: 0 auto;
+    }
+    
+    /* Fila superior: buscador + ordenar */
+    .search-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .search-box-wrapper {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      max-width: 500px;
+    }
+    .buscador {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1px solid #e8dfd2;
+      border-right: none;
+      border-radius: 4px 0 0 4px;
+      background: #ffffff;
+      font-family: inherit;
+      font-size: 13px;
+      color: #2c2c2c;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .buscador::placeholder {
+      color: #bbb;
+    }
+    .buscador:focus {
+      border-color: #c9a87c;
+    }
+    .search-arrow {
+      padding: 0 18px;
+      background: #c9a87c;
+      color: #ffffff;
+      border: 1px solid #c9a87c;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-arrow:hover {
+      background: #b8976a;
+      border-color: #b8976a;
+    }
+    
+    .ordenar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .ordenar-wrapper label {
+      font-size: 13px;
+      color: #2c2c2c;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .ordenar-wrapper select {
+      padding: 12px 30px 12px 14px;
+      border: 1px solid #e8dfd2;
+      border-radius: 4px;
+      background: #ffffff;
+      font-family: inherit;
+      font-size: 12px;
+      color: #2c2c2c;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%232c2c2c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: border-color 0.2s;
+    }
+    .ordenar-wrapper select:hover {
+      border-color: #c9a87c;
+    }
+    
+    /* ===== CATEGORÍAS CIRCULARES ===== */
+    .categorias-circulares {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    .cat-circle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .cat-circle:hover {
+      transform: translateY(-5px);
+    }
+    .cat-circle-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f5ede3 0%, #e8dcc9 100%);
+      border: 2px solid #e8dfd2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: #c9a87c;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .cat-circle:hover .cat-circle-img {
+      border-color: #c9a87c;
+      box-shadow: 0 8px 25px rgba(201, 168, 124, 0.3);
+    }
+    .cat-circle.activo .cat-circle-img {
+      border: 3px solid #c9a87c;
+      box-shadow: 0 0 0 5px rgba(201, 168, 124, 0.15);
+    }
+    .cat-circle-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .cat-circle-name {
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      color: #2c2c2c;
+      text-transform: uppercase;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .cat-circle.activo .cat-circle-name {
+      color: #c9a87c;
+      font-weight: 700;
+    }
+    
+    /* Responsive */
+    @media (max-width: 900px) {
+      .search-top {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+      }
+      .ordenar-wrapper {
+        justify-content: space-between;
+      }
+      .categorias-circulares {
+        gap: 25px;
+      }
+      .cat-circle-img {
+        width: 85px;
+        height: 85px;
+        font-size: 30px;
+      }
+      .cat-circle-name {
+        font-size: 11px;
+        letter-spacing: 1px;
+      }
     }
     
     /* Responsive: en celular */
@@ -1102,12 +1271,22 @@
   </nav>
 </header>
 
-<!-- ===== BUSCADOR Y FILTROS (debajo del header) ===== -->
+<!-- ===== SECCIÓN DE BÚSQUEDA Y CATEGORÍAS ===== -->
 <section class="search-section">
-  <input type="text" class="buscador" id="buscador" placeholder="Buscar producto..." />
-  <div class="filtros" id="filtros"></div>
-  <div class="ordenar-container">
-      <label for="ordenar">Ordenar por:</label>
+  
+  <!-- FILA SUPERIOR: Buscador + Ordenar -->
+  <div class="search-top">
+    <div class="search-box-wrapper">
+      <input type="text" class="buscador" id="buscador" placeholder="Buscar producto..." />
+      <button class="search-arrow" onclick="document.getElementById('buscador').focus()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="ordenar-wrapper">
+      <label for="ordenar">Ordenar por</label>
       <select id="ordenar" onchange="cambiarOrden(this.value)">
         <option value="default">Por defecto</option>
         <option value="precio-asc">Precio: menor a mayor</option>
@@ -1116,6 +1295,11 @@
         <option value="nombre-desc">Nombre: Z-A</option>
       </select>
     </div>
+  </div>
+
+  <!-- FILA DE CATEGORÍAS CIRCULARES -->
+  <div class="categorias-circulares" id="filtros"></div>
+
 </section>
   
   <!-- Overlay oscuro -->
@@ -1274,13 +1458,38 @@
       
       categorias.push(...catsUnicas);
       
-      contenedor.innerHTML = categorias.map(cat => `
-        <button class="filtro-btn ${cat === categoriaActual ? 'activo' : ''}" 
-                onclick="cambiarFiltro('${cat}')">
-          ${cat}
-        </button>
-      `).join('');
+      contenedor.innerHTML = categorias.map(cat => {
+        // Buscar la primera foto de la categoría para mostrar en el círculo
+        const productoConFoto = todosLosProductos.find(p => p.categoria === cat && p.foto_url && p.foto_url.trim() !== '');
+        const fotoCirculo = productoConFoto 
+          ? `<img src="${productoConFoto.foto_url}" alt="${cat}" />`
+          : `<span>${getEmojiCategoria(cat)}</span>`;
+        
+        return `
+          <div class="cat-circle ${cat === categoriaActual ? 'activo' : ''}" 
+               onclick="cambiarFiltro('${cat}')">
+            <div class="cat-circle-img">
+              ${fotoCirculo}
+            </div>
+            <div class="cat-circle-name">${cat}</div>
+          </div>
+        `;
+      }).join('');
     };
+    
+    // Función auxiliar para emoji de categoría (fallback si no hay foto)
+    function getEmojiCategoria(cat) {
+      const catLower = (cat || '').toLowerCase();
+      if (catLower.includes('dama') || catLower.includes('mujer')) return '👗';
+      if (catLower.includes('caballero') || catLower.includes('hombre')) return '👔';
+      if (catLower.includes('niño')) return '🧒';
+      if (catLower.includes('niña')) return '👧';
+      if (catLower.includes('vestido')) return '👗';
+      if (catLower.includes('calzado') || catLower.includes('zapato')) return '👠';
+      if (catLower.includes('accesorio') || catLower.includes('bolso')) return '👜';
+      if (catLower.includes('toda')) return '✨';
+      return '👕';
+    }
  
         window.cambiarOrden = function cambiarOrden(valor) {
       ordenActual = valor;
