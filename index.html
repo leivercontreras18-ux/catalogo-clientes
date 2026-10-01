@@ -740,143 +740,274 @@
       display: inline-block;
       line-height: 1.2;
     }
+    /* ===== PANEL DEL CARRITO ELEGANTE ===== */
     .cart-panel {
       position: fixed;
       top: 0;
       right: -420px;
       width: 400px;
-      max-width: 90vw;
+      max-width: 92vw;
       height: 100vh;
-      background: white;
-      box-shadow: -4px 0 30px rgba(0,0,0,0.15);
-      z-index: 1001;
-      transition: right 0.3s ease;
+      background: #ffffff;
+      box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+      z-index: 1002;
+      transition: right 0.35s ease;
       display: flex;
       flex-direction: column;
+      font-family: 'Segoe UI', system-ui, sans-serif;
     }
     .cart-panel.open { right: 0; }
+    
+    /* Header del carrito */
     .cart-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
-      border-bottom: 1px solid #eee;
+      padding: 22px 24px;
+      border-bottom: 1px solid #f0ebe3;
     }
-    .cart-header h2 { font-size: 1.2em; font-weight: 500; }
+    .cart-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cart-header h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: #2c2c2c;
+      margin: 0;
+    }
+    .cart-header-count {
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 14px;
+      color: #999;
+      font-weight: 400;
+    }
     .cart-close {
       background: none;
       border: none;
-      font-size: 1.5em;
+      font-size: 1.4em;
       cursor: pointer;
       color: #999;
+      transition: color 0.2s, transform 0.2s;
+      line-height: 1;
     }
+    .cart-close:hover {
+      color: #c9a87c;
+      transform: rotate(90deg);
+    }
+    
+    /* Lista de productos */
     .cart-items {
       flex: 1;
       overflow-y: auto;
-      padding: 15px 20px;
+      padding: 20px 24px;
     }
-    .cart-empty {
+    
+    /* Estado vacío */
+    .cart-empty-state {
       text-align: center;
       padding: 60px 20px;
-      color: #999;
-      line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+    .cart-empty-state h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: #2c2c2c;
+      margin: 20px 0 8px;
+    }
+    .cart-empty-state p {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 24px;
+    }
+    .cart-explorar {
+      padding: 12px 28px;
+      background: #c9a87c;
+      color: #ffffff;
+      border: none;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .cart-explorar:hover {
+      background: #b8976a;
+      transform: translateY(-2px);
+    }
+    
+    /* Productos individuales */
     .cart-item {
       display: flex;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f0f0;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid #f5f0e8;
+      align-items: flex-start;
+    }
+    .cart-item:last-child {
+      border-bottom: none;
     }
     .cart-item-foto {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
       background: #f5ede3;
       flex-shrink: 0;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5em;
+      font-size: 1.8em;
     }
-    .cart-item-foto img { width: 100%; height: 100%; object-fit: cover; }
-    .cart-item-info { flex: 1; }
-    .cart-item-nombre { font-weight: 500; font-size: 0.95em; margin-bottom: 4px; }
-    .cart-item-detalles { font-size: 0.8em; color: #999; }
-    .cart-item-precio { color: #c9a87c; font-weight: 600; font-size: 0.95em; }
+    .cart-item-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cart-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .cart-item-nombre {
+      font-weight: 600;
+      font-size: 14px;
+      color: #2c2c2c;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .cart-item-detalles {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+    .cart-item-cantidad {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cart-btn-cantidad {
+      border: 1px solid #e8dfd2;
+      background: #ffffff;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      color: #2c2c2c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      padding: 0;
+    }
+    .cart-btn-cantidad:hover {
+      background: #c9a87c;
+      color: #ffffff;
+      border-color: #c9a87c;
+    }
+    .cart-item-cantidad span {
+      font-weight: 600;
+      font-size: 14px;
+      color: #2c2c2c;
+      min-width: 20px;
+      text-align: center;
+    }
+    .cart-item-precio-box {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .cart-item-precio {
+      color: #c9a87c;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
     .cart-item-remove {
       background: none;
       border: none;
       color: #ccc;
       cursor: pointer;
-      font-size: 1.2em;
-      padding: 0 5px;
+      font-size: 14px;
+      padding: 0;
+      transition: color 0.2s;
     }
-    .cart-item-remove:hover { color: #e74c3c; }
-    .cart-btn-cantidad {
-      border: 1px solid #ddd;
-      background: white;
-      border-radius: 5px;
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-      font-size: 1em;
-      line-height: 1;
+    .cart-item-remove:hover {
+      color: #e74c3c;
     }
+    
+    /* Footer del carrito */
     .cart-footer {
-      padding: 20px;
-      border-top: 2px solid #f0f0f0;
-      background: white;
+      padding: 22px 24px;
+      border-top: 1px solid #f0ebe3;
+      background: #ffffff;
     }
-    .cart-total {
+    .cart-subtotal-row {
       display: flex;
       justify-content: space-between;
-      font-size: 1.3em;
-      font-weight: 700;
-      margin-bottom: 15px;
+      align-items: center;
+      margin-bottom: 6px;
     }
-    .cart-total span:last-child { color: #c9a87c; }
+    .cart-subtotal-label {
+      font-size: 14px;
+      color: #666;
+    }
+    .cart-subtotal-value {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #2c2c2c;
+    }
+    .cart-envio-nota {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 18px;
+    }
     .cart-send {
       width: 100%;
       padding: 15px;
-      background: #25D366;
-      color: white;
+      background: #c9a87c;
+      color: #ffffff;
       border: none;
-      border-radius: 12px;
-      font-size: 1em;
+      border-radius: 10px;
+      font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(201, 168, 124, 0.3);
     }
-    .cart-send:hover { background: #1ebe5d; }
-    .cart-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
+    .cart-send:hover {
+      background: #b8976a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201, 168, 124, 0.4);
     }
-    .cart-overlay.open { opacity: 1; pointer-events: auto; }
-    .btn-agregar {
+    .cart-seguir {
       width: 100%;
       padding: 10px;
-      margin-top: 10px;
-      background: #c9a87c;
-      color: white;
+      background: none;
       border: none;
-      border-radius: 8px;
+      color: #999;
+      font-size: 12px;
       cursor: pointer;
       font-family: inherit;
-      font-size: 0.9em;
-      font-weight: 600;
-      transition: all 0.2s;
+      margin-top: 8px;
+      transition: color 0.2s;
     }
+    .cart-seguir:hover {
+      color: #c9a87c;
+    }
+    
     .btn-agregar:hover { background: #b8976a; }
     .btn-agregar:disabled { background: #ddd; cursor: not-allowed; }
     .cargando {
@@ -1008,30 +1139,53 @@
     </div>
   </div>
   
-  <!-- Panel lateral del carrito -->
-  <div class="cart-panel" id="cartPanel">
-    <div class="cart-header">
-      <h2>🛒 Tu pedido</h2>
-      <button class="cart-close" onclick="toggleCart()">✕</button>
+  <!-- ===== PANEL LATERAL DEL CARRITO (ELEGANTE) ===== -->
+<div class="cart-panel" id="cartPanel">
+  
+  <!-- HEADER DEL CARRITO -->
+  <div class="cart-header">
+    <div class="cart-header-left">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+      <h2>Tu Pedido <span class="cart-header-count">(<span id="cartHeaderCount">0</span>)</span></h2>
     </div>
-    <div class="cart-items" id="cartItems">
-      <p class="cart-empty">Tu pedido está vacío.<br>Agrega productos para empezar 👗</p>
-    </div>
-    <div class="cart-footer" id="cartFooter" style="display: none;">
-      <div class="cart-total">
-        <span>Total:</span>
-        <span id="cartTotal">$0.00</span>
-      </div>
-      <button class="cart-send" onclick="enviarPedidoWhatsApp()">
-        📱 Enviar pedido por WhatsApp
-      </button>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+
+  <!-- LISTA DE PRODUCTOS -->
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty-state">
+      <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#c9a87c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+      <h3>Tu pedido está vacío</h3>
+      <p>Agrega productos para empezar</p>
+      <button class="cart-explorar" onclick="toggleCart(); document.getElementById('productos').scrollIntoView({behavior:'smooth'});">Explorar Catálogo →</button>
     </div>
   </div>
- 
-  <div id="destacados-section" style="display: none;">
-    <h2 class="seccion-titulo">⭐ DESTACADOS</h2>
-    <div id="destacados"></div>
+
+  <!-- FOOTER DEL CARRITO -->
+  <div class="cart-footer" id="cartFooter" style="display: none;">
+    <div class="cart-subtotal-row">
+      <span class="cart-subtotal-label">Subtotal</span>
+      <span class="cart-subtotal-value" id="cartTotal">$0.00</span>
+    </div>
+    <p class="cart-envio-nota">Envío calculado al finalizar</p>
+    <button class="cart-send" onclick="enviarPedidoWhatsApp()">
+      Finalizar Pedido por WhatsApp
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+      </svg>
+    </button>
+    <button class="cart-seguir" onclick="toggleCart()">← Seguir comprando</button>
   </div>
+
+</div>
  
   <div id="todos-section">
     <h2 class="seccion-titulo" id="titulo-todos">📦 TODOS LOS PRODUCTOS</h2>
@@ -1418,22 +1572,35 @@
     function actualizarCarritoUI() {
        const count = document.getElementById('cartCount');
        const countHeader = document.getElementById('cartCountHeader');
+       const cartHeaderCount = document.getElementById('cartHeaderCount');
        const items = document.getElementById('cartItems');
        const footer = document.getElementById('cartFooter');
        const total = document.getElementById('cartTotal');
 
       const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
       if (count) count.textContent = totalItems;
-      if (countHeader) countHeader.textContent = totalItems;;
- 
+      if (countHeader) countHeader.textContent = totalItems;
+      if (cartHeaderCount) cartHeaderCount.textContent = totalItems;
+
       if (carrito.length === 0) {
-        items.innerHTML = '<p class="cart-empty">Tu pedido está vacío.<br>Agrega productos para empezar 👗</p>';
+        items.innerHTML = `
+          <div class="cart-empty-state">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#c9a87c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <h3>Tu pedido está vacío</h3>
+            <p>Agrega productos para empezar</p>
+            <button class="cart-explorar" onclick="toggleCart(); document.getElementById('productos').scrollIntoView({behavior:'smooth'});">Explorar Catálogo →</button>
+          </div>
+        `;
         footer.style.display = 'none';
         return;
       }
- 
+
       footer.style.display = 'block';
- 
+
       items.innerHTML = carrito.map(item => {
         const subtotal = item.cantidad * item.precio_venta;
         const foto = item.foto_url 
@@ -1448,18 +1615,20 @@
               <div class="cart-item-detalles">
                 ${item.talla ? 'Talla ' + item.talla : ''}${item.color ? ' · ' + item.color : ''}
               </div>
-              <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
+              <div class="cart-item-cantidad">
                 <button class="cart-btn-cantidad" onclick="cambiarCantidad('${item.id}', -1)">−</button>
-                <span style="font-weight: 600;">${item.cantidad}</span>
+                <span>${item.cantidad}</span>
                 <button class="cart-btn-cantidad" onclick="cambiarCantidad('${item.id}', 1)">+</button>
-                <span class="cart-item-precio" style="margin-left: auto;">$${subtotal.toFixed(2)}</span>
               </div>
             </div>
-            <button class="cart-item-remove" onclick="quitarDelCarrito('${item.id}')">✕</button>
+            <div class="cart-item-precio-box">
+              <div class="cart-item-precio">$${subtotal.toFixed(2)}</div>
+              <button class="cart-item-remove" onclick="quitarDelCarrito('${item.id}')">✕</button>
+            </div>
           </div>
         `;
       }).join('');
- 
+
       const totalPrecio = carrito.reduce((sum, item) => sum + (item.cantidad * item.precio_venta), 0);
       total.textContent = '$' + totalPrecio.toFixed(2);
     }
