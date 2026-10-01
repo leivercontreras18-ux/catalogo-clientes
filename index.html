@@ -81,6 +81,26 @@
       color: #c9a87c;
       transform: scale(1.1);
     }
+        .icon-cart-header {
+      position: relative;
+    }
+    .cart-count-header {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: #c9a87c;
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      font-family: 'Segoe UI', sans-serif;
+    }
     .header-nav {
       display: flex;
       align-items: center;
@@ -679,6 +699,7 @@
     
         /* ===== CARRITO ===== */
     .cart-btn {
+      display: none;
       position: fixed;
       top: 20px;
       right: 20px;
@@ -864,7 +885,7 @@
   <!-- NIVEL 1: Envíos + Logo + Íconos -->
   <div class="header-top">
     <div class="header-left">
-      <span class="envios-tag">🇻🇪 Envíos a Venezuela</span>
+      <span class="envios-tag"><img src="https://flagcdn.com/w20/ve.png" alt="Venezuela" style="vertical-align: middle; margin-right: 6px; border-radius: 2px;" /> Envíos a Venezuela</span>
     </div>
     <div class="header-center">
       <div class="logo-circle">L</div>
@@ -873,7 +894,10 @@
     <div class="header-right">
       <span class="icon-header" onclick="document.getElementById('buscador').focus()">🔍</span>
       <span class="icon-header" onclick="toggleWishlist()">♡</span>
-      <span class="icon-header" onclick="toggleCart()">🛍</span>
+  <span class="icon-header icon-cart-header" onclick="toggleCart()">
+  🛍
+   <span class="cart-count-header" id="cartCountHeader">0</span>
+  </span>
     </div>
   </div>
 
@@ -1375,14 +1399,15 @@
     }
  
     function actualizarCarritoUI() {
-        console.log('🟢 actualizarCarritoUI ejecutada. Carrito tiene:', carrito.length, 'items');
        const count = document.getElementById('cartCount');
+       const countHeader = document.getElementById('cartCountHeader');
        const items = document.getElementById('cartItems');
        const footer = document.getElementById('cartFooter');
        const total = document.getElementById('cartTotal');
- 
+
       const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-      count.textContent = totalItems;
+      if (count) count.textContent = totalItems;
+      if (countHeader) countHeader.textContent = totalItems;;
  
       if (carrito.length === 0) {
         items.innerHTML = '<p class="cart-empty">Tu pedido está vacío.<br>Agrega productos para empezar 👗</p>';
