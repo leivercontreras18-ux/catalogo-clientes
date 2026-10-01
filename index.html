@@ -275,6 +275,19 @@
       object-fit: cover;
       display: block;
     }
+    .cat-emoji {
+      font-size: 50px;
+      line-height: 1;
+      display: block;
+      filter: grayscale(0.15);
+      transition: transform 0.3s;
+    }
+    .cat-circle:hover .cat-emoji {
+      transform: scale(1.15);
+    }
+    .cat-circle.activo .cat-emoji {
+      transform: scale(1.1);
+    }
     .cat-circle-name {
       margin-top: 16px;
       font-size: 13px;
@@ -1459,17 +1472,13 @@
       categorias.push(...catsUnicas);
       
       contenedor.innerHTML = categorias.map(cat => {
-        // Buscar la primera foto de la categoría para mostrar en el círculo
-        const productoConFoto = todosLosProductos.find(p => p.categoria === cat && p.foto_url && p.foto_url.trim() !== '');
-        const fotoCirculo = productoConFoto 
-          ? `<img src="${productoConFoto.foto_url}" alt="${cat}" />`
-          : `<span>${getEmojiCategoria(cat)}</span>`;
+        const emoji = getEmojiCategoria(cat);
         
         return `
           <div class="cat-circle ${cat === categoriaActual ? 'activo' : ''}" 
                onclick="cambiarFiltro('${cat}')">
             <div class="cat-circle-img">
-              ${fotoCirculo}
+              <span class="cat-emoji">${emoji}</span>
             </div>
             <div class="cat-circle-name">${cat}</div>
           </div>
@@ -1477,17 +1486,21 @@
       }).join('');
     };
     
-    // Función auxiliar para emoji de categoría (fallback si no hay foto)
+    // Función auxiliar para emoji de categoría
     function getEmojiCategoria(cat) {
       const catLower = (cat || '').toLowerCase();
+      if (catLower.includes('toda')) return '✨';
       if (catLower.includes('dama') || catLower.includes('mujer')) return '👗';
       if (catLower.includes('caballero') || catLower.includes('hombre')) return '👔';
-      if (catLower.includes('niño')) return '🧒';
+      if (catLower.includes('niño')) return '👦';
       if (catLower.includes('niña')) return '👧';
       if (catLower.includes('vestido')) return '👗';
+      if (catLower.includes('blusa')) return '👚';
+      if (catLower.includes('jean') || catLower.includes('pantal')) return '👖';
       if (catLower.includes('calzado') || catLower.includes('zapato')) return '👠';
       if (catLower.includes('accesorio') || catLower.includes('bolso')) return '👜';
-      if (catLower.includes('toda')) return '✨';
+      if (catLower.includes('short')) return '🩳';
+      if (catLower.includes('chaqueta') || catLower.includes('abrigo')) return '🧥';
       return '👕';
     }
  
