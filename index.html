@@ -81,7 +81,7 @@
       color: #c9a87c;
       transform: scale(1.1);
     }
-        .icon-cart-header {
+    .icon-cart-header {
       position: relative;
     }
     .cart-count-header {
@@ -699,7 +699,7 @@
     
         /* ===== CARRITO ===== */
     .cart-btn {
-      display: none;
+      display: none !important;
       position: fixed;
       top: 20px;
       right: 20px;
@@ -892,13 +892,13 @@
       <span class="logo-name">LEWIN BOUTIQUE</span>
     </div>
     <div class="header-right">
-      <span class="icon-header" onclick="document.getElementById('buscador').focus()">🔍</span>
-      <span class="icon-header" onclick="toggleWishlist()">♡</span>
+  <span class="icon-header" onclick="document.getElementById('buscador').focus()">🔍</span>
+  <span class="icon-header" onclick="toggleWishlist()">♡</span>
   <span class="icon-header icon-cart-header" onclick="toggleCart()">
-  🛍
-   <span class="cart-count-header" id="cartCountHeader">0</span>
+    🛍
+    <span class="cart-count-header" id="cartCountHeader">0</span>
   </span>
-    </div>
+</div>
   </div>
 
   <!-- NIVEL 2: Menú de navegación -->
@@ -933,11 +933,6 @@
     </div>
 </section>
   
-  <!-- Botón flotante del carrito -->
-  <button class="cart-btn" id="cartBtn" onclick="toggleCart()">
-    🛒 <span>Pedido</span> <span class="cart-count" id="cartCount">0</span>
-  </button>
- 
   <!-- Overlay oscuro -->
   <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
  
