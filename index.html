@@ -2240,16 +2240,21 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // ===== HEADER COMPACTO AL BAJAR =====
+    // ===== HEADER COMPACTO AL BAJAR (con histéresis) =====
     let headerCompacto = false;
     window.addEventListener('scroll', function() {
       const header = document.querySelector('.main-header');
       if (!header) return;
       
-      if (window.scrollY > 100 && !headerCompacto) {
+      const y = window.scrollY;
+      
+      // Encoger cuando bajes más de 150px
+      if (y > 150 && !headerCompacto) {
         header.classList.add('compacto');
         headerCompacto = true;
-      } else if (window.scrollY <= 100 && headerCompacto) {
+      }
+      // Expandir solo cuando subas por debajo de 80px
+      else if (y < 80 && headerCompacto) {
         header.classList.remove('compacto');
         headerCompacto = false;
       }
