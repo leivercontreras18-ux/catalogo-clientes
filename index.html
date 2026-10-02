@@ -1298,6 +1298,103 @@
         gap: 30px;
       }
     }
+    
+    /* ===== VISTAS SPA - HERO ===== */
+    .vista {
+      animation: fadeInVista 0.4s ease;
+    }
+    @keyframes fadeInVista {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .nav-link.activo {
+      color: #c9a87c;
+      position: relative;
+    }
+    .nav-link.activo::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #c9a87c;
+    }
+    .hero-bienvenida {
+      text-align: center;
+      padding: 100px 40px 120px;
+      background: linear-gradient(180deg, #faf7f5 0%, #f5ede3 100%);
+    }
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: #b8976a;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero-titulo {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 58px;
+      font-weight: 500;
+      color: #2c2c2c;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero-subtitulo {
+      font-size: 15px;
+      color: #888;
+      letter-spacing: 3px;
+      margin-bottom: 40px;
+    }
+    .hero-btn {
+      display: inline-block;
+      padding: 16px 42px;
+      background: #c9a87c;
+      color: #ffffff;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s;
+      box-shadow: 0 6px 20px rgba(201, 168, 124, 0.3);
+    }
+    .hero-btn:hover {
+      background: #b8976a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 168, 124, 0.4);
+    }
+    .vista-vacia {
+      text-align: center;
+      padding: 100px 40px;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .vista-vacia h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 42px;
+      font-weight: 500;
+      color: #2c2c2c;
+      margin-bottom: 20px;
+    }
+    .vista-vacia p {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 30px;
+      max-width: 500px;
+      line-height: 1.7;
+    }
+    @media (max-width: 700px) {
+      .hero-titulo { font-size: 36px; }
+      .hero-bienvenida { padding: 60px 20px 80px; }
+      .vista-vacia h2 { font-size: 28px; }
+    }
   </style>
 </head>
 <body>
