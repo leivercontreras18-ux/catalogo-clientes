@@ -7,12 +7,18 @@
   <link rel="icon" type="image/png" href="https://qhihqujbzjcuxshndsez.supabase.co/storage/v1/object/public/productos-fotos/1787708461873-removebg-preview%20(1).png" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      overflow-x: hidden;
+      width: 100%;
+    }
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
       background: #faf7f5;
       color: #2c2c2c;
       padding: 0;
       scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
     }
     
     /* ===== HEADER ELEGANTE ===== */
@@ -1331,6 +1337,11 @@
       text-align: center;
       padding: 100px 40px 120px;
       background: linear-gradient(180deg, #faf7f5 0%, #f5ede3 100%);
+      min-height: calc(100vh - 140px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     .hero-tag {
       font-size: 11px;
