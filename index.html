@@ -2180,7 +2180,33 @@
     cargarProductos();
     actualizarCarritoUI();
     console.log('🏁 Módulo ejecutado COMPLETO');
- 
+
+
+    // ===== NAVEGACIÓN POR VISTAS (SPA) =====
+    window.mostrarVista = function mostrarVista(nombre) {
+      console.log('Cambiando a vista:', nombre);
+      
+      document.querySelectorAll('.vista').forEach(v => {
+        v.style.display = 'none';
+      });
+      
+      const vista = document.getElementById('vista-' + nombre);
+      if (vista) {
+        vista.style.display = 'block';
+      } else {
+        console.warn('Vista no encontrada: vista-' + nombre);
+      }
+      
+      document.querySelectorAll('.nav-link').forEach(a => {
+        a.classList.remove('activo');
+        if (a.getAttribute('data-vista') === nombre) {
+          a.classList.add('activo');
+        }
+      });
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    
   </script>
 </body>
 </html>
