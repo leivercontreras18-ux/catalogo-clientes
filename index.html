@@ -2248,13 +2248,13 @@
       
       const y = window.scrollY;
       
-      // Encoger cuando bajes más de 150px
-      if (y > 150 && !headerCompacto) {
+      // Encoger cuando bajes más de 50px
+      if (y > 50 && !headerCompacto) {
         header.classList.add('compacto');
         headerCompacto = true;
       }
-      // Expandir solo cuando subas por debajo de 80px
-      else if (y < 80 && headerCompacto) {
+      // Expandir solo cuando subas por debajo de 20px
+      else if (y < 20 && headerCompacto) {
         header.classList.remove('compacto');
         headerCompacto = false;
       }
