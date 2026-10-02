@@ -1218,6 +1218,86 @@
       color: #999;
       grid-column: 1 / -1;
     }
+    
+    /* ===== FOOTER ===== */
+    .main-footer {
+      background: #2c2c2c;
+      color: #faf7f5;
+      padding: 60px 40px 20px;
+      margin-top: 60px;
+    }
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      text-align: center;
+    }
+    .footer-col h4 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      color: #c9a87c;
+    }
+    .footer-col p {
+      font-size: 13px;
+      margin-bottom: 10px;
+      color: #cccccc;
+      line-height: 1.6;
+    }
+    .footer-col p a {
+      color: #cccccc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-col p a:hover {
+      color: #c9a87c;
+    }
+    .footer-logo-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #c9a87c;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-weight: 700;
+      font-size: 22px;
+      margin: 0 auto 15px;
+    }
+    .footer-logo-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+    .footer-slogan {
+      font-size: 12px;
+      color: #999;
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      font-size: 11px;
+      color: #888;
+    }
+    @media (max-width: 700px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1258,20 +1338,34 @@
 
   <!-- NIVEL 2: Menú de navegación -->
   <nav class="header-nav">
-    <a href="#" class="nav-link">INICIO</a>
-    <span class="nav-dot">·</span>
-    <a href="#" class="nav-link">CATÁLOGO</a>
-    <span class="nav-dot">·</span>
-    <a href="#" class="nav-link">COMBOS</a>
-    <span class="nav-dot">·</span>
-    <a href="#" class="nav-link">NOVEDADES</a>
-    <span class="nav-dot">·</span>
-    <a href="#" class="nav-link">NOSOTROS</a>
-    <span class="nav-dot">·</span>
-    <a href="#" class="nav-link">CONTACTO</a>
-  </nav>
-</header>
+  <a href="#" class="nav-link activo" data-vista="inicio" onclick="mostrarVista('inicio'); return false;">INICIO</a>
+  <span class="nav-dot">·</span>
+  <a href="#" class="nav-link" data-vista="catalogo" onclick="mostrarVista('catalogo'); return false;">CATÁLOGO</a>
+  <span class="nav-dot">·</span>
+  <a href="#" class="nav-link" data-vista="combos" onclick="mostrarVista('combos'); return false;">COMBOS</a>
+  <span class="nav-dot">·</span>
+  <a href="#" class="nav-link" data-vista="novedades" onclick="mostrarVista('novedades'); return false;">NOVEDADES</a>
+  <span class="nav-dot">·</span>
+  <a href="#" class="nav-link" data-vista="nosotros" onclick="mostrarVista('nosotros'); return false;">NOSOTROS</a>
+  <span class="nav-dot">·</span>
+  <a href="#" class="nav-link" data-vista="contacto" onclick="mostrarVista('contacto'); return false;">CONTACTO</a>
+</nav>
 
+</header>
+  
+<!-- ===== VISTA INICIO ===== -->
+<div class="vista" id="vista-inicio">
+  <section class="hero-bienvenida">
+    <p class="hero-tag">BOUTIQUE VENEZOLANA</p>
+    <h1 class="hero-titulo">Nacimos para vestir<br>a tu familia</h1>
+    <p class="hero-subtitulo">Damas · Caballeros · Niños · Niñas</p>
+    <button class="hero-btn" onclick="mostrarVista('catalogo')">Explorar Catálogo →</button>
+  </section>
+</div>
+  
+  <!-- ===== VISTA CATÁLOGO ===== -->
+<div class="vista" id="vista-catalogo" style="display: none;">
+  
 <!-- ===== SECCIÓN DE BÚSQUEDA Y CATEGORÍAS ===== -->
 <section class="search-section">
   
@@ -1416,7 +1510,35 @@
       <p class="cargando">Cargando productos...</p>
     </div>
   </div>
- 
+ </div>
+<!-- FIN VISTA CATÁLOGO -->
+  
+  <!-- ===== FOOTER ===== -->
+<footer id="contacto" class="main-footer">
+  <div class="footer-content">
+    <div class="footer-col">
+      <div class="footer-logo-circle">L</div>
+      <div class="footer-logo-name">LEWIN BOUTIQUE</div>
+      <div class="footer-slogan">Moda que enamora</div>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACTO</h4>
+      <p>📱 WhatsApp: +58 424-166-8588</p>
+      <p>📷 Instagram: @lewinboutique</p>
+    </div>
+    <div class="footer-col">
+      <h4>MENÚ</h4>
+      <p><a href="#" onclick="mostrarVista('inicio'); return false;">Inicio</a></p>
+      <p><a href="#" onclick="mostrarVista('catalogo'); return false;">Catálogo</a></p>
+      <p><a href="#" onclick="mostrarVista('combos'); return false;">Combos</a></p>
+      <p><a href="#" onclick="mostrarVista('contacto'); return false;">Contacto</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Lewin Boutique. Todos los derechos reservados.</p>
+  </div>
+</footer>
+  
   <script type="module">
     const SUPABASE_URL = 'https://qhihqujbzjcuxshndsez.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFoaWhxdWpiempjdXhzaG5kc2V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc3NzQzNTcsImV4cCI6MjEwMzM1MDM1N30.eyGr5EOeQQeYfftReayfRdMisR_cQIGPuLpiv7XFzhI';
