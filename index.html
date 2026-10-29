@@ -344,22 +344,52 @@
       100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
     }
 
+    /* ============================================================
+       RESPONSIVE (MÓVIL Y TABLET)
+       ============================================================ */
     @media (max-width: 900px) {
       .header-top { grid-template-columns: 1fr; gap: 15px; padding: 15px 20px; text-align: center; }
       .header-left, .header-right { justify-content: center; text-align: center; }
-      .header-nav { flex-wrap: wrap; gap: 10px; padding: 12px 15px; }
+      
+      /* Menú de navegación deslizable */
+      .header-nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 12px 15px; scrollbar-width: none; }
+      .header-nav::-webkit-scrollbar { display: none; }
       .nav-dot { display: none; }
+      
+      /* Filtros deslizables */
       .search-top { flex-direction: column; gap: 15px; align-items: stretch; }
+      .filtros-container { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; scrollbar-width: none; }
+      .filtros-container::-webkit-scrollbar { display: none; }
+      
       .hero-titulo { font-size: 40px; }
       .footer-content { grid-template-columns: 1fr; }
       .nosotros-container { grid-template-columns: 1fr; padding: 0 20px; }
       .nosotros-foto { height: 350px; }
+      
       .modal-contenido { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
-      .modal-foto-wrapper { min-height: 300px; max-height: 350px; }
+      .modal-foto-wrapper { min-height: 300px; max-height: 350px; padding: 20px; }
       .modal-info { padding: 30px 25px; }
+      
       .stats-grid { grid-template-columns: 1fr; padding: 0 20px; }
       .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
       .whatsapp-float svg { width: 26px; height: 26px; }
+      
+      /* Ajustes de Catálogo en móvil (2 columnas) */
+      #destacados-section, #todos-section { padding: 10px 15px; }
+      #destacados, #productos { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      
+      .tarjeta { border-radius: 12px; }
+      .foto { height: 170px; padding: 10px; }
+      .info { padding: 10px; }
+      .info h3 { font-size: 13px; line-height: 1.2; margin-bottom: 2px; }
+      .detalles { font-size: 10px; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .precio { font-size: 16px; margin-bottom: 8px; }
+      
+      .btn-agregar { padding: 8px 5px; font-size: 11px; border-radius: 20px; }
+      .btn-agregar::after { display: none; }
+      .badge-dinamico { font-size: 9px; padding: 3px 6px; top: 6px; left: 6px; }
+      
+      .seccion-titulo { font-size: 20px; margin: 20px 0 15px 0; }
     }
   </style>
 </head>
@@ -533,8 +563,8 @@
     <div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #f0ebe3;">
       <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe3; text-align: center;">
         <span style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">WhatsApp</span>
-        <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">+58 424-166-8588</p>
-        <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">+58 412-637-8659</p>
+        <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">+58 424-166-8588 (Leiver)</p>
+        <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">+58 412-637-8659 (Winderly)</p>
       </div>
       <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe3; text-align: center;">
         <span style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">Instagram</span>
@@ -725,8 +755,8 @@
     </div>
     <div class="footer-col">
       <h4>CONTACTO</h4>
-      <p>📱 WhatsApp: +58 424-166-8588</p>
-      <p>📱 WhatsApp: +58 412-637-8659</p>
+      <p>📱 WhatsApp: +58 424-166-8588 (Leiver)</p>
+      <p>📱 WhatsApp: +58 412-637-8659 (Winderly)</p>
       <p>📷 Instagram: @lewinboutique</p>
     </div>
     <div class="footer-col">
@@ -765,7 +795,7 @@
     let tallaActual = 'Todas'; 
     let colorActual = 'Todos'; 
     let carrito = JSON.parse(localStorage.getItem('carritoLewin') || '[]');
-    let mensajePedidoActual = ''; // Variable para guardar el pedido temporalmente
+    let mensajePedidoActual = ''; 
 
     // ===== NOTIFICACIONES TOAST =====
     function mostrarToast(mensaje, tipo = 'exito') {
@@ -1269,8 +1299,6 @@
           if (contadorClientes) contadorClientes.textContent = nuevoValor;
         }
       } catch (err) { console.log('No se pudo actualizar la métrica global.'); }
-      
-      // Opcional: vaciar el carrito después de enviar? El usuario no lo pidió, lo dejamos igual.
     };
 
     // 3. Función para cerrar el modal sin enviar
