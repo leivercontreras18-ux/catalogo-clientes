@@ -192,7 +192,19 @@
     .modal-btn-whatsapp { width: 100%; padding: 16px; background: #25D366; color: white; border: none; border-radius: 30px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .modal-btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); }
     
-    /* ===== LIGHTBOX (AGREGAR FOTO) ===== */
+    /* ===== MODAL SELECCIÓN DE VENDEDOR ===== */
+    .modal-vendedor { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 3000; justify-content: center; align-items: center; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+    .modal-vendedor.abierto { display: flex; animation: fadeInModal 0.2s ease; }
+    .vendedor-content { background: #ffffff; border-radius: 20px; padding: 30px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.2); position: relative; }
+    .vendedor-content h3 { font-size: 20px; font-weight: 800; color: #1a1a1a; margin-bottom: 10px; }
+    .vendedor-content p { font-size: 14px; color: #666; margin-bottom: 25px; }
+    .vendedor-opciones { display: flex; flex-direction: column; gap: 12px; }
+    .btn-vendedor { width: 100%; padding: 16px; background: #25D366; color: white; border: none; border-radius: 12px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+    .btn-vendedor:hover { background: #1ebe5d; transform: scale(1.02); }
+    .btn-cerrar-vendedor { background: none; border: none; color: #888; font-size: 14px; margin-top: 15px; cursor: pointer; text-decoration: underline; }
+    .btn-cerrar-vendedor:hover { color: #1a1a1a; }
+
+    /* ===== LIGHTBOX ===== */
     .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.92); z-index: 99999; justify-content: center; align-items: center; cursor: zoom-out; padding: 20px; }
     .lightbox.abierto { display: flex; }
     .lightbox img { max-width: 95%; max-height: 95%; object-fit: contain; border-radius: 8px; mix-blend-mode: normal; }
@@ -522,6 +534,7 @@
       <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe3; text-align: center;">
         <span style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">WhatsApp</span>
         <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">+58 424-166-8588</p>
+        <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">+58 412-637-8659</p>
       </div>
       <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe3; text-align: center;">
         <span style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">Instagram</span>
@@ -617,7 +630,6 @@
   <div class="modal-overlay" onclick="cerrarModal()"></div>
   <div class="modal-contenido">
     <div class="modal-foto-wrapper" style="cursor: zoom-in;">
-      <!-- El evento onclick ahora está directamente en la imagen -->
       <img id="modalFoto" src="" alt="" onclick="abrirLightbox(this.src)" style="cursor: zoom-in;" />
       <div id="modalFotoPlaceholder" class="modal-foto-placeholder">👗</div>
     </div>
@@ -652,6 +664,25 @@
         </button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- MODAL SELECCIÓN DE VENDEDOR -->
+<div class="modal-vendedor" id="modalVendedor">
+  <div class="vendedor-content">
+    <h3>¿Con quién deseas completar tu pedido?</h3>
+    <p>Elige a quién le enviaremos el resumen de tu compra por WhatsApp.</p>
+    <div class="vendedor-opciones">
+      <button class="btn-vendedor" onclick="confirmarEnvioWsp('584241668588')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+        Enviar a Leiver
+      </button>
+      <button class="btn-vendedor" onclick="confirmarEnvioWsp('584126378659')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+        Enviar a Winderly
+      </button>
+    </div>
+    <button class="btn-cerrar-vendedor" onclick="cerrarModalVendedor()">Cancelar</button>
   </div>
 </div>
 
@@ -695,6 +726,7 @@
     <div class="footer-col">
       <h4>CONTACTO</h4>
       <p>📱 WhatsApp: +58 424-166-8588</p>
+      <p>📱 WhatsApp: +58 412-637-8659</p>
       <p>📷 Instagram: @lewinboutique</p>
     </div>
     <div class="footer-col">
@@ -733,7 +765,7 @@
     let tallaActual = 'Todas'; 
     let colorActual = 'Todos'; 
     let carrito = JSON.parse(localStorage.getItem('carritoLewin') || '[]');
-    const WHATSAPP_NUM = '584241668588';
+    let mensajePedidoActual = ''; // Variable para guardar el pedido temporalmente
 
     // ===== NOTIFICACIONES TOAST =====
     function mostrarToast(mensaje, tipo = 'exito') {
@@ -1036,7 +1068,6 @@
       document.body.style.overflow = 'hidden';
     };
  
-    // ===== LIGHTBOX CORREGIDO =====
     window.abrirLightbox = function abrirLightbox(urlFoto) {
       if (!urlFoto || urlFoto.trim() === '' || urlFoto.includes('undefined') || urlFoto.includes('null')) return;
       
@@ -1071,13 +1102,14 @@
       if (p.talla) mensaje += `📏 Talla: ${p.talla}\n`;
       if (p.color) mensaje += `🎨 Color: ${p.color}\n`;
       mensaje += `💰 Precio: $${(parseFloat(p.precio_venta) || 0).toFixed(2)}\n\nMe interesa este producto, ¿está disponible?`;
-      window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`, '_blank');
+      window.open(`https://wa.me/584241668588?text=${encodeURIComponent(mensaje)}`, '_blank');
     };
  
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         if (document.getElementById('modalProducto').classList.contains('abierto')) cerrarModal();
         if (document.getElementById('lightbox').classList.contains('abierto')) cerrarLightbox();
+        if (document.getElementById('modalVendedor').classList.contains('abierto')) cerrarModalVendedor();
       }
     });
  
@@ -1197,8 +1229,10 @@
       total.textContent = '$' + totalPrecio.toFixed(2);
     }
  
-    window.enviarPedidoWhatsApp = async function enviarPedidoWhatsApp() {
+    // 1. Al darle al botón principal, abrimos el modal de selección
+    window.enviarPedidoWhatsApp = function enviarPedidoWhatsApp() {
       if (carrito.length === 0) return;
+      
       let mensaje = '🛍️ *NUEVO PEDIDO - LEWIN BOUTIQUE*\n\n';
       carrito.forEach(item => {
         const subtotal = item.cantidad * item.precio_venta;
@@ -1210,8 +1244,22 @@
       const total = carrito.reduce((sum, item) => sum + (item.cantidad * item.precio_venta), 0);
       mensaje += `────────────────\n💰 *TOTAL: $${total.toFixed(2)}*\n\n¡Gracias por tu pedido! 💜`;
       
-      window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`, '_blank');
+      mensajePedidoActual = mensaje; // Guardamos el mensaje
+      
+      // Abrimos el modal de vendedor
+      document.getElementById('modalVendedor').classList.add('abierto');
+      document.body.style.overflow = 'hidden';
+    };
 
+    // 2. Al hacer clic en un vendedor, se envía a ese número específico
+    window.confirmarEnvioWsp = async function(telefono) {
+      window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensajePedidoActual)}`, '_blank');
+      
+      // Cerrar modal
+      document.getElementById('modalVendedor').classList.remove('abierto');
+      document.body.style.overflow = '';
+      
+      // Actualizar contador de clientes felices
       try {
         const { data } = await supabase.from('metricas').select('clientes_felices').eq('id', 1).maybeSingle();
         if (data) {
@@ -1221,6 +1269,14 @@
           if (contadorClientes) contadorClientes.textContent = nuevoValor;
         }
       } catch (err) { console.log('No se pudo actualizar la métrica global.'); }
+      
+      // Opcional: vaciar el carrito después de enviar? El usuario no lo pidió, lo dejamos igual.
+    };
+
+    // 3. Función para cerrar el modal sin enviar
+    window.cerrarModalVendedor = function() {
+      document.getElementById('modalVendedor').classList.remove('abierto');
+      document.body.style.overflow = '';
     };
 
     // ===== NAVEGACIÓN SPA Y FOOTER =====
