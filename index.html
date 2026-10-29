@@ -575,19 +575,6 @@
       margin-right: 6px;
       box-shadow: 0 2px 6px rgba(219, 39, 119, 0.35);
     }
-    .badge-oferta {
-      display: inline-block;
-      background: linear-gradient(135deg, #db2777 0%, #ec4899 100%);
-      color: white;
-      font-size: 0.7em;
-      font-weight: 700;
-      letter-spacing: 1px;
-      padding: 3px 10px;
-      border-radius: 12px;
-      margin-bottom: 8px;
-      margin-right: 6px;
-      box-shadow: 0 2px 6px rgba(219, 39, 119, 0.35);
-    }
     .badge-nuevo {
       display: inline-block;
       background: linear-gradient(135deg, #c9a87c 0%, #d4b88a 100%);
@@ -1577,21 +1564,39 @@
 
 </section>
   
-  <!-- Overlay oscuro -->
-  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<!-- ===== SECCIÓN DE DESTACADOS ===== -->
+<div id="destacados-section" style="display: none;">
+  <h2 class="seccion-titulo">⭐ DESTACADOS</h2>
+  <div id="destacados"></div>
+</div>
  
-  <!-- ===== LIGHTBOX (foto en grande) ===== -->
-  <div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
-    <button class="lightbox-cerrar" onclick="cerrarLightbox()">✕</button>
-    <img id="lightboxImg" src="" alt="" />
+  <div id="todos-section">
+    <h2 class="seccion-titulo" id="titulo-todos">📦 TODOS LOS PRODUCTOS</h2>
+    <div id="productos">
+      <p class="cargando">Cargando productos...</p>
+    </div>
   </div>
- 
-  <!-- ===== MODAL DE PRODUCTO (DISEÑO NUEVO) ===== -->
+ </div>
+<!-- FIN VISTA CATÁLOGO -->
+
+<!-- ============================================================
+     BLOQUES GLOBALES (fuera de las vistas):
+     overlay, lightbox, modal y carrito — funcionan desde cualquier vista
+     ============================================================ -->
+<!-- Overlay oscuro -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<!-- ===== LIGHTBOX (foto en grande) ===== -->
+<div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
+  <button class="lightbox-cerrar" onclick="cerrarLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<!-- ===== MODAL DE PRODUCTO ===== -->
 <div class="modal-producto" id="modalProducto">
   <div class="modal-overlay" onclick="cerrarModal()"></div>
   <div class="modal-contenido">
     
-    <!-- COLUMNA IZQUIERDA: FOTO -->
     <div class="modal-foto-wrapper" onclick="abrirLightbox(this.querySelector('img').src)" style="cursor: zoom-in;">
       <img id="modalFoto" src="" alt="" style="cursor: zoom-in;" />
       <div id="modalFotoPlaceholder" class="modal-foto-placeholder">👗</div>
@@ -1599,10 +1604,8 @@
       <span id="modalBadgeNuevo" class="modal-badge-nuevo">✨ NUEVO</span>
     </div>
     
-    <!-- BOTÓN CERRAR -->
     <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
     
-    <!-- COLUMNA DERECHA: INFO -->
     <div class="modal-info">
       <span id="modalCategoria" class="modal-categoria"></span>
       <h2 id="modalNombre" class="modal-nombre"></h2>
@@ -1641,11 +1644,10 @@
     </div>
   </div>
 </div>
-  
-  <!-- ===== PANEL LATERAL DEL CARRITO (ELEGANTE) ===== -->
+
+<!-- ===== PANEL LATERAL DEL CARRITO ===== -->
 <div class="cart-panel" id="cartPanel">
   
-  <!-- HEADER DEL CARRITO -->
   <div class="cart-header">
     <div class="cart-header-left">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2c2c2c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1658,7 +1660,6 @@
     <button class="cart-close" onclick="toggleCart()">✕</button>
   </div>
 
-  <!-- LISTA DE PRODUCTOS -->
   <div class="cart-items" id="cartItems">
     <div class="cart-empty-state">
       <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#c9a87c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
@@ -1668,11 +1669,10 @@
       </svg>
       <h3>Tu pedido está vacío</h3>
       <p>Agrega productos para empezar</p>
-      <button class="cart-explorar" onclick="toggleCart(); document.getElementById('productos').scrollIntoView({behavior:'smooth'});">Explorar Catálogo →</button>
+      <button class="cart-explorar" onclick="toggleCart(); mostrarVista('catalogo');">Explorar Catálogo →</button>
     </div>
   </div>
 
-  <!-- FOOTER DEL CARRITO -->
   <div class="cart-footer" id="cartFooter" style="display: none;">
     <div class="cart-subtotal-row">
       <span class="cart-subtotal-label">Subtotal</span>
@@ -1690,22 +1690,97 @@
 
 </div>
 
-<!-- ===== SECCIÓN DE DESTACADOS ===== -->
-<div id="destacados-section" style="display: none;">
-  <h2 class="seccion-titulo">⭐ DESTACADOS</h2>
-  <div id="destacados"></div>
+<!-- ===== VISTA COMBOS ===== -->
+<div class="vista" id="vista-combos" style="display: none;">
+  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px;">
+    <p class="hero-tag">PACKS ESPECIALES</p>
+    <h1 class="hero-titulo">Combos Lewin</h1>
+    <p class="hero-subtitulo">Ahorra comprando en conjunto</p>
+  </section>
+  <div style="max-width: 1200px; margin: 0 auto; padding: 20px 40px 80px;">
+    <p class="cargando" style="text-align: center;">
+      Próximamente encontrarás aquí nuestros combos exclusivos. 💜
+    </p>
+  </div>
 </div>
- 
-  <div id="todos-section">
-    <h2 class="seccion-titulo" id="titulo-todos">📦 TODOS LOS PRODUCTOS</h2>
-    <div id="productos">
-      <p class="cargando">Cargando productos...</p>
+
+<!-- ===== VISTA NOVEDADES ===== -->
+<div class="vista" id="vista-novedades" style="display: none;">
+  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px;">
+    <p class="hero-tag">RECIÉN LLEGADO</p>
+    <h1 class="hero-titulo">Novedades</h1>
+    <p class="hero-subtitulo">Lo último de la temporada</p>
+  </section>
+  <div style="max-width: 1200px; margin: 0 auto; padding: 20px 40px 80px;">
+    <div id="novedades-grid"
+         style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px;">
+      <p class="cargando" style="grid-column: 1 / -1;">Cargando novedades...</p>
     </div>
   </div>
- </div>
-<!-- FIN VISTA CATÁLOGO -->
+</div>
+
+<!-- ===== VISTA NOSOTROS ===== -->
+<div class="vista" id="vista-nosotros" style="display: none;">
+  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px;">
+    <p class="hero-tag">NUESTRA HISTORIA</p>
+    <h1 class="hero-titulo">Sobre Nosotros</h1>
+    <p class="hero-subtitulo">Moda que enamora</p>
+  </section>
+  <div style="max-width: 800px; margin: 0 auto; padding: 20px 40px 80px; text-align: center;">
+    <p style="font-size: 16px; color: #666; line-height: 1.9; margin-bottom: 20px;">
+      En <strong style="color:#2c2c2c;">Lewin Boutique</strong> creemos que la moda es una forma de expresión.
+      Somos una boutique venezolana dedicada a traer las últimas tendencias en ropa, calzado y accesorios
+      para damas, caballeros y niños.
+    </p>
+    <p style="font-size: 16px; color: #666; line-height: 1.9; margin-bottom: 20px;">
+      Cada pieza de nuestro catálogo está seleccionada con cuidado para ofrecerte calidad, estilo y precios
+      accesibles. Enviamos a toda Venezuela 🇻🇪.
+    </p>
+    <p style="font-family: Georgia, serif; font-style: italic; color: #c9a87c; font-size: 18px; margin-top: 30px;">
+      "Moda que enamora"
+    </p>
+  </div>
+</div>
+
+<!-- ===== VISTA CONTACTO ===== -->
+<div class="vista" id="vista-contacto" style="display: none;">
+  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px;">
+    <p class="hero-tag">HABLEMOS</p>
+    <h1 class="hero-titulo">Contáctanos</h1>
+    <p class="hero-subtitulo">Estamos para ti</p>
+  </section>
+  <div style="max-width: 700px; margin: 0 auto; padding: 20px 40px 80px;">
+    <div style="background: #ffffff; border-radius: 20px; padding: 30px 35px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f0ebe3;">
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: #f5ede3; display: flex; align-items: center; justify-content: center; font-size: 20px;">📱</div>
+        <div>
+          <div style="font-size: 11px; color: #999; letter-spacing: 1.5px; text-transform: uppercase;">WhatsApp</div>
+          <div style="font-size: 15px; color: #2c2c2c; font-weight: 600;">+58 424-166-8588</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f0ebe3;">
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: #f5ede3; display: flex; align-items: center; justify-content: center; font-size: 20px;">📷</div>
+        <div>
+          <div style="font-size: 11px; color: #999; letter-spacing: 1.5px; text-transform: uppercase;">Instagram</div>
+          <div style="font-size: 15px; color: #2c2c2c; font-weight: 600;">@lewinboutique</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 0;">
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: #f5ede3; display: flex; align-items: center; justify-content: center; font-size: 20px;">🇻🇪</div>
+        <div>
+          <div style="font-size: 11px; color: #999; letter-spacing: 1.5px; text-transform: uppercase;">Envíos</div>
+          <div style="font-size: 15px; color: #2c2c2c; font-weight: 600;">A toda Venezuela</div>
+        </div>
+      </div>
+    </div>
+    <button class="hero-btn" style="margin: 30px auto 0; display: block;"
+            onclick="window.open('https://wa.me/584241668588', '_blank')">
+      Escribir por WhatsApp →
+    </button>
+  </div>
+</div>
   
-  <!-- ===== FOOTER ===== -->
+<!-- ===== FOOTER ===== -->
 <footer id="contacto" class="main-footer">
   <div class="footer-content">
     <div class="footer-col">
@@ -1854,7 +1929,6 @@
       categoriaActual = cat;
       crearBotonesFiltros();
       
-      // Reaplicar el buscador actual
       const texto = document.getElementById('buscador').value.toLowerCase();
       const filtrados = todosLosProductos.filter(p =>
         (p.producto || '').toLowerCase().includes(texto) ||
@@ -1914,7 +1988,6 @@
             lista = lista.filter(p => p.categoria === categoriaActual);
           }
  
-          // Aplicar orden
           if (ordenActual === 'precio-asc') {
             lista = [...lista].sort((a, b) => (parseFloat(a.precio_venta) || 0) - (parseFloat(b.precio_venta) || 0));
           } else if (ordenActual === 'precio-desc') {
@@ -1956,7 +2029,6 @@
       mostrarProductos(filtrados);
     });
  
-        
     // ===== FUNCIONES DEL MODAL DE PRODUCTO =====
     let productoModalActual = null;
  
@@ -1980,7 +2052,6 @@
         placeholderEl.style.display = 'flex';
       }
       
-      // Badge NUEVO
       const badgeNuevo = document.getElementById('modalBadgeNuevo');
       if (badgeNuevo) {
         if (typeof esNuevo === 'function' && esNuevo(producto)) {
@@ -1990,7 +2061,6 @@
         }
       }
 
-      // Badge OFERTA
       const badgeOferta = document.getElementById('modalBadgeOferta');
       if (badgeOferta) {
         if (producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta) {
@@ -2026,7 +2096,6 @@
         stockEl.textContent = `✅ ${producto.cantidad} disponibles`;
       }
       
-      // ===== BOTÓN AGREGAR (NO sobreescribir HTML, solo habilitar/deshabilitar) =====
       const btnAgregar = document.getElementById('modalBtnAgregar');
       if (btnAgregar) {
         if (disponible) {
@@ -2038,7 +2107,6 @@
         }
       }
       
-      // ===== BOTÓN WHATSAPP (usar flex, no block) =====
       const btnWhatsapp = document.getElementById('modalBtnWhatsapp');
       if (btnWhatsapp) {
         btnWhatsapp.style.display = disponible ? 'flex' : 'none';
@@ -2061,7 +2129,6 @@
       const lightbox = document.getElementById('lightbox');
       lightbox.classList.remove('abierto');
     };
- 
  
     window.cerrarModal = function cerrarModal() {
       document.getElementById('modalProducto').classList.remove('abierto');
@@ -2100,7 +2167,7 @@
       }
     });
  
-        // ===== FUNCIONES DEL CARRITO =====
+    // ===== FUNCIONES DEL CARRITO =====
     window.toggleCart = function toggleCart() {
       const panel = document.getElementById('cartPanel');
       const overlay = document.getElementById('cartOverlay');
@@ -2196,7 +2263,7 @@
             </svg>
             <h3>Tu pedido está vacío</h3>
             <p>Agrega productos para empezar</p>
-            <button class="cart-explorar" onclick="toggleCart(); document.getElementById('productos').scrollIntoView({behavior:'smooth'});">Explorar Catálogo →</button>
+            <button class="cart-explorar" onclick="toggleCart(); mostrarVista('catalogo');">Explorar Catálogo →</button>
           </div>
         `;
         footer.style.display = 'none';
@@ -2260,12 +2327,10 @@
       window.open(url, '_blank');
     };
  
-    
     console.log('✅ Módulo llegó al final');
     cargarProductos();
     actualizarCarritoUI();
     console.log('🏁 Módulo ejecutado COMPLETO');
-
 
     // ===== NAVEGACIÓN POR VISTAS (SPA) =====
     window.mostrarVista = function mostrarVista(nombre) {
@@ -2300,17 +2365,46 @@
       
       const y = window.scrollY;
       
-      // Encoger cuando bajes más de 100px
       if (y > 100 && !headerCompacto) {
         header.classList.add('compacto');
         headerCompacto = true;
       }
-      // Expandir solo cuando subas por debajo de 20px
       else if (y < 20 && headerCompacto) {
         header.classList.remove('compacto');
         headerCompacto = false;
       }
     });
+
+    // ===== WISHLIST (toggle del corazón) =====
+    window.toggleWishlist = function toggleWishlist() {
+      mostrarVista('catalogo');
+      setTimeout(() => {
+        document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
+    };
+
+    // ===== CARGAR NOVEDADES =====
+    function cargarNovedades() {
+      const grid = document.getElementById('novedades-grid');
+      if (!grid) return;
+      if (typeof todosLosProductos === 'undefined' || todosLosProductos.length === 0) {
+        grid.innerHTML = '<p class="cargando" style="grid-column:1/-1;">Cargando...</p>';
+        return;
+      }
+      const nuevos = todosLosProductos.filter(p => esNuevo(p));
+      if (nuevos.length === 0) {
+        grid.innerHTML = '<p class="cargando" style="grid-column:1/-1;">Aún no hay novedades. ¡Vuelve pronto! 💜</p>';
+        return;
+      }
+      grid.innerHTML = nuevos.map(p => generarTarjeta(p)).join('');
+    }
+
+    // Wrapper para cargar novedades al entrar
+    const _mostrarVistaBase = window.mostrarVista;
+    window.mostrarVista = function (nombre) {
+      _mostrarVistaBase(nombre);
+      if (nombre === 'novedades') cargarNovedades();
+    };
     
   </script>
 </body>
