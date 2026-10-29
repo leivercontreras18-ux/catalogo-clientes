@@ -6,14 +6,14 @@
   <title>Lewin Boutique - Catálogo</title>
   <link rel="icon" type="image/png" href="https://qhihqujbzjcuxshndsez.supabase.co/storage/v1/object/public/productos-fotos/1787708461873-removebg-preview%20(1).png" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { overflow-x: clip; width: 100%; }
     body {
-      font-family: 'Inter', system-ui, sans-serif !important;
+      font-family: 'Poppins', 'Segoe UI', sans-serif !important;
       background: #ffffff !important;
-      color: #1a1a1a;
+      color: #2c2c2c;
       padding: 0;
       scroll-behavior: smooth;
       overflow-x: clip;
@@ -25,12 +25,11 @@
       background: #ffffff; margin: -20px -20px 0 -20px; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 999; transition: all 0.3s ease;
     }
     
-    /* ===== HEADER COMPACTO AL BAJAR ===== */
     .main-header.compacto .header-left { display: none; }
     .main-header.compacto .header-nav { display: none; }
     .main-header.compacto .header-top { padding: 12px 40px; grid-template-columns: 1fr 1fr; }
     .main-header.compacto .header-center { justify-content: flex-start; gap: 10px; }
-    .main-header.compacto .logo-circle { width: 38px; height: 38px; font-size: 20px; }
+    .main-header.compacto .logo-circle { width: 38px; height: 38px; font-size: 20px; background: #2563eb; }
     .main-header.compacto .logo-name { font-size: 18px; letter-spacing: 2px; }
     .main-header.compacto .header-right { gap: 14px; }
     .main-header.compacto .icon-header { width: 20px; height: 20px; }
@@ -39,8 +38,8 @@
     .header-left { text-align: left; }
     .envios-tag { font-size: 12px; color: #666; letter-spacing: 0.5px; }
     .header-center { display: flex; align-items: center; justify-content: center; gap: 14px; }
-    .logo-circle { width: 52px; height: 52px; border-radius: 50%; background: #1a1a1a; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 26px; }
-    .logo-name { font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #1a1a1a; }
+    .logo-circle { width: 52px; height: 52px; border-radius: 50%; background: #2563eb; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 26px; font-family: 'Inter', sans-serif; }
+    .logo-name { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #1a1a1a; }
     .header-right { display: flex; align-items: center; justify-content: flex-end; gap: 18px; }
     .icon-header { display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: #1a1a1a; transition: color 0.2s, transform 0.2s; width: 22px; height: 22px; }
     .icon-header svg { display: block; width: 100%; height: 100%; }
@@ -83,7 +82,7 @@
     .cat-circle-name { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: inherit; text-transform: uppercase; }
     .cat-circle.activo .cat-circle-name { color: #ffffff; }
     
-    /* ===== TARJETAS ESTILO SHOPMODERN ===== */
+    /* ===== TARJETAS ===== */
     .seccion-titulo { text-align: left; font-size: 24px; font-weight: 800; color: #1a1a1a; margin: 30px 0 20px 0; padding: 10px 0; }
     #destacados-section { max-width: 1300px; margin: 0 auto 30px auto; padding: 20px 40px; }
     #destacados, #productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px; max-width: 1300px; margin: 0 auto; }
@@ -107,12 +106,6 @@
     
     .badge-dinamico { position: absolute; top: 12px; left: 12px; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; color: white; z-index: 2; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
  
-    /* ===== LIGHTBOX ===== */
-    .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.92); z-index: 3000; justify-content: center; align-items: center; cursor: zoom-out; padding: 20px; }
-    .lightbox.abierto { display: flex; }
-    .lightbox img { max-width: 95%; max-height: 95%; object-fit: contain; border-radius: 8px; mix-blend-mode: normal; }
-    .lightbox-cerrar { position: absolute; top: 20px; right: 20px; width: 45px; height: 45px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: #ffffff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
- 
     /* ===== MODAL DE PRODUCTO ===== */
     .modal-producto { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
     .modal-producto.abierto { display: flex; animation: fadeInModal 0.25s ease; }
@@ -121,29 +114,23 @@
     .modal-contenido { position: relative; background: #ffffff; border-radius: 24px; max-width: 950px; width: 100%; max-height: 92vh; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25); animation: slideUpModal 0.35s ease; display: grid; grid-template-columns: 1fr 1fr; min-height: 580px; }
     @keyframes slideUpModal { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     .modal-cerrar { position: absolute; top: 18px; right: 18px; z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: #ffffff; border: 1px solid #eaeaea; color: #1a1a1a; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.25s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
-    .modal-cerrar:hover { background: #1a1a1a; color: #ffffff; transform: rotate(90deg); }
+    .modal-cerrar:hover { background: #2563eb; color: #ffffff; transform: rotate(90deg); border-color: #2563eb; }
     
     .modal-foto-wrapper { position: relative; background: #f8f9fa; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: zoom-in; padding: 40px; }
     .modal-foto-wrapper img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
     .modal-foto-placeholder { font-size: 6em; color: #ccc; }
     
-    .modal-badge-oferta, .modal-badge-nuevo { position: absolute; top: 18px; left: 18px; color: white; font-size: 12px; font-weight: 700; letter-spacing: 1px; padding: 6px 14px; border-radius: 20px; z-index: 5; display: none; }
-    .modal-badge-oferta { background: #ef4444; }
-    .modal-badge-oferta.visible { display: block !important; }
-    .modal-badge-nuevo { background: #22c55e; }
-    
     .modal-info { padding: 50px 45px; display: flex; flex-direction: column; overflow-y: auto; height: 100%; }
     .modal-categoria { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888; font-weight: 600; margin-bottom: 10px; }
     .modal-nombre { font-size: 32px; font-weight: 800; color: #1a1a1a; line-height: 1.2; margin-bottom: 12px; }
     .modal-precio { font-size: 28px; font-weight: 800; color: #1a1a1a; margin-bottom: 4px; }
-    .modal-precio-bs { font-size: 14px; color: #888; margin-bottom: 25px; }
     
     .modal-detalles { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
     .modal-detalle-pill { display: flex; align-items: center; gap: 6px; padding: 8px 16px; background: #f8f9fa; border-radius: 30px; font-size: 13px; border: 1px solid #eaeaea; }
     .modal-detalle-label { color: #888; font-weight: 600; }
     .modal-detalle-valor { color: #1a1a1a; font-weight: 700; }
     
-    /* ===== ALERTAS DE STOCK MODERNAS ===== */
+    /* ===== ALERTAS DE STOCK ===== */
     .modal-stock { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 18px; border-radius: 12px; font-size: 13px; font-weight: 600; margin-bottom: 25px; letter-spacing: 0.5px; text-align: center; }
     .modal-stock svg { flex-shrink: 0; }
     .modal-stock.disponible { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
@@ -158,12 +145,6 @@
     
     .modal-btn-whatsapp { width: 100%; padding: 16px; background: #25D366; color: white; border: none; border-radius: 30px; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .modal-btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); }
-    
-    @media (max-width: 700px) {
-      .modal-contenido { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
-      .modal-foto-wrapper { min-height: 300px; max-height: 350px; }
-      .modal-info { padding: 30px 25px; }
-    }
     
     /* ===== CARRITO ===== */
     .cart-panel { position: fixed; top: 0; right: -420px; width: 400px; max-width: 92vw; height: 100vh; background: #ffffff; box-shadow: -8px 0 40px rgba(0,0,0,0.12); z-index: 1002; transition: right 0.35s ease; display: flex; flex-direction: column; font-family: inherit; }
@@ -211,6 +192,38 @@
     
     .cargando { text-align: center; padding: 60px; color: #888; grid-column: 1 / -1; }
     
+    /* ===== VISTAS SPA ===== */
+    .vista { animation: fadeInVista 0.4s ease; }
+    @keyframes fadeInVista { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .hero-bienvenida { text-align: center; padding: 100px 40px 120px; background: #f8f9fa; min-height: calc(100vh - 100px); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .hero-tag { font-size: 12px; letter-spacing: 3px; color: #2563eb; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
+    .hero-titulo { font-size: 58px; font-weight: 800; color: #1a1a1a; line-height: 1.1; margin-bottom: 20px; }
+    .hero-subtitulo { font-size: 18px; color: #888; margin-bottom: 40px; }
+    .hero-btn { display: inline-block; padding: 16px 42px; background: #2563eb; color: #ffffff; border: none; border-radius: 30px; text-decoration: none; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+    .hero-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4); }
+
+    /* ===== VISTA NOSOTROS ===== */
+    .nosotros-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 40px auto 20px; padding: 0 40px; align-items: center; }
+    .nosotros-foto { width: 100%; height: 450px; background: #f8f9fa; border-radius: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid #eaeaea; }
+    .nosotros-foto img { width: 100%; height: 100%; object-fit: cover; }
+    .nosotros-texto h2 { font-size: 36px; color: #1a1a1a; margin-bottom: 20px; font-weight: 800; }
+    .nosotros-texto p { font-size: 15px; color: #666; line-height: 1.8; margin-bottom: 20px; }
+    .nosotros-iconos { display: flex; gap: 30px; margin-top: 30px; }
+    .nosotros-icono-item { text-align: center; }
+    .nosotros-icono-item svg { width: 32px; height: 32px; stroke: #2563eb; margin-bottom: 10px; }
+    .nosotros-icono-item span { display: block; font-size: 12px; color: #1a1a1a; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ===== TESTIMONIOS ===== */
+    .testimonios-section { max-width: 1100px; margin: 60px auto 80px; padding: 0 40px; }
+    .testimonios-titulo { text-align: center; font-size: 28px; font-weight: 800; color: #1a1a1a; margin-bottom: 40px; }
+    .testimonios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .testimonio-card { background: #ffffff; border: 1px solid #eaeaea; border-radius: 16px; padding: 30px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: transform 0.3s ease; }
+    .testimonio-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .testimonio-estrellas { color: #3b82f6; font-size: 20px; margin-bottom: 20px; letter-spacing: 2px; }
+    .testimonio-texto { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .testimonio-autor { font-size: 15px; font-weight: 800; color: #1a1a1a; }
+
     /* ===== FOOTER ===== */
     .main-footer { background: #1a1a1a; color: #ffffff; padding: 40px 40px 20px; margin-top: 40px; display: none; }
     .footer-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; text-align: center; }
@@ -218,40 +231,19 @@
     .footer-col p { font-size: 13px; margin-bottom: 7px; color: #a1a1aa; line-height: 1.5; }
     .footer-col p a { color: #a1a1aa; text-decoration: none; transition: color 0.3s; }
     .footer-col p a:hover { color: #ffffff; }
-    .footer-logo-circle { width: 40px; height: 40px; border-radius: 50%; background: #2563eb; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; margin: 0 auto 10px; }
+    .footer-logo-circle { width: 40px; height: 40px; border-radius: 50%; background: #2563eb; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; font-family: 'Inter', sans-serif; margin: 0 auto 10px; }
     .footer-logo-name { font-size: 18px; font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; color: #ffffff; }
     .footer-slogan { font-size: 13px; color: #888; }
     .footer-bottom { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; font-size: 11px; color: #666; }
-    
-    /* ===== VISTAS SPA - HERO ===== */
-    .vista { animation: fadeInVista 0.4s ease; }
-    @keyframes fadeInVista { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    
-    .hero-bienvenida { text-align: center; padding: 100px 40px 120px; background: #f8f9fa; min-height: calc(100vh - 100px); display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .hero-tag { font-size: 12px; letter-spacing: 3px; color: #2563eb; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
-    .hero-titulo { font-size: 64px; font-weight: 800; color: #1a1a1a; line-height: 1.1; margin-bottom: 20px; }
-    .hero-subtitulo { font-size: 18px; color: #666; margin-bottom: 40px; }
-    .hero-btn { display: inline-block; padding: 16px 42px; background: #2563eb; color: #ffffff; border: none; border-radius: 30px; text-decoration: none; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-    .hero-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3); }
-    
+
     /* ===== NOTIFICACIONES TOAST ===== */
     .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 12px; pointer-events: none; }
-    .toast { background: #1a1a1a; color: #ffffff; padding: 16px 20px; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; min-width: 280px; max-width: 400px; animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; pointer-events: auto; }
+    .toast { background: #1a1a1a; color: #ffffff; padding: 16px 20px; border-radius: 12px; font-family: inherit; font-size: 14px; font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 12px; min-width: 280px; max-width: 400px; animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; pointer-events: auto; }
     .toast.advertencia { border-left: 4px solid #ef4444; }
     .toast.exito { border-left: 4px solid #22c55e; }
     .toast svg { width: 20px; height: 20px; flex-shrink: 0; }
     @keyframes slideInRight { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes fadeOutToast { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(20px); } }
-
-    /* ===== NOSOTROS - ESTADÍSTICAS ===== */
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; max-width: 1100px; margin: 40px auto 0; padding: 0 20px; }
-    .stat-card { background: #ffffff; border: 1px solid #eaeaea; border-radius: 16px; padding: 30px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; }
-    .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: #2563eb; }
-    .stat-icon { color: #2563eb; margin-bottom: 15px; width: 40px; height: 40px; }
-    .stat-icon svg { width: 100%; height: 100%; stroke-width: 1.5; }
-    .stat-number { font-size: 42px; font-weight: 800; color: #2563eb; line-height: 1; margin-bottom: 8px; }
-    .stat-label { font-size: 13px; font-weight: 800; color: #1a1a1a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-    .stat-desc { font-size: 13px; color: #666; line-height: 1.4; }
 
     @media (max-width: 900px) {
       .header-top { grid-template-columns: 1fr; gap: 15px; padding: 15px 20px; text-align: center; }
@@ -261,6 +253,12 @@
       .search-top { flex-direction: column; gap: 15px; align-items: stretch; }
       .hero-titulo { font-size: 40px; }
       .footer-content { grid-template-columns: 1fr; }
+      .nosotros-container { grid-template-columns: 1fr; padding: 0 20px; }
+      .nosotros-foto { height: 350px; }
+      .modal-contenido { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
+      .modal-foto-wrapper { min-height: 300px; max-height: 350px; }
+      .modal-info { padding: 30px 25px; }
+      .testimonios-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -314,7 +312,128 @@
     <button class="hero-btn" onclick="mostrarVista('catalogo')">Explorar Catálogo →</button>
   </section>
 </div>
-  
+
+<!-- ===== VISTA NOSOTROS ===== -->
+<div class="vista" id="vista-nosotros" style="display: none;">
+  <section class="hero-bienvenida" style="min-height: auto; padding: 60px 40px 20px; background: #ffffff;">
+    <p class="hero-tag">NUESTRA HISTORIA</p>
+    <h1 class="hero-titulo">Sobre Nosotros</h1>
+  </section>
+
+  <div class="nosotros-container">
+    <!-- FOTO IZQUIERDA -->
+    <div class="nosotros-foto">
+      <!-- Cambia este src por el link de tu foto real -->
+      <img src="AQUI_VA_EL_LINK_DE_TU_FOTO" alt="Lewin Boutique" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#9ca3af; font-size:14px; letter-spacing:2px;\'>AQUÍ VA TU FOTO</span>';" />
+    </div>
+
+    <!-- TEXTO DERECHA -->
+    <div class="nosotros-texto">
+      <h2>Moda que enamora</h2>
+      <p>En <strong>Lewin Boutique</strong> creemos que el estilo no tiene límites. No somos solo una tienda de moda; somos tu aliado para encontrar eso que te hace único.</p>
+      <p>Desde un look elegante para una ocasión especial, hasta la ropa deportiva para entrenar, la comodidad para los más pequeños de la casa o esa pieza de anime que estabas buscando. Seleccionamos calidad, estilo y precio para toda la familia, con envíos a toda Venezuela.</p>
+      
+      <div class="nosotros-iconos">
+        <div class="nosotros-icono-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Calidad</span>
+        </div>
+        <div class="nosotros-icono-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" /></svg>
+          <span>Envíos</span>
+        </div>
+        <div class="nosotros-icono-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+          <span>Variedad</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN DE TESTIMONIOS -->
+  <div class="testimonios-section">
+    <h2 class="testimonios-titulo">Lo que dicen nuestros clientes</h2>
+    <div class="testimonios-grid">
+      
+      <!-- Testimonio 1 -->
+      <div class="testimonio-card">
+        <div class="testimonio-estrellas">★★★★★</div>
+        <p class="testimonio-texto">"¡Increíble la calidad! Me encanta cómo combinan el estilo clásico con un toque moderno. Definitivamente volveré a comprar."</p>
+        <div class="testimonio-autor">María G.</div>
+      </div>
+
+      <!-- Testimonio 2 -->
+      <div class="testimonio-card">
+        <div class="testimonio-estrellas">★★★★★</div>
+        <p class="testimonio-texto">"El envío fue rapidísimo y la presentación del producto impecable. Sentí muy especial al abrir mi paquete. ¡Muy recomendado!"</p>
+        <div class="testimonio-autor">Juan P.</div>
+      </div>
+
+      <!-- Testimonio 3 -->
+      <div class="testimonio-card">
+        <div class="testimonio-estrellas">★★★★★</div>
+        <p class="testimonio-texto">"Ropa ética y con estilo, lo que estaba buscando. Todo el proceso de compra fue sencillo y el diseño es justo como en la foto. ¡Muy contenta!"</p>
+        <div class="testimonio-autor">Ana S.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== VISTA COMBOS ===== -->
+<div class="vista" id="vista-combos" style="display: none;">
+  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px; background: #ffffff;">
+    <p class="hero-tag">PACKS ESPECIALES</p>
+    <h1 class="hero-titulo">Combos Lewin</h1>
+    <p class="hero-subtitulo">Ahorra comprando en conjunto</p>
+  </section>
+  <div style="max-width: 800px; margin: 0 auto; padding: 20px 40px 80px; text-align: center;">
+    <p style="font-size: 16px; color: #666;">Próximamente encontrarás aquí nuestros combos exclusivos.</p>
+  </div>
+</div>
+
+<!-- ===== VISTA NOVEDADES ===== -->
+<div class="vista" id="vista-novedades" style="display: none;">
+  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px; background: #ffffff;">
+    <p class="hero-tag">RECIÉN LLEGADO</p>
+    <h1 class="hero-titulo">Novedades</h1>
+    <p class="hero-subtitulo">Lo último de la temporada</p>
+  </section>
+  <div style="max-width: 1300px; margin: 0 auto; padding: 20px 40px 80px;">
+    <div id="novedades-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px;">
+      <p class="cargando" style="grid-column: 1 / -1;">Cargando novedades...</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VISTA CONTACTO ===== -->
+<div class="vista" id="vista-contacto" style="display: none;">
+  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px; background: #ffffff;">
+    <p class="hero-tag">HABLEMOS</p>
+    <h1 class="hero-titulo">Contáctanos</h1>
+    <p class="hero-subtitulo">Estamos para ti</p>
+  </section>
+  <div style="max-width: 600px; margin: 0 auto; padding: 20px 40px 80px;">
+    <div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid #f0ebe3;">
+      <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe3; text-align: center;">
+        <span style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">WhatsApp</span>
+        <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">+58 424-166-8588</p>
+      </div>
+      <div style="padding: 15px 0; border-bottom: 1px solid #f0ebe3; text-align: center;">
+        <span style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">Instagram</span>
+        <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">@lewinboutique</p>
+      </div>
+      <div style="padding: 15px 0; text-align: center;">
+        <span style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">Envíos</span>
+        <p style="font-size: 16px; color: #2c2c2c; font-weight: 600; margin-top: 5px;">A toda Venezuela</p>
+      </div>
+    </div>
+    <button class="hero-btn" style="margin: 30px auto 0; display: block; width: 100%;" onclick="window.open('https://wa.me/584241668588', '_blank')">
+      Escribir por WhatsApp
+    </button>
+  </div>
+</div>
+
 <!-- ===== VISTA CATÁLOGO ===== -->
 <div class="vista" id="vista-catalogo" style="display: none;">
   <section class="search-section">
@@ -353,125 +472,6 @@
   </div>
 </div>
 
-<!-- ===== VISTA COMBOS ===== -->
-<div class="vista" id="vista-combos" style="display: none;">
-  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px; background: #ffffff;">
-    <p class="hero-tag">PACKS ESPECIALES</p>
-    <h1 class="hero-titulo" style="font-size: 48px;">Combos Lewin</h1>
-    <p class="hero-subtitulo">Ahorra comprando en conjunto</p>
-  </section>
-  <div style="max-width: 1200px; margin: 0 auto; padding: 20px 40px 80px;">
-    <p class="cargando" style="text-align: center;">Próximamente encontrarás aquí nuestros combos exclusivos. 💜</p>
-  </div>
-</div>
-
-<!-- ===== VISTA NOVEDADES ===== -->
-<div class="vista" id="vista-novedades" style="display: none;">
-  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px; background: #ffffff;">
-    <p class="hero-tag">RECIÉN LLEGADO</p>
-    <h1 class="hero-titulo" style="font-size: 48px;">Novedades</h1>
-    <p class="hero-subtitulo">Lo último de la temporada</p>
-  </section>
-  <div style="max-width: 1300px; margin: 0 auto; padding: 20px 40px 80px;">
-    <div id="novedades-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px;">
-      <p class="cargando" style="grid-column: 1 / -1;">Cargando novedades...</p>
-    </div>
-  </div>
-</div>
-
-<!-- ===== VISTA NOSOTROS ===== -->
-<div class="vista" id="vista-nosotros" style="display: none;">
-  <section class="hero-bienvenida" style="min-height: auto; padding: 60px 40px 40px; background: #ffffff;">
-    <p class="hero-tag">NUESTRA HISTORIA</p>
-    <h1 class="hero-titulo" style="font-size: 52px; margin-bottom: 15px;">Sobre Nosotros</h1>
-    <p class="hero-subtitulo" style="font-size: 18px; color: #666; max-width: 800px; margin: 0 auto 30px; line-height: 1.6;">
-      En <strong>Lewin Boutique</strong> creemos que el estilo no tiene límites. No somos solo una tienda de moda; somos tu aliado para encontrar eso que te hace único. Desde un look elegante, hasta la ropa deportiva, la comodidad para los más pequeños o esa pieza de anime que estabas buscando. Seleccionamos calidad, estilo y precio para toda la familia, con envíos a toda Venezuela. 🇻🇪
-    </p>
-
-    <!-- TARJETAS DE ESTADÍSTICAS REALES -->
-    <div class="stats-grid">
-      
-      <!-- Tarjeta 1: Envíos -->
-      <div class="stat-card">
-        <div class="stat-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        </div>
-        <div class="stat-number">24</div>
-        <div class="stat-label">Estados con Envío</div>
-        <div class="stat-desc">Expandiendo nuestro alcance en todo el país.</div>
-      </div>
-
-      <!-- Tarjeta 2: Productos Reales (Se actualiza solo) -->
-      <div class="stat-card">
-        <div class="stat-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
-        </div>
-        <div class="stat-number" id="contadorProductos">...</div>
-        <div class="stat-label">Artículos en Catálogo</div>
-        <div class="stat-desc">Llevando hallazgos curados a tu puerta diariamente.</div>
-      </div>
-
-      <!-- Tarjeta 3: Calidad -->
-      <div class="stat-card">
-        <div class="stat-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
-        </div>
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Calidad y Variedad</div>
-        <div class="stat-desc">Excelencia seleccionada en cada pieza.</div>
-      </div>
-
-      <!-- Tarjeta 4: Clientes (Inicia en 0, sube con el pedido) -->
-      <div class="stat-card">
-        <div class="stat-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-        </div>
-        <div class="stat-number" id="contadorClientes">0</div>
-        <div class="stat-label">Clientes Felices</div>
-        <div class="stat-desc">Comunidad satisfecha compartiendo su alegría.</div>
-      </div>
-
-    </div>
-  </section>
-</div>
-
-<!-- ===== VISTA CONTACTO ===== -->
-<div class="vista" id="vista-contacto" style="display: none;">
-  <section class="hero-bienvenida" style="min-height: auto; padding: 80px 40px 50px; background: #ffffff;">
-    <p class="hero-tag">HABLEMOS</p>
-    <h1 class="hero-titulo" style="font-size: 48px;">Contáctanos</h1>
-    <p class="hero-subtitulo">Estamos para ti</p>
-  </section>
-  <div style="max-width: 700px; margin: 0 auto; padding: 20px 40px 80px;">
-    <div style="background: #f8f9fa; border-radius: 20px; padding: 30px 35px; border: 1px solid #eaeaea;">
-      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid #eaeaea;">
-        <div style="width: 44px; height: 44px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid #eaeaea;">📱</div>
-        <div>
-          <div style="font-size: 12px; color: #888; font-weight: 600; text-transform: uppercase;">WhatsApp</div>
-          <div style="font-size: 16px; color: #1a1a1a; font-weight: 700;">+58 424-166-8588</div>
-        </div>
-      </div>
-      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid #eaeaea;">
-        <div style="width: 44px; height: 44px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid #eaeaea;">📷</div>
-        <div>
-          <div style="font-size: 12px; color: #888; font-weight: 600; text-transform: uppercase;">Instagram</div>
-          <div style="font-size: 16px; color: #1a1a1a; font-weight: 700;">@lewinboutique</div>
-        </div>
-      </div>
-      <div style="display: flex; align-items: center; gap: 16px; padding: 16px 0;">
-        <div style="width: 44px; height: 44px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid #eaeaea;">🇻🇪</div>
-        <div>
-          <div style="font-size: 12px; color: #888; font-weight: 600; text-transform: uppercase;">Envíos</div>
-          <div style="font-size: 16px; color: #1a1a1a; font-weight: 700;">A toda Venezuela</div>
-        </div>
-      </div>
-    </div>
-    <button class="hero-btn" style="margin: 30px auto 0; display: block;" onclick="window.open('https://wa.me/584241668588', '_blank')">
-      Escribir por WhatsApp →
-    </button>
-  </div>
-</div>
-
 <!-- ============================================================
      BLOQUES GLOBALES (Cart, Modal, Lightbox)
      ============================================================ -->
@@ -488,8 +488,6 @@
     <div class="modal-foto-wrapper" onclick="abrirLightbox(this.querySelector('img').src)" style="cursor: zoom-in;">
       <img id="modalFoto" src="" alt="" />
       <div id="modalFotoPlaceholder" class="modal-foto-placeholder">👗</div>
-      <span id="modalBadgeOferta" class="modal-badge-oferta">Sale</span>
-      <span id="modalBadgeNuevo" class="modal-badge-nuevo">New</span>
     </div>
     
     <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
@@ -519,7 +517,6 @@
         </button>
         <button id="modalBtnWhatsapp" class="modal-btn-whatsapp" onclick="pedirPorWhatsApp()">
           PEDIR POR WHATSAPP
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-left: 6px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </button>
       </div>
     </div>
@@ -597,26 +594,24 @@
     let carrito = JSON.parse(localStorage.getItem('carritoLewin') || '[]');
     const WHATSAPP_NUM = '584241668588';
 
-    // ===== FUNCIÓN DE NOTIFICACIÓN TOAST =====
+    // ===== NOTIFICACIONES TOAST =====
     function mostrarToast(mensaje, tipo = 'exito') {
       const container = document.getElementById('toastContainer');
       if (!container) return;
       const toast = document.createElement('div');
       toast.className = `toast ${tipo}`;
-      
       const icono = tipo === 'exito' 
         ? `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #22c55e;"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`
         : `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #ef4444;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
-        
       toast.innerHTML = `${icono} <span>${mensaje}</span>`;
       container.appendChild(toast);
-      
       setTimeout(() => {
         toast.style.animation = 'fadeOutToast 0.3s ease forwards';
         setTimeout(() => toast.remove(), 300);
       }, 3500);
     }
     
+    // ===== CARGAR PRODUCTOS =====
     async function cargarProductos() {
       const contenedor = document.getElementById('productos');
       try {
@@ -628,24 +623,11 @@
  
         todosLosProductos = data || [];
         
-        // Actualizamos el contador de productos reales
-        const contadorEl = document.getElementById('contadorProductos');
-        if (contadorEl) {
-          contadorEl.textContent = todosLosProductos.length;
-        }
-
-        // Cargar métricas de clientes felices desde Supabase
-        const { data: metricasData, error: metricasError } = await supabase
-          .from('metricas')
-          .select('clientes_felices')
-          .eq('id', 1)
-          .single();
-
-        if (!metricasError && metricasData) {
+        // Cargar contador de clientes si existe la tabla
+        const { data: metricasData } = await supabase.from('metricas').select('clientes_felices').eq('id', 1).maybeSingle();
+        if (metricasData) {
           const contadorClientes = document.getElementById('contadorClientes');
-          if (contadorClientes) {
-             contadorClientes.textContent = metricasData.clientes_felices;
-          }
+          if (contadorClientes) contadorClientes.textContent = metricasData.clientes_felices;
         }
 
         crearBotonesFiltros();
@@ -657,19 +639,17 @@
       }
     }
 
+    // ===== FILTROS Y ORDEN =====
     window.crearBotonesFiltros = function crearBotonesFiltros() {
       const contenedor = document.getElementById('filtros');
       const categorias = ['Todas'];
-      
       const catsUnicas = [...new Set(todosLosProductos.map(p => p.categoria).filter(c => c))];
       catsUnicas.sort();
-      
       categorias.push(...catsUnicas);
       
       contenedor.innerHTML = categorias.map(cat => {
         return `
-          <div class="cat-circle ${cat === categoriaActual ? 'activo' : ''}" 
-               onclick="cambiarFiltro('${cat}')">
+          <div class="cat-circle ${cat === categoriaActual ? 'activo' : ''}" onclick="cambiarFiltro('${cat}')">
             <div class="cat-circle-name">${cat}</div>
           </div>
         `;
@@ -680,8 +660,7 @@
       ordenActual = valor;
       const texto = document.getElementById('buscador').value.toLowerCase();
       const filtrados = todosLosProductos.filter(p =>
-        (p.producto || '').toLowerCase().includes(texto) ||
-        (p.categoria || '').toLowerCase().includes(texto)
+        (p.producto || '').toLowerCase().includes(texto) || (p.categoria || '').toLowerCase().includes(texto)
       );
       mostrarDestacados(filtrados);
       mostrarProductos(filtrados);
@@ -690,11 +669,9 @@
     window.cambiarFiltro = function cambiarFiltro(cat) {
       categoriaActual = cat;
       crearBotonesFiltros();
-      
       const texto = document.getElementById('buscador').value.toLowerCase();
       const filtrados = todosLosProductos.filter(p =>
-        (p.producto || '').toLowerCase().includes(texto) ||
-        (p.categoria || '').toLowerCase().includes(texto)
+        (p.producto || '').toLowerCase().includes(texto) || (p.categoria || '').toLowerCase().includes(texto)
       );
       mostrarDestacados(filtrados);
       mostrarProductos(filtrados);
@@ -708,52 +685,34 @@
       return dias < 15;
     }
 
+    // ===== GENERAR TARJETA =====
     function generarTarjeta(p) {
       const disponible = p.cantidad > 0;
       const tieneFoto = p.foto_url && p.foto_url.trim() !== '';
-      const contenidoFoto = tieneFoto
-        ? `<img src="${p.foto_url}" alt="${p.producto}" onerror="this.parentElement.innerHTML='👗'" />`
-        : '👗';
- 
+      const contenidoFoto = tieneFoto ? `<img src="${p.foto_url}" alt="${p.producto}" onerror="this.parentElement.innerHTML='👗'" />` : '👗';
       const enOferta = p.en_oferta === true && p.precio_oferta > 0 && p.precio_oferta < p.precio_venta;
       
       let badgeHTML = '';
       const catLower = (p.categoria || '').toLowerCase();
-      
-      if (enOferta) {
-        badgeHTML = `<span class="badge-dinamico" style="background: #ef4444;">Sale</span>`;
-      } else if (esNuevo(p)) {
-        badgeHTML = `<span class="badge-dinamico" style="background: #22c55e;">New</span>`;
-      } else if (catLower.includes('anime') || catLower.includes('juego')) {
-        badgeHTML = `<span class="badge-dinamico" style="background: #8b5cf6;">Anime</span>`;
-      } else if (catLower.includes('deport') || catLower.includes('gym')) {
-        badgeHTML = `<span class="badge-dinamico" style="background: #3b82f6;">Sports</span>`;
-      } else if (catLower.includes('niño') || catLower.includes('niña') || catLower.includes('kids')) {
-        badgeHTML = `<span class="badge-dinamico" style="background: #eab308;">Kids</span>`;
-      } else if (catLower.includes('dama') || catLower.includes('mujer')) {
-        badgeHTML = `<span class="badge-dinamico" style="background: #ec4899;">Dama</span>`;
-      } else if (catLower.includes('hombre') || catLower.includes('caballero')) {
-        badgeHTML = `<span class="badge-dinamico" style="background: #475569;">Hombre</span>`;
-      }
+      if (enOferta) { badgeHTML = `<span class="badge-dinamico" style="background: #ef4444;">Sale</span>`; }
+      else if (esNuevo(p)) { badgeHTML = `<span class="badge-dinamico" style="background: #22c55e;">New</span>`; }
+      else if (catLower.includes('anime') || catLower.includes('juego')) { badgeHTML = `<span class="badge-dinamico" style="background: #8b5cf6;">Anime</span>`; }
+      else if (catLower.includes('deport') || catLower.includes('gym')) { badgeHTML = `<span class="badge-dinamico" style="background: #3b82f6;">Sports</span>`; }
+      else if (catLower.includes('niño') || catLower.includes('niña') || catLower.includes('kids')) { badgeHTML = `<span class="badge-dinamico" style="background: #eab308;">Kids</span>`; }
+      else if (catLower.includes('dama') || catLower.includes('mujer')) { badgeHTML = `<span class="badge-dinamico" style="background: #ec4899;">Dama</span>`; }
+      else if (catLower.includes('hombre') || catLower.includes('caballero')) { badgeHTML = `<span class="badge-dinamico" style="background: #475569;">Hombre</span>`; }
 
       return `
         <div class="tarjeta" style="cursor: pointer;" onclick="abrirModal('${p.id || p.producto}')">
-          <div class="foto">
-            ${badgeHTML}
-            ${contenidoFoto}
-          </div>
+          <div class="foto">${badgeHTML}${contenidoFoto}</div>
           <div class="info">
             <h3>${p.producto || 'Sin nombre'}</h3>
-            <p class="detalles">
-              ${p.categoria || ''}${p.talla ? ' · Talla ' + p.talla : ''}${p.color ? ' · ' + p.color : ''}
-            </p>
+            <p class="detalles">${p.categoria || ''}${p.talla ? ' · Talla ' + p.talla : ''}${p.color ? ' · ' + p.color : ''}</p>
             ${enOferta 
               ? `<p class="precio"><span style="text-decoration: line-through; color: #999; font-size: 14px; font-weight: 500; margin-right: 5px;">$${p.precio_venta}</span> <span style="color: #ef4444;">$${p.precio_oferta}</span></p>`
               : `<p class="precio">$${p.precio_venta || 0}</p>`
             }
-            <button class="btn-agregar" 
-                    onclick="event.stopPropagation(); agregarAlCarrito('${p.id || p.producto}')"
-                    ${!disponible ? 'disabled' : ''}>
+            <button class="btn-agregar" onclick="event.stopPropagation(); agregarAlCarrito('${p.id || p.producto}')" ${!disponible ? 'disabled' : ''}>
               ${disponible ? 'Add to Cart' : 'Agotado'}
             </button>
           </div>
@@ -761,20 +720,13 @@
       `;
     }
  
+    // ===== MOSTRAR PRODUCTOS =====
     function mostrarProductos(lista) {
-      if (categoriaActual !== 'Todas') {
-        lista = lista.filter(p => p.categoria === categoriaActual);
-      }
-
-      if (ordenActual === 'precio-asc') {
-        lista = [...lista].sort((a, b) => (parseFloat(a.precio_venta) || 0) - (parseFloat(b.precio_venta) || 0));
-      } else if (ordenActual === 'precio-desc') {
-        lista = [...lista].sort((a, b) => (parseFloat(b.precio_venta) || 0) - (parseFloat(a.precio_venta) || 0));
-      } else if (ordenActual === 'nombre-asc') {
-        lista = [...lista].sort((a, b) => (a.producto || '').localeCompare(b.producto || ''));
-      } else if (ordenActual === 'nombre-desc') {
-        lista = [...lista].sort((a, b) => (b.producto || '').localeCompare(a.producto || ''));
-      }
+      if (categoriaActual !== 'Todas') { lista = lista.filter(p => p.categoria === categoriaActual); }
+      if (ordenActual === 'precio-asc') { lista = [...lista].sort((a, b) => (parseFloat(a.precio_venta) || 0) - (parseFloat(b.precio_venta) || 0)); } 
+      else if (ordenActual === 'precio-desc') { lista = [...lista].sort((a, b) => (parseFloat(b.precio_venta) || 0) - (parseFloat(a.precio_venta) || 0)); } 
+      else if (ordenActual === 'nombre-asc') { lista = [...lista].sort((a, b) => (a.producto || '').localeCompare(b.producto || '')); } 
+      else if (ordenActual === 'nombre-desc') { lista = [...lista].sort((a, b) => (b.producto || '').localeCompare(a.producto || '')); }
 
       const contenedor = document.getElementById('productos');
       if (lista.length === 0) {
@@ -786,9 +738,7 @@
 
     function mostrarDestacados(lista) {
       let filtrados = [...lista];
-      if (categoriaActual !== 'Todas') {
-        filtrados = filtrados.filter(p => p.categoria === categoriaActual);
-      }
+      if (categoriaActual !== 'Todas') { filtrados = filtrados.filter(p => p.categoria === categoriaActual); }
       const destacados = filtrados.filter(p => p.favorito === true);
       
       const section = document.getElementById('destacados-section');
@@ -803,8 +753,7 @@
     document.getElementById('buscador').addEventListener('input', (e) => {
       const texto = e.target.value.toLowerCase();
       const filtrados = todosLosProductos.filter(p =>
-        (p.producto || '').toLowerCase().includes(texto) ||
-        (p.categoria || '').toLowerCase().includes(texto)
+        (p.producto || '').toLowerCase().includes(texto) || (p.categoria || '').toLowerCase().includes(texto)
       );
       mostrarProductos(filtrados);
     });
@@ -832,24 +781,6 @@
         placeholderEl.style.display = 'flex';
       }
       
-      const badgeNuevo = document.getElementById('modalBadgeNuevo');
-      if (badgeNuevo) {
-        if (typeof esNuevo === 'function' && esNuevo(producto)) {
-          badgeNuevo.style.display = 'block';
-        } else {
-          badgeNuevo.style.display = 'none';
-        }
-      }
-
-      const badgeOferta = document.getElementById('modalBadgeOferta');
-      if (badgeOferta) {
-        if (producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta) {
-          badgeOferta.classList.add('visible');
-        } else {
-          badgeOferta.classList.remove('visible');
-        }
-      }
-      
       const enOfertaModal = producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta;
       if (enOfertaModal) {
         document.getElementById('modalPrecio').innerHTML = '<span style="text-decoration: line-through; color: #999; font-size: 0.6em; font-weight: 400; margin-right: 10px;">$' + parseFloat(producto.precio_venta).toFixed(2) + '</span>$' + parseFloat(producto.precio_oferta).toFixed(2);
@@ -858,46 +789,28 @@
       }
       document.getElementById('modalCategoria').textContent = producto.categoria || '';
       document.getElementById('modalNombre').textContent = producto.producto || 'Sin nombre';
-      
-      document.getElementById('modalPrecioBs').style.display = 'none';
       document.getElementById('modalTalla').textContent = producto.talla || '—';
       document.getElementById('modalColor').textContent = producto.color || '—';
       
-      // NUEVO DISEÑO DE STOCK
       const stockEl = document.getElementById('modalStock');
       stockEl.className = 'modal-stock';
       
-      const iconoFuego = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"></path></svg>`;
-      const iconoCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
-      const iconoError = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`;
-
       if (!disponible) {
         stockEl.classList.add('agotado');
-        stockEl.innerHTML = `${iconoError} Agotado por los momentos`;
+        stockEl.innerHTML = `❌ Agotado por los momentos`;
       } else if (producto.cantidad <= 4) {
         stockEl.classList.add('pocas');
-        const textoUnidad = producto.cantidad === 1 ? 'unidad' : 'unidades';
-        stockEl.innerHTML = `${iconoFuego} ¡Date prisa! Solo ${producto.cantidad === 1 ? 'queda' : 'quedan'} ${producto.cantidad} ${textoUnidad}`;
+        stockEl.innerHTML = `🔥 ¡Date prisa! Solo ${producto.cantidad === 1 ? 'queda 1 unidad' : 'quedan ' + producto.cantidad + ' unidades'}`;
       } else {
         stockEl.classList.add('disponible');
-        stockEl.innerHTML = `${iconoCheck} Disponible (${producto.cantidad} en stock)`;
+        stockEl.innerHTML = `✅ Disponible (${producto.cantidad} en stock)`;
       }
       
       const btnAgregar = document.getElementById('modalBtnAgregar');
-      if (btnAgregar) {
-        if (disponible) {
-          btnAgregar.disabled = false;
-          btnAgregar.style.opacity = '1';
-        } else {
-          btnAgregar.disabled = true;
-          btnAgregar.style.opacity = '0.5';
-        }
-      }
+      if (btnAgregar) btnAgregar.disabled = !disponible;
       
       const btnWhatsapp = document.getElementById('modalBtnWhatsapp');
-      if (btnWhatsapp) {
-        btnWhatsapp.style.display = disponible ? 'flex' : 'none';
-      }
+      if (btnWhatsapp) btnWhatsapp.style.display = disponible ? 'flex' : 'none';
       
       document.getElementById('modalProducto').classList.add('abierto');
       document.body.style.overflow = 'hidden';
@@ -932,14 +845,11 @@
     window.pedirPorWhatsApp = function pedirPorWhatsApp() {
       if (!productoModalActual) return;
       const p = productoModalActual;
-      let mensaje = `🛍️ *LEWIN BOUTIQUE*\n\n`;
-      mensaje += `👕 *${p.producto}*\n`;
+      let mensaje = `🛍️ *LEWIN BOUTIQUE*\n\n👕 *${p.producto}*\n`;
       if (p.talla) mensaje += `📏 Talla: ${p.talla}\n`;
       if (p.color) mensaje += `🎨 Color: ${p.color}\n`;
-      mensaje += `💰 Precio: $${(parseFloat(p.precio_venta) || 0).toFixed(2)}\n\n`;
-      mensaje += `Me interesa este producto, ¿está disponible?`;
-      const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, '_blank');
+      mensaje += `💰 Precio: $${(parseFloat(p.precio_venta) || 0).toFixed(2)}\n\nMe interesa este producto, ¿está disponible?`;
+      window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`, '_blank');
     };
  
     document.addEventListener('keydown', function(e) {
@@ -971,10 +881,7 @@
         }
         existe.cantidad = (existe.cantidad || 1) + 1;
       } else {
-        const precioFinal = (producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta)
-          ? parseFloat(producto.precio_oferta)
-          : (parseFloat(producto.precio_venta) || 0);
-        
+        const precioFinal = (producto.en_oferta === true && producto.precio_oferta > 0 && producto.precio_oferta < producto.precio_venta) ? parseFloat(producto.precio_oferta) : (parseFloat(producto.precio_venta) || 0);
         carrito.push({
           id: producto.id || producto.producto,
           producto: producto.producto,
@@ -986,7 +893,6 @@
           cantidad: 1
         });
       }
-      
       mostrarToast('Producto agregado al pedido', 'exito');
       guardarCarrito();
       actualizarCarritoUI();
@@ -995,7 +901,6 @@
     window.cambiarCantidad = function cambiarCantidad(id, delta) {
       const item = carrito.find(i => (i.id || i.producto) === id);
       if (!item) return;
-      
       const producto = todosLosProductos.find(p => (p.id || p.producto) === id);
       const disponible = producto ? (parseInt(producto.cantidad) || 0) : 0;
       
@@ -1003,12 +908,8 @@
         mostrarToast(`Solo hay ${disponible} unidades disponibles de "${item.producto}"`, 'advertencia');
         return;
       }
-      
       item.cantidad += delta;
-      if (item.cantidad <= 0) {
-        carrito = carrito.filter(i => (i.id || i.producto) !== id);
-      }
-      
+      if (item.cantidad <= 0) { carrito = carrito.filter(i => (i.id || i.producto) !== id); }
       guardarCarrito();
       actualizarCarritoUI();
     };
@@ -1019,9 +920,7 @@
       actualizarCarritoUI();
     };
  
-    function guardarCarrito() {
-      localStorage.setItem('carritoLewin', JSON.stringify(carrito));
-    }
+    function guardarCarrito() { localStorage.setItem('carritoLewin', JSON.stringify(carrito)); }
  
     function actualizarCarritoUI() {
       const count = document.getElementById('cartCount');
@@ -1049,19 +948,15 @@
       }
 
       footer.style.display = 'block';
-
       items.innerHTML = carrito.map(item => {
         const subtotal = item.cantidad * item.precio_venta;
         const foto = item.foto_url ? `<img src="${item.foto_url}" />` : '👗';
-        
         return `
           <div class="cart-item">
             <div class="cart-item-foto">${foto}</div>
             <div class="cart-item-info">
               <div class="cart-item-nombre">${item.producto}</div>
-              <div class="cart-item-detalles">
-                ${item.talla ? 'Talla ' + item.talla : ''}${item.color ? ' · ' + item.color : ''}
-              </div>
+              <div class="cart-item-detalles">${item.talla ? 'Talla ' + item.talla : ''}${item.color ? ' · ' + item.color : ''}</div>
               <div class="cart-item-cantidad">
                 <button class="cart-btn-cantidad" onclick="cambiarCantidad('${item.id}', -1)">−</button>
                 <span>${item.cantidad}</span>
@@ -1088,55 +983,35 @@
         mensaje += `👕 *${item.producto}*\n`;
         if (item.talla) mensaje += `📏 Talla: ${item.talla}\n`;
         if (item.color) mensaje += `🎨 Color: ${item.color}\n`;
-        mensaje += `🔢 Cantidad: ${item.cantidad}\n`;
-        mensaje += `💰 Subtotal: $${subtotal.toFixed(2)}\n\n`;
+        mensaje += `🔢 Cantidad: ${item.cantidad}\n💰 Subtotal: $${subtotal.toFixed(2)}\n\n`;
       });
       const total = carrito.reduce((sum, item) => sum + (item.cantidad * item.precio_venta), 0);
-      mensaje += `────────────────\n`;
-      mensaje += `💰 *TOTAL: $${total.toFixed(2)}*\n\n`;
-      mensaje += `¡Gracias por tu pedido! 💜`;
+      mensaje += `────────────────\n💰 *TOTAL: $${total.toFixed(2)}*\n\n¡Gracias por tu pedido! 💜`;
       
-      // 👇 AQUI SUMAMOS +1 AL CLIENTE FELIZ EN SUPABASE 👇
-      try {
-        const { data } = await supabase.from('metricas').select('clientes_felices').eq('id', 1).single();
-        if (data) {
-          const nuevoValor = data.clientes_felices + 1;
-          await supabase.from('metricas').update({ clientes_felices: nuevoValor }).eq('id', 1);
-          const contadorClientes = document.getElementById('contadorClientes');
-          if (contadorClientes) contadorClientes.textContent = nuevoValor;
-        }
-      } catch (err) {
-        console.log('No se pudo actualizar la métrica global, asegúrate de haber creado la tabla.');
-      }
-      // 👆 FIN DEL CONTADOR 👆
+      window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
-      const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, '_blank');
+      try {
+        const { data } = await supabase.from('metricas').select('clientes_felices').eq('id', 1).maybeSingle();
+        if (data) {
+          const nuevoValor = (data.clientes_felices || 0) + 1;
+          await supabase.from('metricas').update({ clientes_felices: nuevoValor }).eq('id', 1);
+        }
+      } catch (err) { console.log('No se pudo actualizar la métrica global.'); }
     };
 
-    // ===== NAVEGACIÓN POR VISTAS (SPA) =====
+    // ===== NAVEGACIÓN SPA Y FOOTER =====
     window.mostrarVista = function mostrarVista(nombre) {
-      document.querySelectorAll('.vista').forEach(v => {
-        v.style.display = 'none';
-      });
-      
+      document.querySelectorAll('.vista').forEach(v => { v.style.display = 'none'; });
       const vista = document.getElementById('vista-' + nombre);
-      if (vista) {
-        vista.style.display = 'block';
-      }
+      if (vista) vista.style.display = 'block';
       
       document.querySelectorAll('.nav-link').forEach(a => {
         a.classList.remove('activo');
-        if (a.getAttribute('data-vista') === nombre) {
-          a.classList.add('activo');
-        }
+        if (a.getAttribute('data-vista') === nombre) a.classList.add('activo');
       });
 
-      // Mostrar el footer SOLO en la vista de inicio
       const footer = document.querySelector('.main-footer');
-      if (footer) {
-        footer.style.display = (nombre === 'inicio') ? 'block' : 'none';
-      }
+      if (footer) footer.style.display = (nombre === 'inicio') ? 'block' : 'none';
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -1147,34 +1022,26 @@
       const header = document.querySelector('.main-header');
       if (!header) return;
       const y = window.scrollY;
-      if (y > 100 && !headerCompacto) {
-        header.classList.add('compacto');
-        headerCompacto = true;
-      } else if (y < 20 && headerCompacto) {
-        header.classList.remove('compacto');
-        headerCompacto = false;
-      }
+      if (y > 100 && !headerCompacto) { header.classList.add('compacto'); headerCompacto = true; }
+      else if (y < 20 && headerCompacto) { header.classList.remove('compacto'); headerCompacto = false; }
     });
 
-    // ===== WISHLIST =====
+    // ===== WISHLIST (Placeholder para futura lógica) =====
     window.toggleWishlist = function toggleWishlist() {
-      mostrarVista('catalogo');
-      setTimeout(() => {
-        document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
-      }, 120);
+      mostrarToast('La lista de deseos estará disponible pronto.', 'exito');
     };
 
-    // ===== NOVEDADES =====
+    // ===== LOGICA DE NOVEDADES =====
     function cargarNovedades() {
       const grid = document.getElementById('novedades-grid');
       if (!grid) return;
       if (typeof todosLosProductos === 'undefined' || todosLosProductos.length === 0) {
-        grid.innerHTML = '<p class="cargando" style="grid-column:1/-1;">Cargando...</p>';
+        grid.innerHTML = '<p class="cargando" style="grid-column:1/-1;">Cargando productos...</p>';
         return;
       }
       const nuevos = todosLosProductos.filter(p => esNuevo(p));
       if (nuevos.length === 0) {
-        grid.innerHTML = '<p class="cargando" style="grid-column:1/-1;">Aún no hay novedades. ¡Vuelve pronto! 💜</p>';
+        grid.innerHTML = '<p class="cargando" style="grid-column:1/-1;">Aún no hay novedades. ¡Vuelve pronto!</p>';
         return;
       }
       grid.innerHTML = nuevos.map(p => generarTarjeta(p)).join('');
