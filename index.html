@@ -328,9 +328,9 @@
 
     <!-- TEXTO DERECHA -->
     <div class="nosotros-texto">
-      <h2>Moda que enamora</h2>
-      <p>En <strong>Lewin Boutique</strong> creemos que el estilo no tiene límites. No somos solo una tienda de moda; somos tu aliado para encontrar eso que te hace único.</p>
-      <p>Desde un look elegante para una ocasión especial, hasta la ropa deportiva para entrenar, la comodidad para los más pequeños de la casa o esa pieza de anime que estabas buscando. Seleccionamos calidad, estilo y precio para toda la familia, con envíos a toda Venezuela.</p>
+      <h2>Variedad sin límites</h2>
+      <p>En <strong>Lewin Boutique</strong> sabemos que cada persona es diferente. Por eso, reunimos en un solo lugar una amplia variedad de estilos: desde ropa deportiva y casual, hasta prendas para los más pequeños y colecciones inspiradas en tus series favoritas.</p>
+      <p>Nos dedicamos a seleccionar calidad, comodidad y buenos precios, para que encuentres exactamente lo que buscas, con envíos a toda Venezuela.</p>
       
       <div class="nosotros-iconos">
         <div class="nosotros-icono-item">
@@ -573,7 +573,7 @@
     <div class="footer-col">
       <div class="footer-logo-circle">L</div>
       <div class="footer-logo-name">LEWIN BOUTIQUE</div>
-      <div class="footer-slogan">Moda que enamora</div>
+      <div class="footer-slogan">Variedad sin límites</div>
     </div>
     <div class="footer-col">
       <h4>CONTACTO</h4>
@@ -638,11 +638,9 @@
  
         todosLosProductos = data || [];
         
-        // 1. Actualizar contador de productos
         const contadorProd = document.getElementById('contadorProductos');
         if (contadorProd) contadorProd.textContent = todosLosProductos.length;
 
-        // 2. Actualizar contador de clientes felices
         const { data: metricasData } = await supabase.from('metricas').select('clientes_felices').eq('id', 1).maybeSingle();
         if (metricasData) {
           const contadorClientes = document.getElementById('contadorClientes');
