@@ -702,6 +702,47 @@
     .hero-btn { display: inline-block; padding: 16px 42px; background: #2563eb; color: #ffffff; border: none; border-radius: 30px; text-decoration: none; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
     .hero-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3); }
     
+    /* ===== NOTIFICACIONES TOAST ===== */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      pointer-events: none;
+    }
+    .toast {
+      background: #1a1a1a;
+      color: #ffffff;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 280px;
+      max-width: 400px;
+      animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      pointer-events: auto;
+    }
+    .toast.advertencia { border-left: 4px solid #ef4444; }
+    .toast.exito { border-left: 4px solid #22c55e; }
+    .toast svg { width: 20px; height: 20px; flex-shrink: 0; }
+    
+    @keyframes slideInRight {
+      from { transform: translateX(120%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes fadeOutToast {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(20px); }
+    }
+
     @media (max-width: 900px) {
       .header-top { grid-template-columns: 1fr; gap: 15px; padding: 15px 20px; text-align: center; }
       .header-left, .header-right { justify-content: center; text-align: center; }
@@ -990,6 +1031,9 @@
     <p>© 2026 Lewin Boutique. Todos los derechos reservados.</p>
   </div>
 </footer>
+
+<!-- ===== TOAST CONTAINER ===== -->
+<div class="toast-container" id="toastContainer"></div>
   
 <script type="module">
     const SUPABASE_URL = 'https://qhihqujbzjcuxshndsez.supabase.co';
@@ -1003,6 +1047,26 @@
     let ordenActual = 'default';
     let carrito = JSON.parse(localStorage.getItem('carritoLewin') || '[]');
     const WHATSAPP_NUM = '584241668588';
+
+    // ===== FUNCIÓN DE NOTIFICACIÓN TOAST =====
+    function mostrarToast(mensaje, tipo = 'exito') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast ${tipo}`;
+      
+      const icono = tipo === 'exito' 
+        ? `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #22c55e;"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="color: #ef4444;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>`;
+        
+      toast.innerHTML = `${icono} <span>${mensaje}</span>`;
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'fadeOutToast 0.3s ease forwards';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
     
     async function cargarProductos() {
       const contenedor = document.getElementById('productos');
@@ -1321,7 +1385,7 @@
       
       if (existe) {
         if (existe.cantidad >= disponible) {
-          alert(`⚠️ Solo hay ${disponible} unidades disponibles de "${producto.producto}"`);
+          mostrarToast(`Solo hay ${disponible} unidades disponibles de "${producto.producto}"`, 'advertencia');
           return;
         }
         existe.cantidad = (existe.cantidad || 1) + 1;
@@ -1342,6 +1406,7 @@
         });
       }
       
+      mostrarToast('Producto agregado al pedido', 'exito');
       guardarCarrito();
       actualizarCarritoUI();
     };
@@ -1354,7 +1419,7 @@
       const disponible = producto ? (parseInt(producto.cantidad) || 0) : 0;
       
       if (delta > 0 && item.cantidad >= disponible) {
-        alert(`⚠️ Solo hay ${disponible} unidades disponibles de "${item.producto}"`);
+        mostrarToast(`Solo hay ${disponible} unidades disponibles de "${item.producto}"`, 'advertencia');
         return;
       }
       
