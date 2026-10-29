@@ -58,12 +58,30 @@
     #destacados-section { padding: 20px 40px; }
     
     .search-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+    
+    /* BARRA DE BÚSQUEDA Y AUTOCOMPLETADO */
     .search-box-wrapper { position: relative; display: flex; align-items: stretch; width: 100%; max-width: 400px; }
     .buscador { flex: 1; padding: 14px 18px; border: 1px solid #e5e7eb; border-right: none; border-radius: 8px 0 0 8px; background: #f8f9fa; font-family: inherit; font-size: 14px; color: #1a1a1a; outline: none; transition: border-color 0.2s; }
     .buscador::placeholder { color: #9ca3af; }
     .buscador:focus { border-color: #2563eb; }
     .search-arrow { padding: 0 18px; background: #2563eb; color: #ffffff; border: 1px solid #2563eb; border-radius: 0 8px 8px 0; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
     .search-arrow:hover { background: #1d4ed8; border-color: #1d4ed8; }
+    
+    .search-suggestions {
+      position: absolute; top: 100%; left: 0; right: 0; margin-top: 4px;
+      background: #ffffff; border: 1px solid #eaeaea; border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 100; display: none; max-height: 400px; overflow-y: auto;
+    }
+    .search-suggestions.abierto { display: block; }
+    .suggestion-item {
+      display: flex; align-items: center; gap: 12px; padding: 10px 15px; cursor: pointer; border-bottom: 1px solid #f0ebe3; transition: background 0.2s;
+    }
+    .suggestion-item:last-child { border-bottom: none; }
+    .suggestion-item:hover { background: #f8f9fa; }
+    .suggestion-img { width: 45px; height: 45px; border-radius: 6px; background: #f8f9fa; object-fit: contain; padding: 3px; }
+    .suggestion-info { flex: 1; min-width: 0; }
+    .suggestion-name { font-size: 13px; font-weight: 600; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .suggestion-price { font-size: 12px; font-weight: 700; color: #2563eb; margin-top: 2px; }
     
     /* ===== FILTROS DESPLEGABLES (Tallas y Colores) ===== */
     .filtros-container { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -517,11 +535,15 @@
 <div class="vista" id="vista-catalogo" style="display: none;">
   <section class="search-section">
     <div class="search-top">
+      
+      <!-- BUSCADOR INTELIGENTE -->
       <div class="search-box-wrapper">
-        <input type="text" class="buscador" id="buscador" placeholder="Buscar producto..." />
+        <input type="text" class="buscador" id="buscador" placeholder="Buscar producto..." autocomplete="off" />
         <button class="search-arrow" onclick="document.getElementById('buscador').focus()">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
         </button>
+        <!-- Dropdown de sugerencias -->
+        <div class="search-suggestions" id="searchDropdown"></div>
       </div>
       
       <!-- FILTROS DESPLEGABLES -->
@@ -699,8 +721,8 @@
     let todosLosProductos = [];
     let categoriaActual = 'Todas';
     let ordenActual = 'default';
-    let tallaActual = 'Todas'; // Nuevo filtro
-    let colorActual = 'Todos'; // Nuevo filtro
+    let tallaActual = 'Todas'; 
+    let colorActual = 'Todos'; 
     let carrito = JSON.parse(localStorage.getItem('carritoLewin') || '[]');
     const WHATSAPP_NUM = '584241668588';
 
@@ -743,9 +765,9 @@
         }
 
         crearBotonesFiltros();
-        crearFiltrosAvanzados(); // Nueva función para tallas y colores
+        crearFiltrosAvanzados(); 
         mostrarDestacados(todosLosProductos);
-        aplicarFiltros(); // Centralizamos el filtrado
+        aplicarFiltros(); 
       } catch (err) {
         contenedor.innerHTML = '<p class="cargando">Error al cargar productos.</p>';
         console.error(err);
@@ -841,7 +863,6 @@
       tallaActual = talla;
       crearFiltrosAvanzados();
       aplicarFiltros();
-      // Cerrar menú
       document.getElementById('menuTallas').classList.remove('abierto');
       document.getElementById('btnTallas').classList.remove('activo');
     };
@@ -850,7 +871,6 @@
       colorActual = color;
       crearFiltrosAvanzados();
       aplicarFiltros();
-      // Cerrar menú
       document.getElementById('menuColores').classList.remove('abierto');
       document.getElementById('btnColores').classList.remove('activo');
     };
@@ -860,25 +880,19 @@
       const texto = document.getElementById('buscador').value.toLowerCase();
       
       let filtrados = todosLosProductos.filter(p => {
-        // Filtro por buscador
         const coincideTexto = (p.producto || '').toLowerCase().includes(texto) || (p.categoria || '').toLowerCase().includes(texto);
-        // Filtro por categoría (píldoras)
         const coincideCategoria = categoriaActual === 'Todas' || p.categoria === categoriaActual;
-        // Filtro por talla
         const coincideTalla = tallaActual === 'Todas' || p.talla === tallaActual;
-        // Filtro por color
         const coincideColor = colorActual === 'Todos' || p.color === colorActual;
 
         return coincideTexto && coincideCategoria && coincideTalla && coincideColor;
       });
 
-      // Aplicar ordenamiento
       if (ordenActual === 'precio-asc') { filtrados.sort((a, b) => (parseFloat(a.precio_venta) || 0) - (parseFloat(b.precio_venta) || 0)); } 
       else if (ordenActual === 'precio-desc') { filtrados.sort((a, b) => (parseFloat(b.precio_venta) || 0) - (parseFloat(a.precio_venta) || 0)); } 
       else if (ordenActual === 'nombre-asc') { filtrados.sort((a, b) => (a.producto || '').localeCompare(b.producto || '')); } 
       else if (ordenActual === 'nombre-desc') { filtrados.sort((a, b) => (b.producto || '').localeCompare(a.producto || '')); }
 
-      // Mostrar resultados
       const contenedor = document.getElementById('productos');
       if (filtrados.length === 0) {
         contenedor.innerHTML = '<p class="cargando">No hay productos que coincidan con los filtros.</p>';
@@ -887,9 +901,6 @@
       }
     };
 
-    // Eventos para actualizar la vista con los inputs
-    document.getElementById('buscador').addEventListener('input', aplicarFiltros);
-    
     window.cambiarOrden = function(valor) {
       ordenActual = valor;
       aplicarFiltros();
@@ -1254,6 +1265,69 @@
       _mostrarVistaBase(nombre);
       if (nombre === 'novedades') cargarNovedades();
     };
+
+    // ===== BÚSQUEDA INTELIGENTE (AUTOCOMPLETADO) =====
+    const buscadorInput = document.getElementById('buscador');
+    const searchDropdown = document.getElementById('searchDropdown');
+
+    buscadorInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      
+      // 1. Filtrar el catálogo de fondo
+      aplicarFiltros();
+
+      // 2. Mostrar sugerencias
+      if (query.length > 0) {
+        const coincidencias = todosLosProductos.filter(p => 
+          (p.producto || '').toLowerCase().includes(query) || 
+          (p.categoria || '').toLowerCase().includes(query)
+        ).slice(0, 5); // Mostrar máximo 5
+
+        if (coincidencias.length > 0) {
+          searchDropdown.innerHTML = coincidencias.map(p => {
+            const precioHTML = p.en_oferta && p.precio_oferta > 0 
+              ? `<span style="text-decoration: line-through; color: #999; font-size: 10px; margin-right: 5px;">$${p.precio_venta}</span>$${p.precio_oferta}` 
+              : `$${p.precio_venta || 0}`;
+            
+            return `
+              <div class="suggestion-item" onclick="abrirModal('${p.id || p.producto}'); ocultarSugerencias();">
+                <img src="${p.foto_url || ''}" class="suggestion-img" onerror="this.src='https://via.placeholder.com/45?text=?'" />
+                <div class="suggestion-info">
+                  <div class="suggestion-name">${p.producto}</div>
+                  <div class="suggestion-price">${precioHTML}</div>
+                </div>
+              </div>
+            `;
+          }).join('');
+          searchDropdown.classList.add('abierto');
+        } else {
+          searchDropdown.innerHTML = `<div style="padding: 15px; text-align: center; color: #888; font-size: 13px;">No se encontraron productos</div>`;
+          searchDropdown.classList.add('abierto');
+        }
+      } else {
+        ocultarSugerencias();
+      }
+    });
+
+    // Al darle Enter, ocultar y hacer scroll al catálogo
+    buscadorInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        ocultarSugerencias();
+        document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+
+    window.ocultarSugerencias = function() {
+      searchDropdown.classList.remove('abierto');
+      searchDropdown.innerHTML = '';
+    };
+
+    // Cerrar sugerencias al hacer clic afuera
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-box-wrapper')) {
+        ocultarSugerencias();
+      }
+    });
 
     // Inicialización
     cargarProductos();
