@@ -22,7 +22,7 @@
     
     /* ===== HEADER ELEGANTE ===== */
     .main-header {
-      background: #ffffff; margin: -20px -20px 0 -20px; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 999; transition: all 0.3s ease;
+      background: #ffffff; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 999; transition: all 0.3s ease; width: 100%;
     }
     
     .main-header.compacto .header-left { display: none; }
@@ -61,10 +61,10 @@
     
     /* BARRA DE BÚSQUEDA Y AUTOCOMPLETADO */
     .search-box-wrapper { position: relative; display: flex; align-items: stretch; width: 100%; max-width: 400px; }
-    .buscador { flex: 1; padding: 14px 18px; border: 1px solid #e5e7eb; border-right: none; border-radius: 8px 0 0 8px; background: #f8f9fa; font-family: inherit; font-size: 14px; color: #1a1a1a; outline: none; transition: border-color 0.2s; }
+    .buscador { flex: 1; padding: 14px 18px; border: 1px solid #e5e7eb; border-right: none; border-radius: 8px 0 0 8px; background: #f8f9fa; font-family: inherit; font-size: 14px; color: #1a1a1a; outline: none; transition: border-color 0.2s; width: 100%; }
     .buscador::placeholder { color: #9ca3af; }
     .buscador:focus { border-color: #2563eb; }
-    .search-arrow { padding: 0 18px; background: #2563eb; color: #ffffff; border: 1px solid #2563eb; border-radius: 0 8px 8px 0; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; }
+    .search-arrow { padding: 0 18px; background: #2563eb; color: #ffffff; border: 1px solid #2563eb; border-radius: 0 8px 8px 0; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .search-arrow:hover { background: #1d4ed8; border-color: #1d4ed8; }
     
     .search-suggestions {
@@ -84,11 +84,11 @@
     .suggestion-price { font-size: 12px; font-weight: 700; color: #2563eb; margin-top: 2px; }
     
     /* ===== FILTROS DESPLEGABLES (Tallas y Colores) ===== */
-    .filtros-container { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .filtros-container { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; width: 100%; }
     
-    .dropdown-wrapper { position: relative; }
+    .dropdown-wrapper { position: relative; flex-shrink: 0; }
     .dropdown-btn {
-      display: flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1px solid #e5e7eb; border-radius: 8px; background: #ffffff; font-family: inherit; font-size: 13px; font-weight: 500; color: #1a1a1a; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 8px; padding: 12px 16px; border: 1px solid #e5e7eb; border-radius: 8px; background: #ffffff; font-family: inherit; font-size: 13px; font-weight: 500; color: #1a1a1a; cursor: pointer; transition: all 0.2s; white-space: nowrap;
     }
     .dropdown-btn:hover, .dropdown-btn.activo { border-color: #2563eb; }
     .dropdown-btn svg { width: 14px; height: 14px; transition: transform 0.2s; }
@@ -348,48 +348,65 @@
        RESPONSIVE (MÓVIL Y TABLET)
        ============================================================ */
     @media (max-width: 900px) {
-      .header-top { grid-template-columns: 1fr; gap: 15px; padding: 15px 20px; text-align: center; }
-      .header-left, .header-right { justify-content: center; text-align: center; }
+      /* Header */
+      .header-top { grid-template-columns: 1fr !important; gap: 15px !important; padding: 15px 20px !important; text-align: center !important; }
+      .header-left, .header-right { justify-content: center !important; text-align: center !important; }
       
-      /* Menú de navegación deslizable */
-      .header-nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 12px 15px; scrollbar-width: none; }
-      .header-nav::-webkit-scrollbar { display: none; }
-      .nav-dot { display: none; }
+      .header-nav { justify-content: flex-start !important; overflow-x: auto !important; flex-wrap: nowrap !important; padding: 12px 15px !important; scrollbar-width: none !important; }
+      .header-nav::-webkit-scrollbar { display: none !important; }
+      .nav-dot { display: none !important; }
       
-      /* Filtros deslizables */
-      .search-top { flex-direction: column; gap: 15px; align-items: stretch; }
-      .filtros-container { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; scrollbar-width: none; }
-      .filtros-container::-webkit-scrollbar { display: none; }
-      
-      .hero-titulo { font-size: 40px; }
-      .footer-content { grid-template-columns: 1fr; }
-      .nosotros-container { grid-template-columns: 1fr; padding: 0 20px; }
-      .nosotros-foto { height: 350px; }
-      
-      .modal-contenido { grid-template-columns: 1fr; max-height: 95vh; overflow-y: auto; }
-      .modal-foto-wrapper { min-height: 300px; max-height: 350px; padding: 20px; }
-      .modal-info { padding: 30px 25px; }
-      
-      .stats-grid { grid-template-columns: 1fr; padding: 0 20px; }
-      .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
-      .whatsapp-float svg { width: 26px; height: 26px; }
-      
-      /* Ajustes de Catálogo en móvil (2 columnas) */
-      #destacados-section, #todos-section { padding: 10px 15px; }
-      #destacados, #productos { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      
-      .tarjeta { border-radius: 12px; }
-      .foto { height: 170px; padding: 10px; }
-      .info { padding: 10px; }
-      .info h3 { font-size: 13px; line-height: 1.2; margin-bottom: 2px; }
-      .detalles { font-size: 10px; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .precio { font-size: 16px; margin-bottom: 8px; }
-      
-      .btn-agregar { padding: 8px 5px; font-size: 11px; border-radius: 20px; }
-      .btn-agregar::after { display: none; }
-      .badge-dinamico { font-size: 9px; padding: 3px 6px; top: 6px; left: 6px; }
-      
-      .seccion-titulo { font-size: 20px; margin: 20px 0 15px 0; }
+      /* Anulamos el header compacto en móvil */
+      .main-header.compacto .header-left { display: block !important; }
+      .main-header.compacto .header-nav { display: flex !important; }
+      .main-header.compacto .header-top { padding: 15px 20px !important; grid-template-columns: 1fr !important; }
+      .main-header.compacto .header-center { justify-content: center !important; gap: 14px !important; }
+      .main-header.compacto .logo-circle { width: 52px !important; height: 52px !important; font-size: 26px !important; }
+      .main-header.compacto .logo-name { font-size: 22px !important; letter-spacing: 1px !important; }
+      .main-header.compacto .header-right { gap: 18px !important; }
+      .main-header.compacto .icon-header { width: 22px !important; height: 22px !important; }
+
+      /* Buscador y Filtros */
+      .search-section { padding: 20px 15px 10px !important; }
+      .search-top { flex-direction: column !important; gap: 15px !important; align-items: stretch !important; margin-bottom: 20px !important; }
+      .search-box-wrapper { max-width: 100% !important; }
+      .filtros-container { overflow-x: auto !important; flex-wrap: nowrap !important; padding-bottom: 5px !important; scrollbar-width: none !important; }
+      .filtros-container::-webkit-scrollbar { display: none !important; }
+
+      /* Categorías (Píldoras) */
+      .categorias-circulares { padding-left: 15px !important; padding-right: 15px !important; margin-bottom: 15px !important; }
+
+      /* Catálogo (2 Columnas) */
+      #destacados-section, #todos-section { padding: 10px 15px !important; }
+      #destacados, #productos { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+      .seccion-titulo { font-size: 20px !important; margin: 20px 0 15px 0 !important; }
+
+      /* Tarjetas */
+      .tarjeta { border-radius: 12px !important; }
+      .foto { height: 170px !important; padding: 10px !important; }
+      .info { padding: 10px !important; }
+      .info h3 { font-size: 13px !important; line-height: 1.2 !important; margin-bottom: 2px !important; }
+      .detalles { font-size: 10px !important; margin-bottom: 6px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
+      .precio { font-size: 16px !important; margin-bottom: 8px !important; }
+      .btn-agregar { padding: 8px 5px !important; font-size: 11px !important; border-radius: 20px !important; }
+      .btn-agregar::after { display: none !important; }
+      .badge-dinamico { font-size: 9px !important; padding: 3px 6px !important; top: 6px !important; left: 6px !important; }
+
+      /* Resto de Vistas */
+      .hero-titulo { font-size: 40px !important; }
+      .footer-content { grid-template-columns: 1fr !important; }
+      .nosotros-container { grid-template-columns: 1fr !important; padding: 0 20px !important; }
+      .nosotros-foto { height: 350px !important; }
+
+      /* Modales */
+      .modal-contenido { grid-template-columns: 1fr !important; max-height: 95vh !important; overflow-y: auto !important; }
+      .modal-foto-wrapper { min-height: 300px !important; max-height: 350px !important; padding: 20px !important; }
+      .modal-info { padding: 30px 25px !important; }
+
+      /* Otros */
+      .stats-grid { grid-template-columns: 1fr !important; padding: 0 20px !important; }
+      .whatsapp-float { width: 50px !important; height: 50px !important; bottom: 20px !important; right: 20px !important; }
+      .whatsapp-float svg { width: 26px !important; height: 26px !important; }
     }
   </style>
 </head>
@@ -1329,6 +1346,16 @@
     window.addEventListener('scroll', function() {
       const header = document.querySelector('.main-header');
       if (!header) return;
+
+      // DESACTIVAR EN MOVIL PARA EVITAR TITILEO
+      if (window.innerWidth <= 900) {
+        if (headerCompacto) {
+            header.classList.remove('compacto');
+            headerCompacto = false;
+        }
+        return;
+      }
+
       const y = window.scrollY;
       if (y > 100 && !headerCompacto) { header.classList.add('compacto'); headerCompacto = true; }
       else if (y < 20 && headerCompacto) { header.classList.remove('compacto'); headerCompacto = false; }
