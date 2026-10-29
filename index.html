@@ -2353,10 +2353,17 @@
           a.classList.add('activo');
         }
       });
+
+      // 👇 NUEVO: Mostrar el footer SOLO en la vista de inicio 👇
+      const footer = document.querySelector('.main-footer');
+      if (footer) {
+        footer.style.display = (nombre === 'inicio') ? 'block' : 'none';
+      }
+      // 👆 FIN DEL NUEVO BLOQUE 👆
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
-
+    
     // ===== HEADER COMPACTO AL BAJAR (con histéresis) =====
     let headerCompacto = false;
     window.addEventListener('scroll', function() {
